@@ -70,7 +70,7 @@ A big topic can take a while and use a lot of tokens: a 45-page book runs severa
 - Claude Code
 - Python 3
 - Node.js 22 or newer
-- Google Chrome or Chromium, for the visual check
+- Google Chrome, Chromium, Edge or Brave, for the visual check. If it isn't found, set `CHROME_PATH` to the browser's executable.
 
 ## Install
 
@@ -89,9 +89,7 @@ ln -s "$PWD/once-upon-a-stack/skills/once-upon-a-stack" ~/.claude/skills/once-up
 
 ## Status
 
-Work in progress. Known gaps:
-
-- The visual check only finds Chrome on Linux, so on macOS and Windows that step won't run yet.
+Work in progress. The visual check is tested on Linux; the macOS and Windows browser paths are written but not yet tested on those systems.
 
 ## License
 

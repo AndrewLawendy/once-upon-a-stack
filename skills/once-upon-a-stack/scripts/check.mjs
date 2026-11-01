@@ -18,13 +18,28 @@ rmSync(outDir, { recursive: true, force: true });
 mkdirSync(outDir, { recursive: true });
 
 const WIDTH = 1366, HEIGHT = 768;
-const CHROME = ['google-chrome', 'google-chrome-stable', 'chromium', 'chromium-browser'];
+// Any Chromium-based browser works (Chrome, Chromium, Edge, Brave). CHROME_PATH wins when set.
+const env = process.env;
+const winRoots = [env.PROGRAMFILES, env['PROGRAMFILES(X86)'], env.LOCALAPPDATA].filter(Boolean);
+const CHROME = [
+  env.CHROME_PATH,
+  ...{
+    darwin: ['Google Chrome', 'Chromium', 'Microsoft Edge', 'Brave Browser'].map((app) => `/Applications/${app}.app/Contents/MacOS/${app}`),
+    win32: winRoots.flatMap((root) => [
+      join(root, 'Google', 'Chrome', 'Application', 'chrome.exe'),
+      join(root, 'Microsoft', 'Edge', 'Application', 'msedge.exe'),
+      join(root, 'BraveSoftware', 'Brave-Browser', 'Application', 'brave.exe'),
+    ]),
+  }[process.platform] ?? [],
+  'google-chrome', 'google-chrome-stable', 'chromium', 'chromium-browser', 'microsoft-edge', 'brave-browser',
+].filter((p) => p && (!p.includes('/') && !p.includes('\\') || existsSync(p)));
+if (typeof WebSocket === 'undefined') { console.error('This check needs Node.js 22 or newer (it uses the built-in WebSocket).'); process.exit(2); }
 const profile = mkdtempSync(join(tmpdir(), 'once-upon-a-stack-check-'));
 
 function launch(names) {
   return new Promise((ok, fail) => {
     const [name, ...rest] = names;
-    if (!name) return fail(new Error('No Chrome or Chromium found'));
+    if (!name) return fail(new Error('No Chrome, Chromium, Edge or Brave found. Install one, or set CHROME_PATH to its executable.'));
     const proc = spawn(name, ['--headless=new', '--disable-gpu', '--no-first-run', '--remote-debugging-port=0',
       `--user-data-dir=${profile}`, 'about:blank'], { stdio: ['ignore', 'ignore', 'pipe'] });
     let log = '';
