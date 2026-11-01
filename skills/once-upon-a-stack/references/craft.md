@@ -3,7 +3,7 @@
 ## Files
 
 ```
-<library>/<slug>--<topic>/     For example: the-squirrels-pantry--caching
+<library>/<slug>--<topic>/     For example: the-diner-on-long-road--caching
   index.html             The finished book, generated. Never edit by hand.
   .source/
     book.json            Title, style, cast, sources, rewrites

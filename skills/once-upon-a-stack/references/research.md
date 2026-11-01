@@ -66,7 +66,7 @@ file and function or a URL. No story language.
 
 ## Fact-check brief
 
-Give a fresh subagent, one that didn't research or write the book, this contract. It reads the built pages in `.source/pages/`, the dossiers in `.source/facts/`, and the cited sources themselves, and writes `.source/facts/fact-check.md`.
+Give a fresh subagent, one that didn't research or write the book, this contract. It reads the page sources in `.source/pages/`, the dossiers in `.source/facts/`, and the cited sources themselves, and writes `.source/facts/fact-check.md`.
 
 ```
 Book: <library>/<book>/.source/pages/ (story text, scene labels and For grown-ups notes)

@@ -8,7 +8,7 @@ compatibility: Works with any agent that reads Agent Skills. Needs Python 3, Nod
 
 A book explains one topic deeply as a children's story with real engineering underneath. It is one self-contained offline HTML file in `<library>/<slug>--<topic>/index.html`, listed on the shelf at `<library>/index.html`. Reading it needs no agent and no network. It changes only when the user asks for a rewrite.
 
-The folder always says what the book is about, in kebab case: the story name, a double hyphen, then the real topic, such as `the-squirrels-pantry--caching`. Below, `<book>` means that folder.
+The folder always says what the book is about, in kebab case: the story name, a double hyphen, then the real topic, such as `the-diner-on-long-road--caching`. Below, `<book>` means that folder.
 
 Paths below are relative to this skill's directory.
 
@@ -28,7 +28,7 @@ If either fails, stop. Tell the user exactly what's missing and how to get it: P
 
 ## Find the library
 
-Do this next, every time. `<library>` is the `library` value in `~/.config/once-upon-a-stack/config.json`. If that file doesn't exist, ask where to keep the books, suggest `~/once-upon-a-shelf`, and save the answer as `{"library": "~/once-upon-a-shelf"}`, creating the folders. Ask only once. Don't suggest `~/Library` or `~/library`: on macOS that is a hidden system folder.
+Do this next, every time. `<library>` is the `library` value in `~/.config/once-upon-a-stack/config.json`. If that file doesn't exist, ask where to keep the books, suggest `~/once-upon-a-shelf`, and save the folder they choose, for example `{"library": "~/once-upon-a-shelf"}`, creating the folders. Ask only once. Don't suggest `~/Library` or `~/library`: on macOS that is a hidden system folder.
 
 ## Build a new book
 
