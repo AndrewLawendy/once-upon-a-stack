@@ -21,7 +21,7 @@ Each answer usually raises new questions. A step is finished when each question 
 
 | Topic type | Start with | Then | Cite as |
 |---|---|---|---|
-| Your own code | Code on the branch that matches the question | Tests, ADRs and contracts in the repo, then tickets, chat and internal docs | repo, file, function, commit |
+| Your own code | Fetch first, then read the remote's default branch at its latest commit, or the branch the user names. Never just whatever is checked out. If the checkout is on another branch or behind, say so in the table of contents. | Tests, ADRs and contracts in the repo, then tickets, chat and internal docs | repo, file, function, commit |
 | Open source (React, Kubernetes, Grafana) | Source code at a pinned release tag, design docs, RFCs and KEPs | Official docs | repo, file, tag or doc URL with version |
 | Concepts | Specs, original papers | Reputable articles | title, link, date |
 
