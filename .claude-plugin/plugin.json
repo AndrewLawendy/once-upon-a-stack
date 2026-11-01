@@ -6,5 +6,6 @@
     "name": "Andrew Lawendy"
   },
   "license": "MIT",
-  "repository": "https://github.com/AndrewLawendy/once-upon-a-stack"
+  "repository": "https://github.com/AndrewLawendy/once-upon-a-stack",
+  "icon": ".claude-plugin/icon.png"
 }
