@@ -31,7 +31,7 @@ Say the boundary aloud as one sentence: "Because the notebook makes forgery pay,
 
 ## The full picture
 
-The hero makes the whole journey once more, drawn as one scene, meeting each character in the order the trip reaches them, and arrives at the goal. Villains are shown where they would strike and what stops them. By this point each character has earned their place. The cast cards come after it, not instead of it.
+The hero makes the whole journey once more, drawn as one scene, meeting each character in the order the trip reaches them, and arrives at the goal. Villains are shown where they would strike and what stops them. By this point each character has earned their place. The cast cards come after the scene, on the same page or the next, never instead of it.
 
 ## World
 
@@ -74,6 +74,6 @@ Short sentences and concrete images. Warm and a little funny, without baby talk.
 
 ## Book structure
 
-Cover, then the chapters (each with its own goal), then the full picture (the hero's last trip as a scene), then the cast cards, then the reference pages: What we don't know yet, a debugging index (symptom to page, using `data-goto` links), and a glossary (real term to story name).
+Cover, then the chapters (each with its own goal), then the full picture (the hero's last trip as a scene), then the cast cards (on the same page or the next), then the reference pages: What we don't know yet, a debugging index (symptom to page, using `data-goto` links), and a glossary (real term to story name).
 
 Nothing before the full picture may show a cast list or a map of the whole system.
