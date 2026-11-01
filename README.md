@@ -83,8 +83,8 @@ In Claude Code (2.1.275 or later):
 Or clone the repo and link the skill into your skills folder:
 
 ```
-git clone https://github.com/AndrewLawendy/once-upon-a-stack.git
-ln -s "$PWD/once-upon-a-stack/skills/once-upon-a-stack" ~/.claude/skills/once-upon-a-stack
+git clone https://github.com/AndrewLawendy/once-upon-a-stack.git ~/once-upon-a-stack
+ln -s ~/once-upon-a-stack/skills/once-upon-a-stack ~/.claude/skills/once-upon-a-stack
 ```
 
 ### Other coding agents
@@ -92,9 +92,9 @@ ln -s "$PWD/once-upon-a-stack/skills/once-upon-a-stack" ~/.claude/skills/once-up
 Codex, Gemini CLI, GitHub Copilot and Cursor all read skills from `~/.agents/skills`, so one link covers them:
 
 ```
-git clone https://github.com/AndrewLawendy/once-upon-a-stack.git
+git clone https://github.com/AndrewLawendy/once-upon-a-stack.git ~/once-upon-a-stack
 mkdir -p ~/.agents/skills
-ln -s "$PWD/once-upon-a-stack/skills/once-upon-a-stack" ~/.agents/skills/once-upon-a-stack
+ln -s ~/once-upon-a-stack/skills/once-upon-a-stack ~/.agents/skills/once-upon-a-stack
 ```
 
 Then ask for a book in plain words, such as "make a picture book about DNS". These agents are supported by their documentation but not tested yet. Agents that can't start subagents or view images still work, with a few extra steps the skill explains.

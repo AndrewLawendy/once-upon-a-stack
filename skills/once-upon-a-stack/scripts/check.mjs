@@ -37,7 +37,7 @@ const CHROME = [
   }[process.platform] ?? [],
   'google-chrome', 'google-chrome-stable', 'chromium', 'chromium-browser', 'microsoft-edge', 'brave-browser',
 ].filter((p) => p && (!p.includes('/') && !p.includes('\\') || existsSync(p)));
-if (typeof WebSocket === 'undefined') { console.error(`This check needs Node.js 22 or newer (it uses the built-in WebSocket). This is Node ${process.versions.node}: install a newer one from https://nodejs.org.`); process.exit(2); }
+if (typeof WebSocket === 'undefined') { console.error(`This check needs Node.js 22 or newer (it uses the built-in WebSocket). This is Node ${process.versions.node}: install Node.js 22 or newer.`); process.exit(2); }
 const profile = mkdtempSync(join(tmpdir(), 'once-upon-a-stack-check-'));
 
 function launch(names) {
