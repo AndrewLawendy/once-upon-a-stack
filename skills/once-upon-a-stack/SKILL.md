@@ -17,9 +17,18 @@ Paths below are relative to this skill's directory.
 - **No subagents:** research the journeys one at a time yourself, writing each dossier before starting the next. For the fact-check, ask the user to run it in a new session with the brief in `references/research.md`, so the checker still didn't write the book.
 - **Can't view images:** rely on the check's report, and ask the user to open the screenshots in `.source/check/` and tell you what looks wrong.
 
+## Check the tools
+
+Do this first, every time, before any research. It takes a few seconds.
+
+1. `python3 --version` (on Windows, `python --version`) must print Python 3.
+2. `node scripts/check.mjs --preflight` must print `Ready:`. It confirms Node.js 22 or newer and that a Chromium-based browser (Chrome, Chromium, Edge or Brave) launches.
+
+If either fails, stop. Tell the user exactly what's missing and how to get it: Python from python.org, Node.js from nodejs.org, or a browser. If a browser is installed but not found, set `CHROME_PATH` to its executable. Don't start research until both pass.
+
 ## Find the library
 
-Do this first, every time. `<library>` is the `library` value in `~/.config/once-upon-a-stack/config.json`. If that file doesn't exist, ask where to keep the books, suggest `~/once-upon-a-shelf`, and save the answer as `{"library": "~/once-upon-a-shelf"}`, creating the folders. Ask only once. Don't suggest `~/Library` or `~/library`: on macOS that is a hidden system folder.
+Do this next, every time. `<library>` is the `library` value in `~/.config/once-upon-a-stack/config.json`. If that file doesn't exist, ask where to keep the books, suggest `~/once-upon-a-shelf`, and save the answer as `{"library": "~/once-upon-a-shelf"}`, creating the folders. Ask only once. Don't suggest `~/Library` or `~/library`: on macOS that is a hidden system folder.
 
 ## Build a new book
 

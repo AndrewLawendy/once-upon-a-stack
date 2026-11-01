@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 // Headless visual check of a built book, in light and dark, at laptop size.
 // Usage: node check.mjs "<library>/<slug>--<topic>"
+//        node check.mjs --preflight   (only confirms Node and a browser work, before any book exists)
 // Writes screenshots to .source/check/, prints problems, exits 1 if there are any.
 import { spawn } from 'node:child_process';
 import { mkdirSync, mkdtempSync, rmSync, writeFileSync, existsSync } from 'node:fs';
@@ -9,13 +10,16 @@ import { join, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 
 const arg = process.argv[2];
-if (!arg) { console.error('Usage: node check.mjs "<library>/<slug>--<topic>"'); process.exit(2); }
-const folder = resolve(arg.replace(/^~/, homedir()));
+const preflight = arg === '--preflight';
+if (!arg) { console.error('Usage: node check.mjs "<library>/<slug>--<topic>" or node check.mjs --preflight'); process.exit(2); }
+const folder = preflight ? '' : resolve(arg.replace(/^~/, homedir()));
 const file = join(folder, 'index.html');
-if (!existsSync(file)) { console.error(`No built book at ${file}`); process.exit(2); }
 const outDir = join(folder, '.source', 'check');
-rmSync(outDir, { recursive: true, force: true });
-mkdirSync(outDir, { recursive: true });
+if (!preflight) {
+  if (!existsSync(file)) { console.error(`No built book at ${file}`); process.exit(2); }
+  rmSync(outDir, { recursive: true, force: true });
+  mkdirSync(outDir, { recursive: true });
+}
 
 const WIDTH = 1366, HEIGHT = 768;
 // Any Chromium-based browser works (Chrome, Chromium, Edge, Brave). CHROME_PATH wins when set.
@@ -33,7 +37,7 @@ const CHROME = [
   }[process.platform] ?? [],
   'google-chrome', 'google-chrome-stable', 'chromium', 'chromium-browser', 'microsoft-edge', 'brave-browser',
 ].filter((p) => p && (!p.includes('/') && !p.includes('\\') || existsSync(p)));
-if (typeof WebSocket === 'undefined') { console.error('This check needs Node.js 22 or newer (it uses the built-in WebSocket).'); process.exit(2); }
+if (typeof WebSocket === 'undefined') { console.error(`This check needs Node.js 22 or newer (it uses the built-in WebSocket). This is Node ${process.versions.node}: install a newer one from https://nodejs.org.`); process.exit(2); }
 const profile = mkdtempSync(join(tmpdir(), 'once-upon-a-stack-check-'));
 
 function launch(names) {
@@ -47,7 +51,7 @@ function launch(names) {
     proc.stderr.on('data', (chunk) => {
       log += chunk;
       const found = log.match(/DevTools listening on (ws:\S+)/);
-      if (found) ok({ proc, url: found[1] });
+      if (found) ok({ proc, url: found[1], name });
     });
   });
 }
@@ -127,6 +131,20 @@ const MEASURE = `(() => {
   if (!hasNotes && !isPlain) out.push('story page has no For grown-ups notes');
   return JSON.stringify({ problems: out, hasNotes, plays: page.querySelectorAll('button[data-play]').length, steps: page.querySelectorAll('.journey .steps li').length });
 })()`;
+
+if (preflight) {
+  try {
+    const found = await launch(CHROME);
+    console.log(`Ready: Node ${process.versions.node}, browser ${found.name}`);
+    found.proc.kill();
+  } catch (err) {
+    console.error(`Not ready: ${err.message}`);
+    process.exitCode = 2;
+  }
+  await sleep(200);
+  rmSync(profile, { recursive: true, force: true });
+  process.exit();
+}
 
 const report = [];
 let chrome;
