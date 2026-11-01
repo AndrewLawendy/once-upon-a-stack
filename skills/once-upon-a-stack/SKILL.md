@@ -46,7 +46,7 @@ Do this next, every time. `<library>` is the `library` value in `~/.config/once-
 
 At the start of each step, and after each chapter while writing, post one line with the step, what's done and the time left, such as `Step 5 of 9: writing pages (12 of 30 done), about 10 min left.`
 
-Rough times for a 30-page book, measured on a real run: research 5-10 min, writing 10-20 min, build and visual check 5-10 min, fact-check 10-15 min and fixes about 5 min, so 35-60 min in total. Scale with the page count. Without subagents, research takes about this long for each chapter. Once a step has finished, base the time left on how long the steps so far really took.
+Rough times for a 30-40 page book, measured on real runs: research 5-10 min, writing 8-15 min, build and visual check 4-8 min, fact-check 10-15 min and fixes 2-5 min, so 25-45 min in total. Scale with the page count. Without subagents, research takes about this long for each chapter. Once a step has finished, base the time left on how long the steps so far really took.
 
 ## Rewrite
 

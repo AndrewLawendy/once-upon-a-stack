@@ -48,6 +48,8 @@ Characters can be anything that suits the world: people, animals, household obje
 
 Every character maps to one real thing, written in `book.json`, and has a name, one signature color and one job.
 
+Aim for about 10 characters. A mechanism that doesn't recur can be a prop, like a stencil or a bell, rather than a character. A big cast crowds the "So far" strip and is hard to keep straight.
+
 Treat challenges in one of three ways:
 - **A character:** only if it keeps coming back or seems to have a will of its own. A villain's appearance still spells out the real mechanism. "The Echo did it" is not a root cause.
 - **Weather:** how the world simply is, such as distance, delay or poor phone lines. Nobody's fault.
