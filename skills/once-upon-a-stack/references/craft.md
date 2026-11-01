@@ -35,6 +35,8 @@
 
 `topic` is the plain name someone would search for. The build requires the folder to be `<slug>--<topic in kebab case>`, such as `the-busy-harbor--kubernetes`. It shows the readable topic in the browser tab, on the cover stamp and on the shelf.
 
+`spine` colors the book on the shelf. Pick a `bg` that stands out from the shelf's walls, teal `#2E8B7F` in light mode and navy `#141B3F` in dark, and an `fg` that's easy to read on it.
+
 `chain.json`, approved with the table of contents (the first two chapters of the example):
 ```json
 {
