@@ -97,10 +97,10 @@ body.has-strip .so-far{display:flex}
 .cast-wrap{min-height:100%;max-width:1320px;margin:auto;padding:clamp(1rem,3vh,2rem) 16px 1.4rem;display:flex;flex-direction:column;justify-content:center}
 .cast-wrap h2,.sheet h2{font:400 clamp(1.8rem,4vw,3rem)/1.08 var(--font-display);margin:0 0 .45em}
 .cast-wrap h2{color:var(--cast-title)}
-.cast-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(220px,100%),1fr));gap:clamp(.7rem,1.6vw,1.3rem);align-items:start}
-.scrap{--c:#fff;background:var(--c);color:#16262E;padding:1rem 1.1rem 1.2rem;font-size:1.12rem}
-.scrap svg{max-width:min(100%,24vh);margin:0 auto .2rem}
-.scrap h3{font:400 1.25rem/1.1 var(--font-display);margin:0 0 .3rem}
+.cast-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(170px,100%),1fr));gap:clamp(.7rem,1.6vw,1.3rem);align-items:start}
+.scrap{--c:#fff;background:var(--c);color:#16262E;padding:.7rem .8rem .8rem;font-size:.98rem}
+.scrap svg{max-width:min(100%,13vh);margin:0 auto .2rem}
+.scrap h3{font:400 1.1rem/1.1 var(--font-display);margin:0 0 .3rem}
 .scrap p{margin:0 0 .4rem;line-height:1.32}
 .scrap .real{margin:0;font-style:italic}
 .scrap.villain{--c:#2A1640;color:#F2F4E8;padding-top:1.5rem}
@@ -112,10 +112,10 @@ body.has-strip .so-far{display:flex}
 .leaf{min-height:100%;max-width:1400px;margin:auto;display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:clamp(1rem,3vw,2.5rem);align-items:center;padding:clamp(1rem,4vh,3rem) clamp(16px,3vw,2.5rem) 1.4rem}
 .leaf.stack{grid-template-columns:minmax(0,1fr);justify-items:center;align-content:center;gap:1rem}
 .art{border:6px solid var(--ink);line-height:0;width:100%}
-.sheet{background:var(--sheet);padding:clamp(1.1rem,2.6vw,2.2rem);box-shadow:4px 8px 0 var(--shadow);max-width:66ch}
+.sheet{background:var(--sheet);padding:clamp(1rem,2vw,1.6rem);box-shadow:4px 8px 0 var(--shadow);max-width:66ch;font-size:1.1rem;line-height:1.45}
 .stack .sheet{max-width:80ch;padding:1rem 1.5rem}
-.sheet h2{color:var(--heading)}
-.sheet p{margin:0 0 .8rem}
+.sheet h2{color:var(--heading);font-size:clamp(1.5rem,2.5vw,2.15rem)}
+.sheet p{margin:0 0 .65rem}
 .sheet p:last-child{margin-bottom:0}
 .running{font-style:italic;font-size:1.02rem;margin:0 0 .2rem!important}
 .seen{font-style:italic;border-left:6px solid var(--rose);padding-left:.9rem}
@@ -124,6 +124,16 @@ body.has-strip .so-far{display:flex}
 .recap{margin-top:.8rem;padding:.8rem 1rem;background:var(--accent);color:var(--on-accent)}
 .quiz{margin-top:.8rem}
 .quiz summary{font-weight:700;cursor:pointer}
+.recap,.quiz{font-size:1.02rem}
+/* Reference pages: unknowns, debugging index, glossary */
+.ref{min-height:100%;max-width:1100px;margin:auto;padding:clamp(1rem,3vh,2rem) 16px 1.4rem}
+.ref .sheet{max-width:none}
+.ref h2{margin-top:0}
+.cols{columns:2 320px;column-gap:2rem;font-size:.98rem}
+.cols p{break-inside:avoid;margin:0 0 .45rem}
+.sheet table{border-collapse:collapse;font-size:.98rem;width:100%;margin:.2rem 0 .6rem}
+.sheet th,.sheet td{border-bottom:2px solid var(--ink);padding:.2rem .4rem;text-align:left;vertical-align:top}
+.sheet code{font-family:var(--font-mono);font-size:.86em}
 
 .compare{--pos:50%;position:relative;border:6px solid var(--ink);line-height:0;width:min(100%,max(320px,calc((100dvh - 330px)*2.174)))}
 .compare .with{position:absolute;inset:0;clip-path:inset(0 0 0 var(--pos))}
@@ -136,8 +146,10 @@ body.has-strip .so-far{display:flex}
 
 .journey svg [data-show]{transition:opacity .35s ease}
 .journey svg [data-move]{transition:transform 1s ease-in-out}
-.journey .steps{list-style:none;margin:.6rem 0;padding:0;line-height:1.4}
+.journey .steps{list-style:none;margin:.6rem 0;padding:0;line-height:1.4;font-size:1.05rem;min-height:3em}
 .journey .steps li[hidden]{display:none}
+.journey > .steps,.journey > .journey-controls{background:var(--sheet);color:var(--ink);padding:.45rem .8rem;margin:0}
+.journey > .steps{margin-top:.6rem}
 .journey-controls{display:flex;align-items:center;gap:.6rem;flex-wrap:wrap}
 .journey-controls span{font-style:italic}
 .play{display:flex;flex-wrap:wrap;gap:.6rem;margin:.2rem 0 .7rem}

@@ -10,7 +10,7 @@
     chain.json           Each chapter's goal, and each attempt, break and arrival
     plan.md              Approved contents and progress, for resuming
     symbols.svg          <symbol> art and optional filters. No <svg>/<defs> wrapper.
-    book.css             Optional: world colors and scene motion
+    book.css             Optional: world colors and scene motion. Page sizing and reference pages come from the shell.
     book.js              Optional: page-specific behavior, runs after the shell
     pages/NN-name.html   One <section class="page ..."> per file, sorted by name
     facts/NN-journey.md  Research dossiers
@@ -104,6 +104,7 @@ Every page: `<section class="page p-c" id="unique-id" aria-labelledby="heading-i
 | Quiz | `<details class="quiz"><summary>Question</summary>Answer</details>` |
 | Full picture | `<section class="page p-b plain full-picture" ...>`: the hero's last trip as one scene. Cast cards may follow on it or on the next page. |
 | Cast card, full picture only | `<article class="scrap" style="--c:#FFD9A0">`. Add `villain` for torn dark paper. Wrap in `.cast-grid`, inside `.cast-wrap`. |
+| Reference page | `<div class="scroller"><div class="ref"><div class="sheet">`. Use `<div class="cols">` of `<p>` for two-column lists (unknowns, glossary) and a `<table>` for the debugging index. The shell styles both. |
 | Link to a page | `<a href="#" data-goto="page-id">` |
 
 ## Art
