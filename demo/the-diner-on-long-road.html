@@ -100,10 +100,10 @@ body.has-strip .so-far{display:flex}
 .cast-wrap{min-height:100%;max-width:1320px;margin:auto;padding:clamp(1rem,3vh,2rem) 16px 1.4rem;display:flex;flex-direction:column;justify-content:center}
 .cast-wrap h2,.sheet h2{font:400 clamp(1.8rem,4vw,3rem)/1.08 var(--font-display);margin:0 0 .45em}
 .cast-wrap h2{color:var(--cast-title)}
-.cast-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(220px,100%),1fr));gap:clamp(.7rem,1.6vw,1.3rem);align-items:start}
-.scrap{--c:#fff;background:var(--c);color:#16262E;padding:1rem 1.1rem 1.2rem;font-size:1.12rem}
-.scrap svg{max-width:min(100%,24vh);margin:0 auto .2rem}
-.scrap h3{font:400 1.25rem/1.1 var(--font-display);margin:0 0 .3rem}
+.cast-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(170px,100%),1fr));gap:clamp(.7rem,1.6vw,1.3rem);align-items:start}
+.scrap{--c:#fff;background:var(--c);color:#16262E;padding:.7rem .8rem .8rem;font-size:.98rem}
+.scrap svg{max-width:min(100%,13vh);margin:0 auto .2rem}
+.scrap h3{font:400 1.1rem/1.1 var(--font-display);margin:0 0 .3rem}
 .scrap p{margin:0 0 .4rem;line-height:1.32}
 .scrap .real{margin:0;font-style:italic}
 .scrap.villain{--c:#2A1640;color:#F2F4E8;padding-top:1.5rem}
@@ -115,10 +115,10 @@ body.has-strip .so-far{display:flex}
 .leaf{min-height:100%;max-width:1400px;margin:auto;display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:clamp(1rem,3vw,2.5rem);align-items:center;padding:clamp(1rem,4vh,3rem) clamp(16px,3vw,2.5rem) 1.4rem}
 .leaf.stack{grid-template-columns:minmax(0,1fr);justify-items:center;align-content:center;gap:1rem}
 .art{border:6px solid var(--ink);line-height:0;width:100%}
-.sheet{background:var(--sheet);padding:clamp(1.1rem,2.6vw,2.2rem);box-shadow:4px 8px 0 var(--shadow);max-width:66ch}
+.sheet{background:var(--sheet);padding:clamp(1rem,2vw,1.6rem);box-shadow:4px 8px 0 var(--shadow);max-width:66ch;font-size:1.1rem;line-height:1.45}
 .stack .sheet{max-width:80ch;padding:1rem 1.5rem}
-.sheet h2{color:var(--heading)}
-.sheet p{margin:0 0 .8rem}
+.sheet h2{color:var(--heading);font-size:clamp(1.5rem,2.5vw,2.15rem)}
+.sheet p{margin:0 0 .65rem}
 .sheet p:last-child{margin-bottom:0}
 .running{font-style:italic;font-size:1.02rem;margin:0 0 .2rem!important}
 .seen{font-style:italic;border-left:6px solid var(--rose);padding-left:.9rem}
@@ -127,6 +127,16 @@ body.has-strip .so-far{display:flex}
 .recap{margin-top:.8rem;padding:.8rem 1rem;background:var(--accent);color:var(--on-accent)}
 .quiz{margin-top:.8rem}
 .quiz summary{font-weight:700;cursor:pointer}
+.recap,.quiz{font-size:1.02rem}
+/* Reference pages: unknowns, debugging index, glossary */
+.ref{min-height:100%;max-width:1100px;margin:auto;padding:clamp(1rem,3vh,2rem) 16px 1.4rem}
+.ref .sheet{max-width:none}
+.ref h2{margin-top:0}
+.cols{columns:2 320px;column-gap:2rem;font-size:.98rem}
+.cols p{break-inside:avoid;margin:0 0 .45rem}
+.sheet table{border-collapse:collapse;font-size:.98rem;width:100%;margin:.2rem 0 .6rem}
+.sheet th,.sheet td{border-bottom:2px solid var(--ink);padding:.2rem .4rem;text-align:left;vertical-align:top}
+.sheet code{font-family:var(--font-mono);font-size:.86em}
 
 .compare{--pos:50%;position:relative;border:6px solid var(--ink);line-height:0;width:min(100%,max(320px,calc((100dvh - 330px)*2.174)))}
 .compare .with{position:absolute;inset:0;clip-path:inset(0 0 0 var(--pos))}
@@ -139,8 +149,10 @@ body.has-strip .so-far{display:flex}
 
 .journey svg [data-show]{transition:opacity .35s ease}
 .journey svg [data-move]{transition:transform 1s ease-in-out}
-.journey .steps{list-style:none;margin:.6rem 0;padding:0;line-height:1.4}
+.journey .steps{list-style:none;margin:.6rem 0;padding:0;line-height:1.4;font-size:1.05rem;min-height:3em}
 .journey .steps li[hidden]{display:none}
+.journey > .steps,.journey > .journey-controls{background:var(--sheet);color:var(--ink);padding:.45rem .8rem;margin:0}
+.journey > .steps{margin-top:.6rem}
 .journey-controls{display:flex;align-items:center;gap:.6rem;flex-wrap:wrap}
 .journey-controls span{font-style:italic}
 .play{display:flex;flex-wrap:wrap;gap:.6rem;margin:.2rem 0 .7rem}
@@ -198,28 +210,6 @@ body.has-strip .so-far{display:flex}
 .l:nth-child(odd){transform:rotate(-3deg)}.l:nth-child(even){transform:rotate(3deg) translateY(.05em)}
 .ntag rect{stroke:var(--on-tag);stroke-width:2}
 
-.sheet{font-size:1.1rem;line-height:1.45;padding:clamp(1rem,2vw,1.6rem)}
-.sheet h2{font-size:clamp(1.5rem,2.5vw,2.15rem)}
-.sheet p{margin-bottom:.65rem}
-.journey .steps{font-size:1.05rem;min-height:3em}
-.journey .art + .steps{margin-top:.6rem}
-.journey > .steps,.journey > .journey-controls{background:var(--sheet);color:var(--ink);padding:.45rem .8rem;margin:0}
-.journey > .steps{margin-top:.6rem}
-.recap,.quiz{font-size:1.02rem}
-.sheet table{border-collapse:collapse;font-size:.98rem;width:100%;margin:.2rem 0 .6rem}
-.sheet th,.sheet td{border-bottom:2px solid var(--ink);padding:.2rem .4rem;text-align:left;vertical-align:top}
-.sheet code{font-family:var(--font-mono);font-size:.86em}
-.wide{max-width:none!important}
-.ref{min-height:100%;max-width:1100px;margin:auto;padding:clamp(1rem,3vh,2rem) 16px 1.4rem}
-.ref .sheet{max-width:none}
-.ref h2{margin-top:0}
-.cast-grid{grid-template-columns:repeat(auto-fit,minmax(min(170px,100%),1fr))}
-.scrap{font-size:.98rem;padding:.7rem .8rem .8rem}
-.scrap svg{max-width:min(100%,13vh)}
-.scrap h3{font-size:1.1rem}
-.cols{columns:2 320px;column-gap:2rem;font-size:.98rem}
-.cols p{break-inside:avoid;margin:0 0 .45rem}
-.cast-list{margin:.2rem 0 .6rem;padding-left:1.5rem;font-size:1rem;line-height:1.35}
 
 </style>
 </head>
@@ -455,7 +445,7 @@ body.has-strip .so-far{display:flex}
     <h3>For grown-ups</h3>
     <dl>
       <dt>Who she is</dt>
-      <dd>Rosie <span class="who">(your app)</span> is the code that serves a request, such as a web server. At Facebook, "a web server needs data" is how the memcache paper begins its overview: it asks the cache by key, and on a miss reads the database. <span class="b v">Verified</span></dd>
+      <dd><span class="b i">Inferred</span> Rosie <span class="who">(your app)</span> stands for the code that serves a request, such as a web server. <span class="b v">Verified</span> The memcache paper describes the read path the same way: "When a web server needs data, it first requests the value from memcache by providing a string key", and on a miss reads the database (s2).</dd>
       <dt>Why "now" matters</dt>
       <dd><span class="b v">Verified</span> "A single user web request can often result in hundreds of individual memcache get requests." Every small delay is multiplied by how many pieces of data one page needs.</dd>
     </dl>
@@ -532,7 +522,7 @@ body.has-strip .so-far{display:flex}
       <dt>Why a database trip is the slow path</dt>
       <dd><span class="b v">Verified</span> Facebook uses memcache "to reduce the frequency of fetching data along more expensive paths such as database queries", and "to lighten the read load on our databases".</dd>
       <dt>The same pie, over and over</dt>
-      <dd><span class="b v">Verified</span> Reads are not spread evenly: "a single key can account for 20% of a server's requests". Most of the work is repeated questions about a few popular things.</dd>
+      <dd><span class="b v">Verified</span> Some keys are very hot: "a single key can account for 20% of a server's requests". <span class="b i">Inferred</span> A few popular things can dominate a server's work.</dd>
       <dt>Why it gets worse at peak</dt>
       <dd><span class="b i">Inferred</span> A database has a fixed number of connections and disk and CPU budget. Past that, requests queue, so every request waits for the ones ahead of it.</dd>
     </dl>
@@ -567,11 +557,11 @@ body.has-strip .so-far{display:flex}
     <h3>For grown-ups</h3>
     <dl>
       <dt>What the case is</dt>
-      <dd><span class="b v">Verified</span> memcached, Facebook's cache server, is "an in-memory hash table running on a single server". Memory is much faster than a database query that may touch disk and do work.</dd>
+      <dd><span class="b v">Verified</span> memcached, the open-source cache server Facebook builds on, is "an in-memory hash table running on a single server" (s3). Memory is much faster than a database query that may touch disk and do work.</dd>
       <dt>Why it helps the farm, not just for the app</dt>
       <dd><span class="b v">Verified</span> The design goal is to shield the database: "We are willing to expose slightly stale data in exchange for insulating a backend storage service from excessive load." That trade, speed and protection for some staleness, comes back in chapter two.</dd>
     </dl>
-    <p class="src">Nishtala et al., NSDI 2013, s2</p>
+    <p class="src">Nishtala et al., NSDI 2013, s2, s3. The "3 sec" in the scene is story scale: a real cache hit takes well under a millisecond (the paper reports a median of 333 microseconds).</p>
   </div>
 </section>
 
@@ -607,7 +597,7 @@ body.has-strip .so-far{display:flex}
       <h2 id="h-hit-miss">Wait, how does the case know?</h2>
       <p>Della <span class="who">(the cache)</span> doesn't understand pies. She keeps <b>labels</b> and what's under them. Ask for "apple pie" and she either has a pie under that label, or she doesn't.</p>
       <p>The surprise is step 4: on a miss, the case doesn't drive to the farm. Rosie <span class="who">(your app)</span> does. She orders from the Baker <span class="who">(the database)</span>, gets her slice, and puts the rest in the case herself.</p>
-      <p>And that's the goal met. Most days her pie is already in the case, and she's eating in seconds.</p>
+      <p>And that's the goal met. Whenever her pie is already in the case, she's eating in seconds.</p>
     </div>
   </div></div>
   <div class="note-src">
@@ -616,7 +606,7 @@ body.has-strip .so-far{display:flex}
       <dt>Key and value</dt>
       <dd><span class="b v">Verified</span> The web server "first requests the value from memcache by providing a string key". The pie's name is the key; the pie is the value.</dd>
       <dt>Who fills the cache</dt>
-      <dd><span class="b v">Verified</span> On a miss, the web server "retrieves the data from the database or other backend service and populates the cache with the key-value pair". This is a "demand-filled look-aside cache": the app looks aside to the cache, and fills it only when asked. memcached itself "provides no server-to-server coordination".</dd>
+      <dd><span class="b v">Verified</span> On a miss, the web server "retrieves the data from the database or other backend service and populates the cache with the key-value pair". This is a "demand-filled look-aside cache": the app looks aside to the cache, and fills it only when asked. memcached itself "provides no server-to-server coordination" (s3).</dd>
       <dt>Other designs</dt>
       <dd>Some caches sit in front and fetch on a miss themselves (read-through), such as HTTP proxies and CDNs. This book follows look-aside, the common pattern with Redis and memcached. <span class="b i">Inferred</span></dd>
     </dl>
@@ -717,7 +707,7 @@ body.has-strip .so-far{display:flex}
     <h3>For grown-ups</h3>
     <dl>
       <dt>The sticker is the TTL</dt>
-      <dd><span class="b v">Verified</span> HTTP: <code>Cache-Control: max-age=600</code> gives a freshness lifetime in seconds; the cache sends <code>Age</code>, its estimate of how long ago the response was generated. Redis: keys can carry an expiration (TTL), for example <code>SET k v EX 600</code>.</dd>
+      <dd><span class="b v">Verified</span> HTTP: <code>Cache-Control: max-age=600</code> gives a freshness lifetime in seconds; the cache sends <code>Age</code>, its estimate of how long ago the response was generated or last successfully validated. Redis: keys can carry an expiration (TTL), for example <code>SET k v EX 600</code>.</dd>
       <dt>Signs your sticker is wrong</dt>
       <dd><span class="b v">Verified</span> Redis's docs say a high <code>expired_keys</code> count can mean "a TTL that is too low". Hit ratio is <code>keyspace_hits / (keyspace_hits + keyspace_misses)</code>.</dd>
       <dt>The trade-off</dt>
@@ -747,7 +737,7 @@ body.has-strip .so-far{display:flex}
         <g class="ntag" transform="rotate(-1.2 745 406)"><rect x="663" y="380" width="163" height="54"/><text class="nt-n" x="745" y="403">Baker</text><text class="nt-f" x="745" y="425">(the database)</text></g>
       </svg></div>
       <ol class="steps">
-        <li>Rosie <span class="who">(your app)</span> misses, orders apple. The farm hands over the <b>old</b> pie, and a slow truck sets off.</li>
+        <li>Rosie <span class="who">(your app)</span> misses, orders apple. The Baker <span class="who">(the database)</span> hands over the <b>old</b> pie, and a slow truck sets off.</li>
         <li>Then the Baker <span class="who">(the database)</span> changes the recipe and phones: "throw out the apple!"</li>
         <li>The case is empty. Nothing to throw out.</li>
         <li>The slow truck finally arrives, and the old pie goes into the case. It stays there until its sticker runs out.</li>
@@ -755,7 +745,7 @@ body.has-strip .so-far{display:flex}
     </div>
     <div class="sheet">
       <p class="running">The Right Pie</p>
-      <h2 id="h-phone-call">The farm phones ahead</h2>
+      <h2 id="h-phone-call">A phone call from the farm</h2>
       <p>Better fix: whenever the recipe changes, the Baker <span class="who">(the database)</span> phones Della <span class="who">(the cache)</span>: "throw out the apple!" The next order then fetches the new pie. Most changes now show up at once.</p>
       <p>Why "throw out", not "here's the new pie"? Throwing out twice is harmless.</p>
       <p>But even throwing out has a gap. Step through it: a slow truck can arrive <b>after</b> the call, and put the old pie back.</p>
@@ -766,7 +756,7 @@ body.has-strip .so-far{display:flex}
     <h3>For grown-ups</h3>
     <dl>
       <dt>Delete on write</dt>
-      <dd><span class="b v">Verified</span> At Facebook, writes update the database and then "send a delete request to memcache that invalidates any stale data". "We choose to delete cached data instead of updating it because deletes are idempotent." HTTP caches do the same for a URL after a successful <code>PUT</code>, <code>POST</code> or <code>DELETE</code> through them.</dd>
+      <dd><span class="b v">Verified</span> At Facebook, a write updates the database, then "sends a delete request to memcache that invalidates any stale data". The delete comes from the web server, or from mcsqueal, a daemon on the database that reads its commit log (s4.1). "We choose to delete cached data instead of updating it because deletes are idempotent." HTTP caches invalidate a URL after a successful <code>PUT</code>, <code>POST</code> or <code>DELETE</code> passes through them (RFC 9111 s4.4).</dd>
       <dt>The stale set</dt>
       <dd><span class="b v">Verified</span> "A stale set occurs when a web server sets a value in memcache that does not reflect the latest value that should be cached. This can occur when concurrent updates to memcache get reordered." <span class="b i">Inferred</span> The four steps on this page are one such reordering: miss, read old value, write and delete, then set old value.</dd>
       <dt>Other gaps</dt>
@@ -797,7 +787,7 @@ body.has-strip .so-far{display:flex}
       <p class="running">The Right Pie</p>
       <h2 id="h-right-pie">Good enough, and honest about it</h2>
       <p>The phone call makes most changes show up at once. The sticker makes sure that even a pie that slips through can't last longer than its date.</p>
-      <p>Big diners close the last gap with a <b>claim ticket</b>. On a miss, Della <span class="who">(the cache)</span> hands out a numbered ticket, and only a delivery with a live ticket may go in the case. The phone call cancels the ticket, so the slow truck's old pie is turned away.</p>
+      <p>Big diners close the last gap with a <b>claim ticket</b>. On a miss, Della <span class="who">(the cache)</span> hands out a numbered ticket, and the delivery must show it. The phone call cancels the ticket, so the slow truck's old pie, with its dead ticket, is turned away.</p>
       <p>And Rosie <span class="who">(your app)</span> gets today's pie, almost always. A cache never promises "always". It promises fast, and fresh enough.</p>
     </div>
   </div></div>
@@ -805,11 +795,11 @@ body.has-strip .so-far{display:flex}
     <h3>For grown-ups</h3>
     <dl>
       <dt>Leases</dt>
-      <dd><span class="b v">Verified</span> "A memcached instance gives a lease to a client to set data back into the cache when that client experiences a cache miss. The lease is a 64-bit token bound to the specific key." Setting requires the token, and "verification can fail if memcached has invalidated the lease token due to receiving a delete request for that item".</dd>
+      <dd><span class="b v">Verified</span> "A memcached instance gives a lease to a client to set data back into the cache when that client experiences a cache miss. The lease is a 64-bit token bound to the specific key the client originally requested." The set carries the token, and "verification can fail if memcached has invalidated the lease token due to receiving a delete request for that item".</dd>
       <dt>The deal</dt>
       <dd><span class="b v">Verified</span> "We are willing to expose slightly stale data in exchange for insulating a backend storage service from excessive load."</dd>
       <dt>Not everywhere</dt>
-      <dd><span class="b i">Inferred</span> Leases need a cache and client that support them; plain Redis and memcached clients don't do this by default. Most apps live with TTL plus delete.</dd>
+      <dd><span class="b i">Inferred</span> Leases need a cache and client that support them. Stock Redis has none; check what your memcached version and client offer. Most apps live with TTL plus delete.</dd>
     </dl>
     <p class="src">Nishtala et al., NSDI 2013, s2, s3.2.1</p>
   </div>
@@ -845,7 +835,7 @@ body.has-strip .so-far{display:flex}
     <h3>For grown-ups</h3>
     <dl>
       <dt>The size of the case</dt>
-      <dd><span class="b v">Verified</span> Redis's limit is <code>maxmemory</code> (default <code>0</code>, no limit on 64-bit). "Whenever a client runs a new command that adds more data to the cache, Redis checks the memory usage. If it is greater than the limit, Redis evicts keys according to the chosen eviction policy."</dd>
+      <dd><span class="b v">Verified</span> Redis's limit is <code>maxmemory</code> (default <code>0</code>, no limit on 64-bit). "Whenever a client runs a new command that adds more data to the cache, Redis checks the memory usage. If it is greater than the limit, Redis evicts keys according to the chosen eviction policy until the total memory used is back below the limit."</dd>
       <dt>The default is: don't throw anything out</dt>
       <dd><span class="b v">Verified</span> <code>maxmemory-policy</code> defaults to <code>noeviction</code>. At the limit, writes are rejected with the error above, and "commands that only read existing data still work as normal". Redis 7.4.0, <code>src/config.c</code> and <code>src/server.c</code> (<code>shared.oomerr</code>).</dd>
       <dt>Why not keep everything</dt>
@@ -884,7 +874,7 @@ body.has-strip .so-far{display:flex}
     <h3>For grown-ups</h3>
     <dl>
       <dt>Random eviction is real</dt>
-      <dd><span class="b v">Verified</span> Redis offers <code>allkeys-random</code> and <code>volatile-random</code>. Its docs suggest random only "when you expect all keys to be accessed with roughly equal frequency".</dd>
+      <dd><span class="b v">Verified</span> Redis offers <code>allkeys-random</code> and <code>volatile-random</code>. Its docs suggest <code>allkeys-random</code> "when you expect all keys to be accessed with roughly equal frequency".</dd>
       <dt>Why it hurts</dt>
       <dd><span class="b i">Inferred</span> Real traffic is uneven, so a random victim is usually cold but sometimes very hot; each hot-key eviction costs one miss per reader until it's refilled.</dd>
     </dl>
@@ -994,7 +984,7 @@ body.has-strip .so-far{display:flex}
         <li>The case is empty, and two hundred people want apple.</li>
         <li>Every one of them misses, and every one sends an order to the farm.</li>
         <li>Two hundred orders for the same pie jam the road.</li>
-        <li>The farm slows down, so each pie takes longer, so more people pile up. It feeds itself.</li>
+        <li>The Baker <span class="who">(the database)</span> slows down, so each pie takes longer, so more people pile up. It feeds itself.</li>
       </ol>
     </div>
     <div class="sheet">
@@ -1092,7 +1082,7 @@ body.has-strip .so-far{display:flex}
       <dt>singleflight</dt>
       <dd><span class="b v">Verified</span> Go's <code>golang.org/x/sync/singleflight</code> (v0.24.0): <code>Do</code> "executes and returns the results of the given function, making sure that only one execution is in-flight for a given key at a time. If a duplicate comes in, the duplicate caller waits for the original to complete and receives the same results."</dd>
       <dt>One spike per diner</dt>
-      <dd><span class="b i">Inferred</span> A <code>singleflight.Group</code> lives in one process's memory, so 100 app servers still send up to 100 queries. Facebook moved the same idea into the cache: each memcached returns a lease token for a key "only once every 10 seconds"; other clients are told to wait briefly and retry. On herd-prone keys, peak database load fell from 17K/s to 1.3K/s. <span class="b v">Verified</span></dd>
+      <dd><span class="b i">Inferred</span> A <code>singleflight.Group</code> lives in one process's memory, so 100 app servers still send up to 100 queries. <span class="b v">Verified</span> Facebook limits this in the cache instead: each memcached hands out a lease token for a key "only once every 10 seconds per key", and other clients are told "to wait a short amount of time" and retry, rather than sharing the first caller's result. On herd-prone keys, peak database load fell from 17K/s to 1.3K/s.</dd>
       <dt>When the first order fails</dt>
       <dd><span class="b i">Inferred</span> Everyone waiting shares its result, including its error, and a hung fetch holds everyone. Use a timeout.</dd>
     </dl>
@@ -1131,7 +1121,7 @@ body.has-strip .so-far{display:flex}
     <div class="sheet">
       <p class="running">Noon</p>
       <h2 id="h-noon-pie">A slice while you wait</h2>
-      <p>Tess <span class="who">(request coalescing)</span> saved the farm, but everyone on her spike still waits the whole trip.</p>
+      <p>Tess <span class="who">(request coalescing)</span> saved the Baker <span class="who">(the database)</span>, but everyone on her spike still waits the whole trip.</p>
       <p>Last trick: when the sticker runs out, Della <span class="who">(the cache)</span> doesn't throw the pie away just yet. For a few more minutes she keeps serving it, while <b>one</b> truck fetches a fresh one. Drag across.</p>
       <p>It's this morning's pie, a few minutes past its sticker. That's the same trade from chapter two, kept small on purpose.</p>
       <p>And at noon, Rosie <span class="who">(your app)</span> gets her slice straight away, and the Baker <span class="who">(the database)</span> bakes one pie.</p>
@@ -1143,9 +1133,9 @@ body.has-strip .so-far{display:flex}
       <dt>stale-while-revalidate</dt>
       <dd><span class="b v">Verified</span> RFC 5861: with <code>Cache-Control: max-age=600, stale-while-revalidate=30</code> a cache "may continue to be served stale for up to an additional 30 seconds while an asynchronous validation is attempted". After the window, "the next request will block and be handled normally".</dd>
       <dt>Facebook's version</dt>
-      <dd><span class="b v">Verified</span> Recently deleted values are kept "for a short time", and "a get request can return a lease token or data that is marked as stale". "Applications that can continue to make forward progress with stale data do not need to wait."</dd>
+      <dd><span class="b v">Verified</span> Recently deleted values are kept "for a short time", and "a get request can return a lease token or data that is marked as stale". "Applications that can continue to make forward progress with stale data do not need to wait for the latest value to be fetched from the databases."</dd>
       <dt>Refreshing early</dt>
-      <dd><span class="b v">Verified</span> Another fix refreshes a hot key just before it expires, at random, so it never goes missing: XFetch, with <code>beta = 1</code> and the last rebuild time stored beside the value.</dd>
+      <dd><span class="b v">Verified</span> Another fix refreshes a hot key just before it expires, at random, so a stampede becomes very unlikely: XFetch, with <code>beta = 1</code> and the last rebuild time stored beside the value.</dd>
     </dl>
     <p class="src">RFC 5861 s3; Nishtala et al., NSDI 2013, s3.2.1; Vattani et al., PVLDB 8(8) 2015, s5</p>
   </div>
@@ -1189,7 +1179,7 @@ body.has-strip .so-far{display:flex}
     <div class="sheet">
       <h2 id="h-full-picture">Rosie's lunch, all of it</h2>
       <p>Now everyone is here. Step through one lunch, start to finish.</p>
-      <p>The case makes it fast. The sticker and the phone call keep it fresh enough. The busboy keeps the right pies. The spike and the old-pie trick keep noon from flattening the farm.</p>
+      <p>Della <span class="who">(the cache)</span> makes it fast. The sticker and the phone call keep it fresh enough. Eddie <span class="who">(the eviction policy)</span> keeps the right pies. Tess <span class="who">(request coalescing)</span> and the old-pie trick keep noon from flattening the farm.</p>
       <p>Each of them is there because something broke without them. That's caching: a copy near the people asking, and a handful of rules for when the copy is wrong, full, or missing.</p>
     </div>
   </div></div>
@@ -1203,8 +1193,8 @@ body.has-strip .so-far{display:flex}
       <article class="scrap" style="--c:#F2C14E"><svg viewBox="0 0 130 180" aria-hidden="true"><use href="#baker" width="130" height="180"/></svg><h3>Baker</h3><p>Keeps the one true recipe book. Slow, far, and right.</p><p class="real">the database</p></article>
       <article class="scrap" style="--c:#FBF6E9"><svg viewBox="0 0 180 200" aria-hidden="true"><use href="#della" width="180" height="200"/></svg><h3>Della</h3><p>A copy of the popular pies, right on the counter.</p><p class="real">the cache</p></article>
       <article class="scrap" style="--c:#F2C14E"><svg viewBox="0 0 140 180" aria-hidden="true"><use href="#eddie" width="140" height="180"/></svg><h3>Eddie</h3><p>Clears the pie nobody asked for the longest. Samples a few.</p><p class="real">the eviction policy (approximate LRU)</p></article>
-      <article class="scrap" style="--c:#FBF6E9"><svg viewBox="0 0 120 180" aria-hidden="true"><use href="#tess" width="120" height="180"/></svg><h3>Tess</h3><p>One order per pie. Everyone else waits on the spike.</p><p class="real">request coalescing (singleflight, leases)</p></article>
-      <article class="scrap villain"><svg viewBox="0 0 300 200" aria-hidden="true"><rect width="300" height="200" fill="#F2C14E"/><use href="#rush" width="300" height="200"/></svg><h3>The Rush</h3><p>Every miss at once, at the worst moment. Feeds itself.</p><p class="real">a cache stampede (thundering herd)</p></article>
+      <article class="scrap" style="--c:#FBF6E9"><svg viewBox="0 0 120 180" aria-hidden="true"><use href="#tess" width="120" height="180"/></svg><h3>Tess</h3><p>One order per pie. Everyone else waits on the spike.</p><p class="real">request coalescing (singleflight)</p></article>
+      <article class="scrap villain"><svg viewBox="0 0 300 200" aria-hidden="true"><rect width="300" height="200" fill="#F2C14E"/><use href="#rush" width="300" height="200"/></svg><h3>The Rush</h3><p>Every miss at once, at the worst moment. Feeds itself.</p><p class="real">a cache stampede (dog-piling)</p></article>
     </div>
   </div></div>
 </section>
@@ -1220,9 +1210,7 @@ body.has-strip .so-far{display:flex}
       <p><b>How long "wait a short time" is.</b> The paper doesn't give the retry delay for clients told to wait. <a href="#" data-goto="p-tess">p.</a></p>
       <p><b>How long stale values are kept.</b> Facebook keeps recently deleted values "for a short time", with no number. <a href="#" data-goto="noon-pie">p.</a></p>
       <p><b>Facebook's overall hit rate.</b> Not found in the parts of the paper read. <i>Settle:</i> its section 7, workload. <a href="#" data-goto="p-della">p.</a></p>
-      <p><b>Exact source lines.</b> Redis <code>evict.c</code> and Go's singleflight were read through a summarising fetcher: function names are confirmed, line numbers are not. <i>Settle:</i> grep a checkout at Redis 7.4.0 and x/sync v0.24.0. <a href="#" data-goto="p-eddie">p.</a></p>
-      <p><b>RFC 9111 exact wording</b> in sections 4.2.4 and 4.4 was paraphrased by the fetcher. <i>Settle:</i> read the RFC directly. <a href="#" data-goto="phone-call">p.</a></p>
-    </div>
+          </div>
   </div></div></div>
 </section>
 
@@ -1251,14 +1239,14 @@ body.has-strip .so-far{display:flex}
       <p><b>App, web server</b>: Rosie</p>
       <p><b>Cache</b>: Della, the pie case</p>
       <p><b>Cache-aside, look-aside</b>: Rosie fills the case on a miss</p>
-      <p><b>Cache stampede, thundering herd</b>: the Rush</p>
+      <p><b>Cache stampede, dog-piling</b>: the Rush. Facebook's "thundering herd" is a cousin, driven by repeated deletes.</p>
       <p><b>Database, source of truth</b>: the Baker at the farm</p>
       <p><b>Eviction</b>: taking a pie out to make room</p>
       <p><b>Hit / miss</b>: the pie is / isn't in the case</p>
       <p><b>Invalidation, delete on write</b>: the phone call</p>
       <p><b>Key / value</b>: the pie's name / the pie</p>
       <p><b>Latency</b>: the long road</p>
-      <p><b>Lease</b>: the claim ticket</p>
+      <p><b>Lease</b>: the claim ticket, against stale sets. Facebook's leases also slow a herd, by handing out one ticket per key every 10 seconds.</p>
       <p><b>LRU, approximated</b>: Eddie, sampling a few plates</p>
       <p><b>LFU</b>: counting how often, not how recently</p>
       <p><b>maxmemory</b>: the size of the case</p>
