@@ -1,0 +1,14 @@
+{
+  "name": "once-upon-a-stack",
+  "owner": {
+    "name": "Andrew Lawendy"
+  },
+  "description": "Picture books that explain technical topics, made with Claude Code.",
+  "plugins": [
+    {
+      "name": "once-upon-a-stack",
+      "source": "./",
+      "description": "Explains any technical topic as an illustrated, offline picture book you can keep and reread."
+    }
+  ]
+}

@@ -74,7 +74,13 @@ A big topic can take a while and use a lot of tokens: a 45-page book runs severa
 
 ## Install
 
-Clone the repo and link the skill into your skills folder:
+In Claude Code (2.1.275 or later):
+
+```
+/plugin install once-upon-a-stack --marketplace AndrewLawendy/once-upon-a-stack
+```
+
+Or clone the repo and link the skill into your skills folder:
 
 ```
 git clone https://github.com/AndrewLawendy/once-upon-a-stack.git
