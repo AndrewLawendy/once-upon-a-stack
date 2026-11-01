@@ -50,7 +50,7 @@ function launch(names) {
     proc.on('error', () => launch(rest).then(ok, fail));
     proc.stderr.on('data', (chunk) => {
       log += chunk;
-      const found = log.match(/DevTools listening on (ws:\S+)/);
+      const found = log.match(/DevTools listening on (\S+)/);
       if (found) ok({ proc, url: found[1], name });
     });
   });
