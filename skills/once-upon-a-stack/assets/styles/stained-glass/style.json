@@ -1,0 +1,35 @@
+{
+  "name": "Stained glass",
+  "fonts": [
+    [
+      "Glass Display",
+      400,
+      "normal",
+      "cinzel-decorative-400.woff2"
+    ],
+    [
+      "Glass Display",
+      700,
+      "normal",
+      "cinzel-decorative-700.woff2"
+    ],
+    [
+      "Glass Body",
+      400,
+      "normal",
+      "cardo-400.woff2"
+    ],
+    [
+      "Glass Body",
+      700,
+      "normal",
+      "cardo-700.woff2"
+    ],
+    [
+      "Glass Body",
+      400,
+      "italic",
+      "cardo-400i.woff2"
+    ]
+  ]
+}

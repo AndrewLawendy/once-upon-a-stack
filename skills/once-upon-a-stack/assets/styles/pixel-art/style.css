@@ -1,0 +1,18 @@
+:root{--ink:#1A1C2C;--sheet:#F4F4F4;--note:#FFCD75;--note-line:#E8B04E;--on-note:#1A1C2C;--page-a:#41A6F6;--page-b:#38B764;--page-c:#3B5DC9;--sky:#41A6F6;--sun:#FFCD75;--hill-back:#257179;--hill-mid:#38B764;--hill-front:#A7F070;--tree:#257179;--path:#FFCD75;--stump:#5D275D;--stump-top:#B13E53;--tag:#1A1C2C;--on-tag:#F4F4F4;--rose:#A52F47;--heading:#29366F;--shadow:rgba(26,28,44,.9);--code:#FFFFFF;--cast-title:#1A1C2C;--accent:#1A1C2C;--on-accent:#FFCD75;--accent2:#A52F47;--on-accent2:#F4F4F4;--marigold:#1A1C2C;--plum:#A52F47;--font-display:"Pixel Display",serif;--font-body:"Pixel Body",serif;--font-mono:ui-monospace,"DejaVu Sans Mono",Menlo,monospace}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--ink:#F4F4F4;--sheet:#1A1C2C;--note:#29366F;--note-line:#3B5DC9;--on-note:#F4F4F4;--page-a:#0F1020;--page-b:#12301F;--page-c:#141630;--sky:#29366F;--sun:#FFCD75;--hill-back:#1A4A50;--hill-mid:#257179;--hill-front:#38B764;--tree:#257179;--path:#566C86;--stump:#5D275D;--stump-top:#B13E53;--tag:#1A1C2C;--on-tag:#F4F4F4;--rose:#EF7D57;--heading:#FFCD75;--shadow:rgba(0,0,0,.6);--code:#141630;--cast-title:#FFCD75;--accent:#FFCD75;--on-accent:#1A1C2C;--accent2:#EF7D57;--on-accent2:#1A1C2C;--marigold:#FFCD75;--plum:#EF7D57}}
+:root[data-theme="dark"]{--ink:#F4F4F4;--sheet:#1A1C2C;--note:#29366F;--note-line:#3B5DC9;--on-note:#F4F4F4;--page-a:#0F1020;--page-b:#12301F;--page-c:#141630;--sky:#29366F;--sun:#FFCD75;--hill-back:#1A4A50;--hill-mid:#257179;--hill-front:#38B764;--tree:#257179;--path:#566C86;--stump:#5D275D;--stump-top:#B13E53;--tag:#1A1C2C;--on-tag:#F4F4F4;--rose:#EF7D57;--heading:#FFCD75;--shadow:rgba(0,0,0,.6);--code:#141630;--cast-title:#FFCD75;--accent:#FFCD75;--on-accent:#1A1C2C;--accent2:#EF7D57;--on-accent2:#1A1C2C;--marigold:#FFCD75;--plum:#EF7D57}
+body{font-size:1.55rem;line-height:1.22}
+.sheet,.notebook,.scrap,.drawer{border:4px solid var(--ink)}
+.sheet{box-shadow:6px 6px 0 var(--shadow)}
+.cast-wrap h2,.sheet h2{font-size:clamp(1.2rem,2.1vw,1.75rem);line-height:1.4}
+.scrap h3,.notebook h3,.drawer h2{font-size:.9rem;line-height:1.5}
+.cover h1{font-size:clamp(1.6rem,4.2vw,3.5rem)}
+.word{background:var(--sheet);padding:.06em .18em}
+.l{background:none;color:var(--heading);padding:0}
+.running,.origin,.scrap,.stamp,.src,.notebook,.b,.tagline{font-size:1.3rem;line-height:1.2}
+.nav button,.drawer button,.journey-controls button,button[data-play]{font-size:1.3rem}
+.nav select{font-size:1.25rem}
+.theme span{font-size:1.25rem;line-height:1.2}
+.ntag rect{stroke:var(--on-tag);stroke-width:4;shape-rendering:crispEdges}
+.ntag text{font-size:22px}
+svg{shape-rendering:crispEdges}

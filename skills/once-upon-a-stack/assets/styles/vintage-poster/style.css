@@ -1,0 +1,10 @@
+:root{--ink:#14213D;--sheet:#F6E7C1;--note:#F2D9A0;--note-line:#D9BD7D;--on-note:#14213D;--page-a:#1E6F73;--page-b:#C8321E;--page-c:#14213D;--sky:#3C9A8F;--sun:#F6E7C1;--hill-back:#1E6F73;--hill-mid:#2C8A80;--hill-front:#14213D;--tree:#14213D;--path:#F2C879;--stump:#14213D;--stump-top:#F28C28;--tag:#F6E7C1;--on-tag:#14213D;--rose:#B22A17;--heading:#B22A17;--shadow:rgba(20,33,61,.5);--code:#FFF7E0;--cast-title:#F6E7C1;--accent:#14213D;--on-accent:#F6E7C1;--accent2:#B22A17;--on-accent2:#F6E7C1;--marigold:#14213D;--plum:#B22A17;--font-display:"Poster Display",serif;--font-body:"Poster Body",serif;--font-mono:ui-monospace,"DejaVu Sans Mono",Menlo,monospace}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--ink:#F6E7C1;--sheet:#14213D;--note:#1F2F52;--note-line:#344770;--on-note:#F6E7C1;--page-a:#0E1830;--page-b:#5C1A10;--page-c:#0A1225;--sky:#142A50;--sun:#F6E7C1;--hill-back:#12484C;--hill-mid:#1A5F62;--hill-front:#0A1225;--tree:#0A1225;--path:#4A5A78;--stump:#0A1225;--stump-top:#B26A1E;--tag:#14213D;--on-tag:#F6E7C1;--rose:#F28C28;--heading:#F28C28;--shadow:rgba(0,0,0,.6);--code:#0E1830;--cast-title:#F6E7C1;--accent:#F28C28;--on-accent:#14213D;--accent2:#C8321E;--on-accent2:#F6E7C1;--marigold:#F28C28;--plum:#C8321E}}
+:root[data-theme="dark"]{--ink:#F6E7C1;--sheet:#14213D;--note:#1F2F52;--note-line:#344770;--on-note:#F6E7C1;--page-a:#0E1830;--page-b:#5C1A10;--page-c:#0A1225;--sky:#142A50;--sun:#F6E7C1;--hill-back:#12484C;--hill-mid:#1A5F62;--hill-front:#0A1225;--tree:#0A1225;--path:#4A5A78;--stump:#0A1225;--stump-top:#B26A1E;--tag:#14213D;--on-tag:#F6E7C1;--rose:#F28C28;--heading:#F28C28;--shadow:rgba(0,0,0,.6);--code:#0E1830;--cast-title:#F6E7C1;--accent:#F28C28;--on-accent:#14213D;--accent2:#C8321E;--on-accent2:#F6E7C1;--marigold:#F28C28;--plum:#C8321E}
+body{font-size:1.14rem}
+.sheet{box-shadow:none}
+.cast-wrap h2,.sheet h2{font-size:clamp(2.2rem,4.6vw,3.6rem);letter-spacing:.02em}
+.scrap h3{font-size:1.55rem;letter-spacing:.02em}
+.cover h1{font-size:clamp(3rem,10vw,8rem);letter-spacing:.04em}
+.word{background:var(--sheet);padding:.06em .18em}
+.l{background:none;color:var(--heading);padding:0}

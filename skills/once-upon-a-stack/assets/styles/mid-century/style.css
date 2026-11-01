@@ -1,0 +1,13 @@
+:root{--ink:#1B1B1B;--sheet:#FBF6E9;--note:#F2C14E;--note-line:#D9A93A;--on-note:#1B1B1B;--page-a:#F2C14E;--page-b:#E4572E;--page-c:#1F7A7A;--sky:#1F7A7A;--sun:#E4572E;--hill-back:#1F7A7A;--hill-mid:#2E9A92;--hill-front:#1B1B1B;--tree:#E4572E;--path:#FBF6E9;--stump:#1B1B1B;--stump-top:#F2C14E;--tag:#FBF6E9;--on-tag:#1B1B1B;--rose:#C2401F;--heading:#B93C1C;--shadow:rgba(27,27,27,.85);--code:#FFFFFF;--cast-title:#FBF6E9;--accent:#135F5F;--on-accent:#FBF6E9;--accent2:#B93C1C;--on-accent2:#FBF6E9;--marigold:#135F5F;--plum:#B93C1C;--font-display:"Mid Display",serif;--font-body:"Mid Body",serif;--font-mono:ui-monospace,"DejaVu Sans Mono",Menlo,monospace}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--ink:#FBF6E9;--sheet:#1F2A2A;--note:#2D3A38;--note-line:#435250;--on-note:#FBF6E9;--page-a:#122020;--page-b:#5A2416;--page-c:#0F3B3B;--sky:#123030;--sun:#E4572E;--hill-back:#1F5F5F;--hill-mid:#1F7A7A;--hill-front:#0A1414;--tree:#B9431F;--path:#3A4A48;--stump:#0A1414;--stump-top:#A98A3A;--tag:#1F2A2A;--on-tag:#FBF6E9;--rose:#F0785A;--heading:#F2C14E;--shadow:rgba(0,0,0,.6);--code:#162020;--cast-title:#FBF6E9;--accent:#F2C14E;--on-accent:#1B1B1B;--accent2:#F0785A;--on-accent2:#1B1B1B;--marigold:#F2C14E;--plum:#F0785A}}
+:root[data-theme="dark"]{--ink:#FBF6E9;--sheet:#1F2A2A;--note:#2D3A38;--note-line:#435250;--on-note:#FBF6E9;--page-a:#122020;--page-b:#5A2416;--page-c:#0F3B3B;--sky:#123030;--sun:#E4572E;--hill-back:#1F5F5F;--hill-mid:#1F7A7A;--hill-front:#0A1414;--tree:#B9431F;--path:#3A4A48;--stump:#0A1414;--stump-top:#A98A3A;--tag:#1F2A2A;--on-tag:#FBF6E9;--rose:#F0785A;--heading:#F2C14E;--shadow:rgba(0,0,0,.6);--code:#162020;--cast-title:#FBF6E9;--accent:#F2C14E;--on-accent:#1B1B1B;--accent2:#F0785A;--on-accent2:#1B1B1B;--marigold:#F2C14E;--plum:#F0785A}
+.sheet{border-radius:26px;box-shadow:7px 7px 0 var(--accent2)}
+.notebook{border-radius:18px}
+.scrap{border-radius:22px}
+.art{border-width:2px;border-radius:6px}
+.nav button,.journey-controls button,button[data-play],.drawer button{border-radius:999px}
+.word{background:var(--sheet);padding:.06em .18em}
+.l{background:none;color:var(--ink);padding:0 .01em}
+.l:nth-child(3n){color:var(--accent2)}.l:nth-child(3n+1){color:var(--accent)}
+.l:nth-child(odd){transform:rotate(-3deg)}.l:nth-child(even){transform:rotate(3deg) translateY(.05em)}
+.ntag rect{stroke:var(--on-tag);stroke-width:2}

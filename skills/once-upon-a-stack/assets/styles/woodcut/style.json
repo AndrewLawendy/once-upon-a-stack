@@ -1,0 +1,23 @@
+{
+  "name": "Woodcut",
+  "fonts": [
+    [
+      "Woodcut Display",
+      400,
+      "normal",
+      "alfa-slab-one-400.woff2"
+    ],
+    [
+      "Woodcut Body",
+      400,
+      "normal",
+      "im-fell-english-400.woff2"
+    ],
+    [
+      "Woodcut Body",
+      400,
+      "italic",
+      "im-fell-english-400i.woff2"
+    ]
+  ]
+}

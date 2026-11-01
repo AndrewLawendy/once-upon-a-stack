@@ -1,0 +1,816 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Squirrel's Pantry</title>
+<style>
+@font-face{font-family:"Bowlby One";src:url(data:font/woff2;base64,{{BOWLBY}}) format("woff2");font-display:swap}
+@font-face{font-family:"Alegreya";font-weight:400;src:url(data:font/woff2;base64,{{ALEGREYA}}) format("woff2");font-display:swap}
+@font-face{font-family:"Alegreya";font-weight:400;font-style:italic;src:url(data:font/woff2;base64,{{ALEGREYA_I}}) format("woff2");font-display:swap}
+@font-face{font-family:"Alegreya";font-weight:700;src:url(data:font/woff2;base64,{{ALEGREYA_B}}) format("woff2");font-display:swap}
+
+:root{
+  --ink:#16262E; --sheet:#F7FBF8; --note:#FFF3A6; --note-line:#9CCBD6; --on-note:#16262E;
+  --page-a:#A9DCE3; --page-b:#F6B01E; --page-c:#2E8B7F;
+  --sky:#A9DCE3; --sun:#F6B01E; --hill-back:#2E8B7F; --hill-mid:#5DB345; --hill-front:#8CCB4E;
+  --tree:#0F4C4A; --path:#F3DFA2; --stump:#7A4A2B; --stump-top:#E8C07A; --tag:#F7FBF8; --on-tag:#16262E;
+  --rose:#E8476A; --plum:#43216B; --marigold:#F6B01E;
+  --heading:#43216B; --shadow:rgba(11,31,42,.32); --code:#FFFFFF; --cast-title:#16262E;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --ink:#F2F4E8; --sheet:#232C5C; --note:#37306B; --note-line:#4C4890; --on-note:#F2F4E8;
+  --page-a:#141B3F; --page-b:#3B2470; --page-c:#0D2F3C;
+  --sky:#1B2A5E; --sun:#EDE9C8; --hill-back:#123C55; --hill-mid:#1F5F52; --hill-front:#2F7F57;
+  --tree:#0A2536; --path:#8D7FA8; --stump:#4A2E25; --stump-top:#A98655; --tag:#2E3873; --on-tag:#F2F4E8;
+  --heading:#F6C957; --shadow:rgba(0,0,0,.5); --code:#2B2559; --cast-title:#F6C957;
+}}
+:root[data-theme="dark"]{
+  --ink:#F2F4E8; --sheet:#232C5C; --note:#37306B; --note-line:#4C4890; --on-note:#F2F4E8;
+  --page-a:#141B3F; --page-b:#3B2470; --page-c:#0D2F3C;
+  --sky:#1B2A5E; --sun:#EDE9C8; --hill-back:#123C55; --hill-mid:#1F5F52; --hill-front:#2F7F57;
+  --tree:#0A2536; --path:#8D7FA8; --stump:#4A2E25; --stump-top:#A98655; --tag:#2E3873; --on-tag:#F2F4E8;
+  --heading:#F6C957; --shadow:rgba(0,0,0,.5); --code:#2B2559; --cast-title:#F6C957;
+}
+
+*{box-sizing:border-box}
+html,body{height:100%}
+body{margin:0;background:var(--page-a);color:var(--ink);font:400 1.25rem/1.55 "Alegreya","Palatino Linotype",Palatino,serif;overflow:hidden}
+svg{display:block;width:100%;height:auto}
+.sky{fill:var(--sky)}.sun{fill:var(--sun)}.hb{fill:var(--hill-back)}.hm{fill:var(--hill-mid)}.hf{fill:var(--hill-front)}
+.tree{fill:var(--tree)}.path{fill:var(--path)}.stump{fill:var(--stump)}.stump-top{fill:var(--stump-top)}
+:focus-visible{outline:3px solid var(--rose);outline-offset:3px}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+
+/* Theme control */
+.theme{position:fixed;bottom:11px;right:16px;z-index:9;margin:0;padding:0;border:0;display:flex;filter:drop-shadow(0 2px 2px var(--shadow))}
+@media (max-width:1100px){.theme{bottom:auto;top:12px;right:28px}}
+.theme label{cursor:pointer}
+.theme input{position:absolute;opacity:0;width:1px;height:1px}
+.theme span{display:block;padding:.22rem .7rem;font:700 1rem/1.5 "Alegreya",serif;background:var(--tag);color:var(--on-tag)}
+.theme input:checked + span{background:#43216B;color:#F7FBF8}
+.theme input:focus-visible + span{outline:3px solid var(--rose);outline-offset:-3px}
+
+/* The book */
+.book{position:fixed;inset:0 0 60px;overflow:hidden;perspective:1800px;background:var(--page-c)}
+.page{position:absolute;inset:0;overflow:hidden;background:var(--bg);transform-origin:left center;backface-visibility:hidden;outline:0}
+.page[hidden]{display:none}
+.scroller{height:100%;overflow:auto}
+.p-a{--bg:var(--page-a)}.p-b{--bg:var(--page-b)}.p-c{--bg:var(--page-c)}
+.note-src{display:none}
+
+.nav{position:fixed;left:0;right:0;bottom:0;height:60px;z-index:8;display:flex;justify-content:center;gap:.45rem;align-items:center;padding:0 16px;background:var(--sheet);color:var(--ink)}
+.nav button{font:700 1.05rem/1.2 "Alegreya",serif;color:#16262E;background:var(--marigold);border:0;padding:.45rem .95rem;cursor:pointer;clip-path:polygon(2% 8%,98% 0,100% 90%,4% 100%)}
+.nav button:disabled{opacity:.35;cursor:default}
+.nav #first,.nav #last{background:transparent;color:var(--ink);padding-inline:.6rem}
+.nav #notes-btn{background:#43216B;color:#F7FBF8;margin-left:.9rem}
+.nav #notes-btn[hidden]{display:none}
+.nav select{font:400 1.05rem/1.2 "Alegreya",serif;color:var(--ink);background:var(--sheet);border:2px solid var(--ink);padding:.3rem .4rem;width:min(21rem,38vw);cursor:pointer}
+
+/* Cover */
+.cover h1{position:absolute;z-index:2;top:clamp(3.4rem,8vh,5.5rem);left:0;right:0;margin:0;padding:0 16px;display:flex;flex-wrap:wrap;justify-content:center;gap:.4em .8em;font:400 clamp(2.1rem,7vw,5.6rem)/1 "Bowlby One","Arial Black",sans-serif}
+.word{display:inline-flex;filter:drop-shadow(2px 4px 0 var(--shadow))}
+.l{display:inline-block;padding:.12em .13em .1em;margin:0 -.015em;color:var(--c,#16262E);background:var(--b,#F7FBF8)}
+.l:nth-child(4n+1){--b:#F6B01E;--c:#16262E;transform:rotate(-4deg);clip-path:polygon(0 3%,100% 0,96% 100%,4% 96%)}
+.l:nth-child(4n+2){--b:#E8476A;--c:#FFF;transform:rotate(3deg) translateY(.05em);clip-path:polygon(5% 0,98% 4%,100% 96%,0 100%)}
+.l:nth-child(4n+3){--b:#F7FBF8;--c:#43216B;transform:rotate(-2deg) translateY(-.04em);clip-path:polygon(0 0,95% 3%,100% 100%,3% 97%)}
+.l:nth-child(4n){--b:#43216B;--c:#F7FBF8;transform:rotate(5deg);clip-path:polygon(3% 4%,100% 0,97% 97%,0 100%)}
+.active .l{animation:drop .6s cubic-bezier(.2,1.3,.4,1) backwards}
+.active .l:nth-child(3n){animation-delay:.14s}.active .l:nth-child(3n+1){animation-delay:.28s}
+@keyframes drop{from{opacity:0;translate:0 -46px;rotate:-16deg}}
+.cover-art{position:absolute;inset:0;width:100%;height:100%}
+.stamp{position:absolute;z-index:2;right:16px;bottom:12px;margin:0;max-width:30ch;padding:.45rem .85rem;font-size:1rem;line-height:1.3;color:var(--on-tag);background:var(--tag);transform:rotate(-1.5deg);clip-path:polygon(1% 5%,99% 0,100% 95%,0 100%)}
+.stamp strong{display:block}
+
+/* Motion that lives in the scenes */
+.bob{animation:none}
+.active .bob{animation:bob 6s ease-in-out infinite}
+@keyframes bob{50%{transform:translateY(-4px)}}
+.active .rise{animation:rise 1.8s ease-out backwards}
+@keyframes rise{from{transform:translateY(110px)}}
+.ntag rect{fill:var(--tag)}
+.ntag text{text-anchor:middle;fill:var(--on-tag);font-family:"Alegreya",serif}
+.nt-n{font-size:23px;font-weight:700}
+.nt-f{font-size:20px;font-style:italic}
+.flap{transform-box:fill-box;transform-origin:center}
+.active .flap{animation:flap 3s ease-in-out infinite alternate}
+@keyframes flap{to{transform:scaleX(.93)}}
+.active .wander{animation:wander 18s ease-in-out infinite}
+@keyframes wander{33%{transform:translate(-14px,-10px)}66%{transform:translate(12px,-16px)}}
+.trek{transform:translate(150px,290px)}
+.active .trek{animation:trek 26s linear infinite}
+@keyframes trek{49%,51%{transform:translate(720px,226px)}}
+.trek-flip{transform-box:fill-box;transform-origin:center}
+.active .trek-flip{animation:trekflip 26s linear infinite}
+@keyframes trekflip{0%,49%{transform:scaleX(1)}51%,100%{transform:scaleX(-1)}}
+.active .step{animation:step 1s ease-in-out infinite alternate}
+@keyframes step{to{transform:translateY(-5px)}}
+.active .fuse{animation:fuse 7s linear infinite}
+.fuse{transform-box:fill-box;transform-origin:left center}
+@keyframes fuse{to{transform:scaleX(0)}}
+.active .copy{animation:copy 7s linear infinite}
+@keyframes copy{0%,92%{opacity:1;scale:1}97%{opacity:0;scale:1.2}100%{opacity:0;scale:1}}
+.copy{transform-box:fill-box;transform-origin:center}
+.swoop{transform:none}
+.active .swoop{animation:swoop 2.6s cubic-bezier(.3,.7,.3,1) backwards}
+@keyframes swoop{from{transform:translate(680px,-240px)}55%{transform:translate(170px,-70px)}}
+.active .fresh{animation:gone .5s 2.1s forwards}
+@keyframes gone{to{opacity:0}}
+.mold{opacity:0}
+.active .mold{animation:show .5s 2.1s forwards}
+@keyframes show{to{opacity:1}}
+
+/* Cast */
+.cast-wrap{min-height:100%;max-width:1320px;margin:auto;padding:clamp(1rem,3vh,2rem) 16px 1.4rem;display:flex;flex-direction:column;justify-content:center}
+.cast-wrap h2,.sheet h2{font:400 clamp(1.8rem,4vw,3rem)/1.08 "Bowlby One","Arial Black",sans-serif;margin:0 0 .45em}
+.cast-wrap h2{color:var(--cast-title)}
+.cast-grid{filter:drop-shadow(3px 6px 3px var(--shadow));display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:clamp(.7rem,1.6vw,1.3rem);align-items:start}
+.scrap{--c:#fff;background:var(--c);color:#16262E;padding:1rem 1.1rem 1.2rem;font-size:1.12rem}
+.scrap svg{max-width:min(100%,27vh);margin:0 auto .2rem}
+.scrap h3{font:400 1.25rem/1.1 "Bowlby One","Arial Black",sans-serif;margin:0 0 .3rem}
+.scrap p{margin:0 0 .4rem;line-height:1.32}
+.scrap .real{margin:0;font-style:italic}
+.active .scrap{animation:land .55s cubic-bezier(.2,1.4,.4,1) backwards}
+.active .scrap:nth-child(2){animation-delay:.1s}.active .scrap:nth-child(3){animation-delay:.2s}.active .scrap:nth-child(4){animation-delay:.35s}
+@keyframes land{from{opacity:0;scale:.72;translate:0 34px}}
+.s-hazel{--c:#FFD9A0;clip-path:polygon(0 2%,99% 0,100% 97%,3% 100%);transform:rotate(-1deg)}
+.s-pip{--c:#C8EAD0;margin-top:2.2rem;clip-path:polygon(3% 0,100% 3%,97% 100%,0 96%);transform:rotate(1.2deg)}
+.s-mort{--c:#F9C4D2;clip-path:polygon(1% 3%,97% 0,100% 100%,0 97%);transform:rotate(-.6deg)}
+.s-mildew{--c:#2A1640;color:#F2F4E8;margin-top:1.6rem;padding-top:1.5rem;clip-path:polygon(0 6%,8% 0,30% 3%,54% 0,78% 3%,100% 0,98% 34%,100% 66%,96% 100%,70% 97%,44% 100%,20% 96%,2% 100%,3% 56%);transform:rotate(.8deg)}
+
+/* Story pages */
+.leaf{min-height:100%;max-width:1400px;margin:auto;display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:clamp(1rem,3vw,2.5rem);align-items:center;padding:clamp(3.2rem,8vh,4rem) clamp(16px,3vw,2.5rem) 1.4rem}
+.leaf.stack{grid-template-columns:minmax(0,1fr);justify-items:center;align-content:center;gap:1rem}
+.art{border:6px solid var(--ink);line-height:0;width:100%}
+.sheet{background:var(--sheet);padding:clamp(1.1rem,2.6vw,2.2rem);box-shadow:4px 8px 0 var(--shadow);max-width:66ch}
+.stack .sheet{max-width:80ch;padding:1rem 1.5rem}
+.sheet h2{color:var(--heading)}
+.sheet p{margin:0 0 .8rem}
+.sheet p:last-child{margin-bottom:0}
+.running{font-style:italic;font-size:1.02rem;margin:0 0 .2rem!important}
+.who{font-size:.84em;font-style:italic;font-weight:400;opacity:.78;white-space:nowrap}
+.seen{font-style:italic;border-left:6px solid var(--rose);padding-left:.9rem}
+
+.compare{--pos:50%;position:relative;border:6px solid var(--ink);line-height:0;width:min(100%,max(320px,calc((100dvh - 330px)*2.174)))}
+.compare .with{position:absolute;inset:0;clip-path:inset(0 0 0 var(--pos))}
+.compare input{position:absolute;inset:0;width:100%;height:100%;margin:0;opacity:0;cursor:ew-resize;z-index:3}
+.bar{position:absolute;top:0;bottom:0;left:var(--pos);width:6px;margin-left:-3px;background:var(--ink);z-index:2;pointer-events:none}
+.knob{position:absolute;top:50%;left:50%;width:50px;height:38px;translate:-50% -50%;display:grid;place-items:center;font:700 1.2rem/1 "Alegreya",serif;background:var(--marigold);color:#16262E;clip-path:polygon(5% 8%,96% 0,100% 92%,0 100%)}
+.compare input:focus-visible ~ .bar .knob{background:var(--rose);color:#fff}
+.tagline{position:absolute;bottom:8px;padding:.1rem .6rem;font:700 1rem/1.4 "Alegreya",serif;background:var(--tag);color:var(--on-tag);z-index:1;pointer-events:none}
+.tagline.left{left:8px}.tagline.right{right:8px}
+
+.play{display:flex;flex-wrap:wrap;gap:.6rem;margin:.2rem 0 .7rem}
+.play button{font:700 1.05rem/1.2 "Alegreya",serif;border:0;padding:.5rem 1rem;cursor:pointer;color:#fff;clip-path:polygon(2% 8%,98% 0,100% 90%,4% 100%)}
+.play #hit{background:#0F4C4A}.play #miss{background:#B3234A}
+.play button:disabled{opacity:.45;cursor:default}
+.caption{min-height:3.2em;font-weight:700;margin:0!important}
+
+/* Grown-ups drawer */
+.notebook{position:fixed;z-index:7;right:16px;bottom:72px;width:min(420px,calc(100vw - 32px));max-height:calc(100dvh - 140px);overflow:auto;color:var(--on-note);padding:1.3rem 1.2rem 1.2rem;font-size:1.12rem;box-shadow:4px 8px 0 var(--shadow);
+  background:var(--note) repeating-linear-gradient(transparent 0 1.72rem,var(--note-line) 1.72rem calc(1.72rem + 1px));animation:slideup .32s cubic-bezier(.2,1.1,.4,1)}
+.notebook[hidden]{display:none}
+@keyframes slideup{from{opacity:0;translate:0 26px;rotate:1.5deg}}
+.notebook h3{font:400 1.2rem/1.2 "Bowlby One","Arial Black",sans-serif;margin:0 0 .5rem}
+.notebook dl{margin:0 0 .8rem}
+.notebook dt{font-weight:700;line-height:1.3}
+.notebook dd{margin:0 0 .5rem;line-height:1.33}
+.notebook p{margin:0 0 .5rem;line-height:1.33}
+.notebook pre{background:var(--code);padding:.55rem .7rem;margin:.3rem 0 .7rem;white-space:pre-wrap;overflow-wrap:anywhere;font:.85rem/1.4 ui-monospace,"DejaVu Sans Mono",Menlo,monospace}
+.dot{display:inline-block;width:.8em;height:.8em;margin-right:.35em;vertical-align:-.04em;clip-path:polygon(10% 0,100% 12%,88% 100%,0 86%)}
+.badge{display:inline-block;margin:.2rem 0 0!important;padding:.35rem .7rem;font-size:.98rem;line-height:1.3;color:#fff;background:#43216B;clip-path:polygon(1% 5%,99% 0,100% 95%,0 100%)}
+
+@media (max-width:900px){
+  .leaf{grid-template-columns:minmax(0,1fr);align-content:start}
+  .cast-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .s-pip,.s-mildew{margin-top:0}
+  .scrap svg{max-width:22vh}
+  .nav{padding:0 10px}
+  .nav #first,.nav #last{display:none}
+  .nav select{width:auto;min-width:0;flex:1}
+  .nav #notes-btn{position:fixed;left:10px;bottom:70px;font-size:1rem;margin:0}
+  .notebook{right:10px;bottom:116px;width:calc(100vw - 20px);max-height:calc(100dvh - 180px)}
+}
+@media (max-width:560px){
+  .cast-grid{grid-template-columns:minmax(0,1fr)}
+  .stamp{left:16px;right:auto}
+  .tagline{font-size:.85rem}
+}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important}.mold{opacity:1}.fresh{opacity:0}}
+@media print{
+  body{overflow:visible;height:auto}
+  .theme,.nav,.notebook,.bar,.compare input{display:none!important}
+  .book{position:static;perspective:none;overflow:visible}
+  .page,.page[hidden]{display:block;position:relative;height:100vh;break-after:page}
+  .note-src{display:block;padding:1rem 2rem}
+  .compare .with{position:static;clip-path:none}
+}
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <defs>
+    <filter id="cut" x="-12%" y="-12%" width="124%" height="130%">
+      <feTurbulence type="fractalNoise" baseFrequency=".03" numOctaves="2" seed="7" result="n"/>
+      <feDisplacementMap in="SourceGraphic" in2="n" scale="5" xChannelSelector="R" yChannelSelector="G" result="d"/>
+      <feDropShadow in="d" dx="2" dy="4" stdDeviation="2" flood-color="#0b1f2a" flood-opacity=".38"/>
+    </filter>
+
+    <symbol id="acorn" viewBox="0 0 60 70">
+      <path d="M12 26 C10 48 22 64 30 68 C38 64 50 48 48 26 Z" fill="#E0A030"/>
+      <path d="M6 28 C6 14 18 8 30 8 C42 8 54 14 54 28 C42 33 18 33 6 28 Z" fill="#7A4A2B"/>
+      <path d="M27 9 L29 0 L34 1 L33 9 Z" fill="#7A4A2B"/>
+    </symbol>
+
+    <symbol id="moldy" viewBox="0 0 60 70">
+      <path d="M12 26 C10 48 22 64 30 68 C38 64 50 48 48 26 Z" fill="#B7A65A"/>
+      <path d="M6 28 C6 14 18 8 30 8 C42 8 54 14 54 28 C42 33 18 33 6 28 Z" fill="#54402C"/>
+      <circle cx="24" cy="42" r="6" fill="#7E9A2D"/><circle cx="37" cy="50" r="4" fill="#7E9A2D"/><circle cx="35" cy="38" r="3" fill="#7E9A2D"/>
+    </symbol>
+
+    <symbol id="hazelBody" viewBox="0 0 200 200">
+      <path d="M72 178 C12 172 -2 92 30 56 C52 32 92 44 86 72 C82 94 58 88 62 112 C66 134 92 142 90 172 Z" fill="#E8791F"/>
+      <path d="M38 76 C50 60 70 62 72 72 C60 70 48 78 44 96 C40 90 36 84 38 76 Z" fill="#F6B01E"/>
+      <path d="M76 180 C64 132 84 94 116 94 C148 94 156 140 144 180 Z" fill="#C4551B"/>
+      <path d="M106 176 C98 142 110 116 126 118 C142 122 144 152 136 176 Z" fill="#FFE3B0"/>
+      <path d="M104 58 L100 26 L124 50 Z" fill="#C4551B"/><path d="M130 50 L150 26 L146 60 Z" fill="#C4551B"/>
+      <path d="M110 52 L106 38 L118 50 Z" fill="#F9A8BC"/>
+      <circle cx="124" cy="78" r="31" fill="#C4551B"/>
+      <ellipse cx="146" cy="88" rx="16" ry="12" fill="#FFE3B0"/>
+      <circle cx="160" cy="84" r="5" fill="#16262E"/>
+      <circle cx="132" cy="70" r="7" fill="#fff"/><circle cx="134" cy="70" r="4" fill="#16262E"/>
+      <ellipse cx="86" cy="182" rx="20" ry="9" fill="#8F3A10"/><ellipse cx="134" cy="182" rx="20" ry="9" fill="#8F3A10"/>
+    </symbol>
+
+    <symbol id="hazel" viewBox="0 0 200 200">
+      <use href="#hazelBody" width="200" height="200"/>
+      <use href="#acorn" x="134" y="112" width="42" height="49"/>
+      <ellipse cx="140" cy="146" rx="15" ry="8" fill="#8F3A10"/>
+    </symbol>
+
+    <symbol id="pip" viewBox="0 0 200 200">
+      <path d="M30 172 L14 146 L32 138 L10 112 L36 106 L24 76 L52 84 L50 52 L76 70 L86 38 L104 66 L124 44 L128 76 L152 66 L146 98 L154 172 Z" fill="#4A3226"/>
+      <path d="M52 150 L46 128 L62 130 L58 104 L76 116 L84 92 L98 114 L112 96 L112 124 L90 160 Z" fill="#6B4A37"/>
+      <path d="M118 174 C102 152 108 106 136 100 C158 96 186 130 194 148 C184 168 150 178 118 174 Z" fill="#F5D9A8"/>
+      <circle cx="128" cy="106" r="12" fill="#D9A06E"/>
+      <circle cx="192" cy="147" r="7" fill="#16262E"/>
+      <circle cx="154" cy="128" r="6" fill="#16262E"/><circle cx="156" cy="126" r="2" fill="#fff"/>
+      <ellipse cx="56" cy="178" rx="18" ry="8" fill="#2E1E16"/><ellipse cx="128" cy="178" rx="18" ry="8" fill="#2E1E16"/>
+    </symbol>
+
+    <symbol id="mort" viewBox="0 0 200 200">
+      <path d="M42 186 C30 100 62 40 100 40 C138 40 170 100 158 186 Z" fill="#4B4566"/>
+      <path d="M72 186 C68 150 80 126 100 126 C120 126 132 150 128 186 Z" fill="#6F6890"/>
+      <ellipse cx="100" cy="100" rx="26" ry="18" fill="#F39AB0"/>
+      <circle cx="100" cy="90" r="8" fill="#D92F5F"/>
+      <circle cx="76" cy="70" r="14" fill="#F7FBF8" stroke="#F6B01E" stroke-width="5"/>
+      <circle cx="124" cy="70" r="14" fill="#F7FBF8" stroke="#F6B01E" stroke-width="5"/>
+      <path d="M90 70 H110" stroke="#F6B01E" stroke-width="5"/>
+      <circle cx="78" cy="71" r="4" fill="#16262E"/><circle cx="126" cy="71" r="4" fill="#16262E"/>
+      <path d="M70 124 L130 118 L134 168 L74 174 Z" fill="#F7FBF8"/>
+      <path d="M80 136 L122 132 M81 148 L123 144 M82 160 L112 157" stroke="#43216B" stroke-width="3"/>
+      <ellipse cx="50" cy="150" rx="20" ry="14" fill="#F39AB0"/><ellipse cx="150" cy="150" rx="20" ry="14" fill="#F39AB0"/>
+    </symbol>
+
+    <symbol id="mildew" viewBox="0 0 200 200">
+      <path d="M100 96 L42 30 L52 62 L16 56 L38 90 L8 110 L42 118 L28 156 L62 136 L100 116 Z" fill="#9CB23A"/>
+      <path d="M100 96 L158 30 L148 62 L184 56 L162 90 L192 110 L158 118 L172 156 L138 136 L100 116 Z" fill="#7E9A2D"/>
+      <circle cx="56" cy="88" r="9" fill="#2A1640"/><circle cx="144" cy="88" r="9" fill="#2A1640"/>
+      <circle cx="58" cy="118" r="5" fill="#E8476A"/><circle cx="142" cy="118" r="5" fill="#E8476A"/>
+      <ellipse cx="100" cy="108" rx="14" ry="42" fill="#43216B"/>
+      <path d="M95 72 C86 50 74 44 66 44 M105 72 C114 50 126 44 134 44" stroke="#43216B" stroke-width="4" fill="none"/>
+      <circle cx="93" cy="84" r="4.5" fill="#F6B01E"/><circle cx="107" cy="84" r="4.5" fill="#F6B01E"/>
+    </symbol>
+
+    <symbol id="pine" viewBox="0 0 100 200">
+      <path class="tree" d="M50 0 L82 62 L66 58 L92 118 L72 112 L100 174 L0 174 L28 112 L8 118 L34 58 L18 62 Z"/>
+      <rect x="42" y="172" width="16" height="28" class="stump"/>
+    </symbol>
+
+    <symbol id="pantryEmpty" viewBox="0 0 200 180">
+      <path class="stump" d="M26 40 L174 34 L188 176 L12 180 Z"/>
+      <ellipse class="stump-top" cx="100" cy="38" rx="76" ry="22"/>
+      <path d="M72 84 C72 66 128 64 130 84 L134 178 L68 178 Z" fill="#16262E"/>
+    </symbol>
+
+    <symbol id="pantry" viewBox="0 0 200 180">
+      <use href="#pantryEmpty" width="200" height="180"/>
+      <use href="#acorn" x="74" y="112" width="30" height="36"/>
+      <use href="#acorn" x="100" y="128" width="26" height="32"/>
+    </symbol>
+
+    <symbol id="store" viewBox="0 0 220 180">
+      <path d="M0 180 C20 70 70 18 110 18 C150 18 200 70 220 180 Z" fill="#54402C"/>
+      <path d="M64 180 C64 118 88 94 110 94 C132 94 156 118 156 180 Z" fill="#16262E"/>
+      <use href="#acorn" x="72" y="128" width="34" height="40"/>
+      <use href="#acorn" x="112" y="134" width="30" height="36"/>
+    </symbol>
+
+    <symbol id="valley" viewBox="0 0 1000 460">
+      <rect class="sky" width="1000" height="460"/>
+      <circle class="sun" cx="150" cy="82" r="46" filter="url(#cut)"/>
+      <path class="hb" d="M-10 250 C170 160 380 170 560 240 C720 160 880 150 1010 220 L1010 470 L-10 470 Z" filter="url(#cut)"/>
+      <path class="hf" d="M-10 310 C260 260 720 250 1010 300 L1010 470 L-10 470 Z" filter="url(#cut)"/>
+      <path class="path" d="M-10 380 C230 340 560 370 850 300 L900 322 C640 410 240 400 -10 440 Z" filter="url(#cut)"/>
+      <use href="#store" x="780" y="162" width="190" height="155" filter="url(#cut)"/>
+      <use href="#mort" x="850" y="240" width="100" height="100" filter="url(#cut)"/>
+      <g class="ntag" transform="rotate(-1.2 875 130)"><rect x="793" y="104" width="163" height="54" filter="url(#cut)"/><text class="nt-n" x="875" y="127">Mort</text><text class="nt-f" x="875" y="149">(the database)</text></g>
+    </symbol>
+  </defs>
+</svg>
+
+<fieldset class="theme" id="theme">
+  <legend class="sr">Theme</legend>
+  <label><input type="radio" name="theme" value="system" checked><span>System</span></label>
+  <label><input type="radio" name="theme" value="light"><span>Light</span></label>
+  <label><input type="radio" name="theme" value="dark"><span>Dark</span></label>
+</fieldset>
+
+<main class="book" id="book">
+
+  <section class="page cover p-a" aria-labelledby="book-title" tabindex="-1">
+    <h1 id="book-title" aria-label="The Squirrel's Pantry">
+      <span class="word" aria-hidden="true"><span class="l">T</span><span class="l">h</span><span class="l">e</span></span>
+      <span class="word" aria-hidden="true"><span class="l">S</span><span class="l">q</span><span class="l">u</span><span class="l">i</span><span class="l">r</span><span class="l">r</span><span class="l">e</span><span class="l">l</span><span class="l">'</span><span class="l">s</span></span>
+      <span class="word" aria-hidden="true"><span class="l">P</span><span class="l">a</span><span class="l">n</span><span class="l">t</span><span class="l">r</span><span class="l">y</span></span>
+    </h1>
+    <svg class="cover-art" viewBox="0 0 1400 760" preserveAspectRatio="xMidYMax slice" role="img" aria-label="A squirrel beside a tree-stump pantry faces a hedgehog, while a moth flutters near a pine tree.">
+      <rect class="sky" width="1400" height="760"/>
+      <g class="rise"><circle class="sun" cx="1180" cy="330" r="82" filter="url(#cut)"/></g>
+      <path class="hb" d="M-20 560 C150 380 340 400 520 520 C720 370 980 340 1420 540 L1420 780 L-20 780 Z" filter="url(#cut)"/>
+      <use href="#pine" x="90" y="300" width="130" height="260" filter="url(#cut)"/>
+      <use href="#pine" x="205" y="350" width="100" height="200" filter="url(#cut)"/>
+      <use href="#pine" x="1195" y="310" width="130" height="260" filter="url(#cut)"/>
+      <path class="hm" d="M-20 610 C260 500 560 540 780 620 C1000 540 1230 520 1420 590 L1420 780 L-20 780 Z" filter="url(#cut)"/>
+      <path class="hf" d="M-20 680 C300 610 980 600 1420 680 L1420 780 L-20 780 Z" filter="url(#cut)"/>
+      <path class="path" d="M430 780 C520 700 790 680 960 610 L1000 620 C860 710 780 720 780 780 Z" filter="url(#cut)"/>
+      <g class="wander"><use class="flap" href="#mildew" x="1040" y="400" width="130" height="130" filter="url(#cut)"/></g>
+      <use href="#pantry" x="290" y="480" width="270" height="243" filter="url(#cut)"/>
+      <g class="bob"><use href="#hazel" x="540" y="430" width="300" height="300" filter="url(#cut)"/></g>
+      <use href="#pip" x="-1040" y="500" width="220" height="220" transform="scale(-1,1)" filter="url(#cut)"/>
+    </svg>
+    <p class="stamp"><strong>A style sample</strong>Written 2026-10-31. A small book about caching.</p>
+  </section>
+
+  <section class="page p-b" aria-labelledby="cast-title" tabindex="-1" hidden>
+    <div class="scroller"><div class="cast-wrap">
+      <h2 id="cast-title">Meet the cast</h2>
+      <div class="cast-grid">
+        <article class="scrap s-hazel">
+          <svg viewBox="0 0 200 200" role="img" aria-label="Hazel the squirrel holding an acorn"><g class="bob"><use href="#hazel" width="200" height="200" filter="url(#cut)"/></g></svg>
+          <h3>Hazel the Squirrel</h3>
+          <p>Keeps a small pantry beside the path, so nobody has to walk far.</p>
+          <p class="real">In real life: the cache, such as Redis.</p>
+        </article>
+        <article class="scrap s-pip">
+          <svg viewBox="0 0 200 200" role="img" aria-label="Pip the hedgehog"><use href="#pip" width="200" height="200" filter="url(#cut)"/></svg>
+          <h3>Pip the Hedgehog</h3>
+          <p>Hungry. Asks for the same acorn every morning.</p>
+          <p class="real">In real life: your app.</p>
+        </article>
+        <article class="scrap s-mort">
+          <svg viewBox="0 0 200 200" role="img" aria-label="Mort the mole wearing glasses, holding a ledger"><use href="#mort" width="200" height="200" filter="url(#cut)"/></svg>
+          <h3>Mort the Mole</h3>
+          <p>Owns every real acorn and never loses one. Careful, far away, and not quick.</p>
+          <p class="real">In real life: the database.</p>
+        </article>
+        <article class="scrap s-mildew">
+          <svg viewBox="0 0 200 200" role="img" aria-label="Mildew the moth, with jagged green wings"><use class="flap" href="#mildew" width="200" height="200" filter="url(#cut)"/></svg>
+          <h3>Mildew the Moth</h3>
+          <p>Comes back whenever a copy goes old. Nobody notices until they take a bite.</p>
+          <p class="real">In real life: stale data.</p>
+        </article>
+      </div>
+    </div></div>
+  </section>
+
+  <section class="page p-c" aria-labelledby="p-problem" tabindex="-1" hidden>
+    <div class="scroller"><div class="leaf">
+      <div class="art">
+        <svg viewBox="0 0 1000 460" role="img" aria-label="Hazel the squirrel walks back and forth along the long path to Mort's distant storehouse.">
+          <use href="#valley" width="1000" height="460"/>
+          <g class="trek"><g class="trek-flip"><g class="step"><use href="#hazelBody" width="130" height="130" filter="url(#cut)"/></g></g><g class="ntag" transform="rotate(-1.2 65 -12)"><rect x="-2" y="-38" width="134" height="54" filter="url(#cut)"/><text class="nt-n" x="65" y="-15">Hazel</text><text class="nt-f" x="65" y="7">(the cache)</text></g></g>
+          <use href="#pip" x="10" y="325" width="125" height="125" filter="url(#cut)"/>
+          <g class="ntag" transform="rotate(-1.2 78 292)"><rect x="21" y="266" width="114" height="54" filter="url(#cut)"/><text class="nt-n" x="78" y="289">Pip</text><text class="nt-f" x="78" y="311">(the app)</text></g>
+        </svg>
+      </div>
+      <div class="sheet">
+        <p class="running">Why does Hazel <span class="who">(the cache)</span> keep a pantry?</p>
+        <h2 id="p-problem">The problem</h2>
+        <p>Every morning, the hedgehogs <span class="who">(requests from your app)</span> want acorns <span class="who">(pieces of data)</span>. All the real acorns live with Mort <span class="who">(the database)</span>, in a storehouse on the far side of the valley. He never loses one, but the walk is long and he can only help a few animals at a time.</p>
+        <p>The strange part is that nearly everyone wants the same few acorns.</p>
+      </div>
+    </div></div>
+    <div class="note-src">
+      <h3>For grown-ups</h3>
+      <dl>
+        <dt><span class="dot" style="background:#4B4566"></span>Mort <span class="who">(the database)</span> and the long walk</dt>
+        <dd>A database read costs time and a connection. Reading from disk or across a network is much slower than reading from memory.</dd>
+        <dt><span class="dot" style="background:#F6B01E"></span>The same few acorns</dt>
+        <dd>Traffic is often uneven: a small share of the data gets most of the reads. That's what makes caching worth doing.</dd>
+      </dl>
+      <p class="badge">Not source-checked: this sample is written from general knowledge.</p>
+    </div>
+  </section>
+
+  <section class="page p-c" aria-labelledby="p-without" tabindex="-1" hidden>
+    <div class="scroller"><div class="leaf stack">
+      <div class="compare" id="compare">
+        <svg viewBox="0 0 1000 460" role="img" aria-label="Without the pantry: six hedgehogs wait in a long line on the path to Mort's distant storehouse.">
+          <use href="#valley" width="1000" height="460"/>
+          <use href="#pip" x="700" y="285" width="86" height="86" filter="url(#cut)"/>
+          <use href="#pip" x="590" y="300" width="94" height="94" filter="url(#cut)"/>
+          <use href="#pip" x="470" y="310" width="100" height="100" filter="url(#cut)"/>
+          <use href="#pip" x="340" y="315" width="108" height="108" filter="url(#cut)"/>
+          <use href="#pip" x="200" y="325" width="114" height="114" filter="url(#cut)"/>
+          <use href="#pip" x="50" y="335" width="120" height="120" filter="url(#cut)"/>
+          <g class="ntag" transform="rotate(-1.2 112 300)"><rect x="43" y="274" width="138" height="54" filter="url(#cut)"/><text class="nt-n" x="112" y="297">Hedgehogs</text><text class="nt-f" x="112" y="319">(requests)</text></g>
+        </svg>
+        <div class="with" aria-hidden="true">
+          <svg viewBox="0 0 1000 460">
+            <use href="#valley" width="1000" height="460"/>
+            <use href="#pantry" x="170" y="225" width="190" height="171" filter="url(#cut)"/>
+            <use href="#hazel" x="310" y="235" width="170" height="170" filter="url(#cut)"/>
+            <use href="#pip" x="-640" y="290" width="130" height="130" transform="scale(-1,1)" filter="url(#cut)"/>
+            <g class="ntag" transform="rotate(-1.2 250 188)"><rect x="173" y="162" width="153" height="54" filter="url(#cut)"/><text class="nt-n" x="250" y="185">Pantry</text><text class="nt-f" x="250" y="207">(fast memory)</text></g>
+            <g class="ntag" transform="rotate(-1.2 415 204)"><rect x="348" y="178" width="134" height="54" filter="url(#cut)"/><text class="nt-n" x="415" y="201">Hazel</text><text class="nt-f" x="415" y="223">(the cache)</text></g>
+            <g class="ntag" transform="rotate(-1.2 580 258)"><rect x="523" y="232" width="114" height="54" filter="url(#cut)"/><text class="nt-n" x="580" y="255">Pip</text><text class="nt-f" x="580" y="277">(the app)</text></g>
+          </svg>
+        </div>
+        <span class="tagline left">Without the pantry</span>
+        <span class="tagline right">With the pantry</span>
+        <input id="slide" type="range" min="0" max="100" value="50" aria-label="Compare the valley without and with the pantry">
+        <div class="bar"><div class="knob" aria-hidden="true">&#8596;</div></div>
+      </div>
+      <div class="sheet">
+        <p class="running">Why does Hazel <span class="who">(the cache)</span> keep a pantry?</p>
+        <h2 id="p-without">Without the pantry</h2>
+        <p>Six hedgehogs <span class="who">(requests)</span> wait in line, most for an acorn <span class="who">(a piece of data)</span> that Mort <span class="who">(the database)</span> fetched five minutes ago. He slows down as the line grows, and the line grows because he's slow. Drag across the picture to compare.</p>
+        <p class="seen">What people actually see: pages load slowly, and the database keeps answering the same question.</p>
+      </div>
+    </div></div>
+    <div class="note-src">
+      <h3>For grown-ups</h3>
+      <dl>
+        <dt><span class="dot" style="background:#E8476A"></span>The line that feeds itself</dt>
+        <dd>Queueing: as a system nears its capacity, waiting times climb sharply, not gradually.</dd>
+        <dt><span class="dot" style="background:#4B4566"></span>The same question</dt>
+        <dd>Repeated identical reads use database capacity that other work could have had.</dd>
+      </dl>
+      <p class="badge">Not source-checked: this sample is written from general knowledge.</p>
+    </div>
+  </section>
+
+  <section class="page p-c" aria-labelledby="p-helper" tabindex="-1" hidden>
+    <div class="scroller"><div class="leaf">
+      <div class="art">
+        <svg viewBox="0 0 1000 460" role="img" aria-label="An animated scene of Pip asking for an acorn and Hazel fetching it. The caption describes each step.">
+          <use href="#valley" width="1000" height="460"/>
+          <use href="#pantryEmpty" x="170" y="225" width="190" height="171" filter="url(#cut)"/>
+          <g class="ntag" transform="rotate(-1.2 262 186)"><rect x="185" y="160" width="153" height="54" filter="url(#cut)"/><text class="nt-n" x="262" y="183">Pantry</text><text class="nt-f" x="262" y="205">(fast memory)</text></g>
+          <g id="stock"><use href="#acorn" x="250" y="345" width="30" height="36" filter="url(#cut)"/></g>
+          <g id="pipG"><use href="#pip" x="15" y="300" width="130" height="130" filter="url(#cut)"/><g class="ntag" transform="rotate(-1.2 80 264)"><rect x="23" y="238" width="114" height="54" filter="url(#cut)"/><text class="nt-n" x="80" y="261">Pip</text><text class="nt-f" x="80" y="283">(the app)</text></g></g>
+          <g id="mortG"><rect x="850" y="240" width="100" height="100" fill="none"/></g>
+          <g id="hazelG" style="transform:translate(380px,240px)">
+            <g id="hazelFlip">
+              <g transform="scale(.85)" filter="url(#cut)">
+                <use href="#hazelBody" width="200" height="200"/>
+                <use id="carry" href="#acorn" x="134" y="112" width="42" height="49" opacity="0"/>
+                <ellipse cx="140" cy="146" rx="15" ry="8" fill="#8F3A10"/>
+              </g>
+            </g>
+            <g class="ntag" transform="rotate(-1.2 85 -10)"><rect x="18" y="-36" width="134" height="54" filter="url(#cut)"/><text class="nt-n" x="85" y="-13">Hazel</text><text class="nt-f" x="85" y="9">(the cache)</text></g>
+          </g>
+          <g id="fly" style="opacity:0"><use href="#acorn" width="40" height="46" filter="url(#cut)"/></g>
+        </svg>
+      </div>
+      <div class="sheet">
+        <p class="running">Why does Hazel <span class="who">(the cache)</span> keep a pantry?</p>
+        <h2 id="p-helper">The helper</h2>
+        <p>Hazel <span class="who">(the cache)</span> keeps a small pantry <span class="who">(fast memory)</span> beside the path. She always looks there first. Try both:</p>
+        <div class="play">
+          <button id="hit" type="button">Pantry has the acorn</button>
+          <button id="miss" type="button">Pantry is missing it</button>
+        </div>
+        <p class="caption" id="caption" aria-live="polite">Pip <span class="who">(the app)</span> is hungry. Choose what's in the pantry.</p>
+      </div>
+    </div></div>
+    <div class="note-src">
+      <h3>For grown-ups</h3>
+      <dl>
+        <dt><span class="dot" style="background:#E8791F"></span>Pantry has it</dt>
+        <dd>A <em>cache hit</em>. Answered without touching the database.</dd>
+        <dt><span class="dot" style="background:#4B4566"></span>Pantry is missing it</dt>
+        <dd>A <em>cache miss</em>. The app reads the database, then stores a copy for next time. This pattern is called <em>cache-aside</em>.</dd>
+      </dl>
+      <p class="badge">Not source-checked: this sample is written from general knowledge.</p>
+    </div>
+  </section>
+
+  <section class="page p-c" aria-labelledby="p-wait" tabindex="-1" hidden>
+    <div class="scroller"><div class="leaf">
+      <div class="art">
+        <svg viewBox="0 0 1000 460" role="img" aria-label="An acorn sits on the pantry with a paper strip that shrinks over time. When the strip is gone, the acorn disappears, and it starts again.">
+          <use href="#valley" width="1000" height="460"/>
+          <use href="#pantryEmpty" x="300" y="210" width="240" height="216" filter="url(#cut)"/>
+          <g class="copy"><use href="#acorn" x="375" y="118" width="90" height="105" filter="url(#cut)"/></g>
+          <rect x="310" y="72" width="220" height="30" fill="#16262E" opacity=".25"/>
+          <rect class="fuse" x="310" y="72" width="220" height="30" fill="#E8476A"/>
+          <use href="#hazelBody" x="540" y="250" width="160" height="160" transform="translate(1240,0) scale(-1,1)" filter="url(#cut)"/>
+          <g class="ntag" transform="rotate(-1.2 620 216)"><rect x="553" y="190" width="134" height="54" filter="url(#cut)"/><text class="nt-n" x="620" y="213">Hazel</text><text class="nt-f" x="620" y="235">(the cache)</text></g>
+          <g class="ntag" transform="rotate(-1.2 215 278)"><rect x="138" y="252" width="153" height="54" filter="url(#cut)"/><text class="nt-n" x="215" y="275">Pantry</text><text class="nt-f" x="215" y="297">(fast memory)</text></g>
+          <g class="ntag" transform="rotate(-1.2 250 160)"><rect x="154" y="134" width="193" height="54" filter="url(#cut)"/><text class="nt-n" x="250" y="157">Acorn copy</text><text class="nt-f" x="250" y="179">(a piece of data)</text></g>
+          <g class="ntag" transform="rotate(-1.2 420 38)"><rect x="313" y="12" width="214" height="54" filter="url(#cut)"/><text class="nt-n" x="420" y="35">Throw-away time</text><text class="nt-f" x="420" y="57">(the TTL)</text></g>
+        </svg>
+      </div>
+      <div class="sheet">
+        <p class="running">Why does Hazel <span class="who">(the cache)</span> keep a pantry?</p>
+        <h2 id="p-wait">Wait, how does she know a copy is too old?</h2>
+        <p>She gives every copy a throw-away time <span class="who">(the TTL)</span>. When that time is up, the copy goes, and the next hedgehog <span class="who">(a request)</span> sends her back to Mort <span class="who">(the database)</span> for a fresh one.</p>
+        <p>Nobody has to tell her the acorn changed. The clock does the work.</p>
+      </div>
+    </div></div>
+    <div class="note-src">
+      <h3>For grown-ups</h3>
+      <dl>
+        <dt><span class="dot" style="background:#E8476A"></span>The shrinking strip</dt>
+        <dd>The <em>TTL</em> (time to live).</dd>
+      </dl>
+      <p>In Redis, keep a copy for 5 minutes:</p>
+      <pre>SET acorn:42 "golden" EX 300</pre>
+      <p class="badge">Not source-checked: this sample is written from general knowledge.</p>
+    </div>
+  </section>
+
+  <section class="page p-c" aria-labelledby="p-price" tabindex="-1" hidden>
+    <div class="scroller"><div class="leaf">
+      <div class="art">
+        <svg viewBox="0 0 1000 460" role="img" aria-label="Mildew the moth flies in and lands above the pantry, and the acorn there turns moldy, while Mort holds a fresh one far away.">
+          <use href="#valley" width="1000" height="460"/>
+          <use href="#acorn" x="800" y="280" width="50" height="58" filter="url(#cut)"/>
+          <use href="#pantryEmpty" x="170" y="225" width="190" height="171" filter="url(#cut)"/>
+          <use class="fresh" href="#acorn" x="238" y="176" width="58" height="68" filter="url(#cut)"/>
+          <use class="mold" href="#moldy" x="238" y="176" width="58" height="68" filter="url(#cut)"/>
+          <g class="swoop"><use class="flap" href="#mildew" x="210" y="62" width="120" height="120" filter="url(#cut)"/><g class="ntag" transform="rotate(-1.2 270 32)"><rect x="198" y="6" width="144" height="54" filter="url(#cut)"/><text class="nt-n" x="270" y="29">Mildew</text><text class="nt-f" x="270" y="51">(stale data)</text></g></g>
+          <use href="#pip" x="15" y="300" width="130" height="130" filter="url(#cut)"/>
+          <g class="ntag" transform="rotate(-1.2 80 264)"><rect x="23" y="238" width="114" height="54" filter="url(#cut)"/><text class="nt-n" x="80" y="261">Pip</text><text class="nt-f" x="80" y="283">(the app)</text></g>
+          <g class="ntag" transform="rotate(-1.2 440 204)"><rect x="363" y="178" width="153" height="54" filter="url(#cut)"/><text class="nt-n" x="440" y="201">Old copy</text><text class="nt-f" x="440" y="223">(out of date)</text></g>
+          <g class="ntag" transform="rotate(-1.2 440 318)"><rect x="363" y="292" width="153" height="54" filter="url(#cut)"/><text class="nt-n" x="440" y="315">Pantry</text><text class="nt-f" x="440" y="337">(fast memory)</text></g>
+          <g class="ntag" transform="rotate(-1.2 722 252)"><rect x="636" y="226" width="173" height="54" filter="url(#cut)"/><text class="nt-n" x="722" y="249">Fresh acorn</text><text class="nt-f" x="722" y="271">(the real data)</text></g>
+        </svg>
+      </div>
+      <div class="sheet">
+        <p class="running">Why does Hazel <span class="who">(the cache)</span> keep a pantry?</p>
+        <h2 id="p-price">The price</h2>
+        <p>The pantry holds copies, not the real acorns. If Mort <span class="who">(the database)</span> swaps an acorn <span class="who">(a piece of data)</span> for a better one, the copy held by Hazel <span class="who">(the cache)</span> is out of date until its time runs out, and Pip <span class="who">(the app)</span> gets the old one without knowing. That's the moment Mildew <span class="who">(stale data)</span> waits for.</p>
+        <p>A shorter time means fewer old acorns, but more walks to Mort <span class="who">(the database)</span>. Someone has to choose. And when the small pantry fills up, Hazel <span class="who">(the cache)</span> has to choose what to throw away.</p>
+      </div>
+    </div></div>
+    <div class="note-src">
+      <h3>For grown-ups</h3>
+      <dl>
+        <dt><span class="dot" style="background:#7E9A2D"></span>Mildew <span class="who">(stale data)</span></dt>
+        <dd><em>Stale data</em>: a cached value that no longer matches the database.</dd>
+        <dt><span class="dot" style="background:#E8476A"></span>Choosing what to throw out</dt>
+        <dd><em>Eviction</em>, often removing the least recently used item (LRU).</dd>
+      </dl>
+      <p class="badge">Not source-checked: this sample is written from general knowledge.</p>
+    </div>
+  </section>
+</main>
+
+<aside class="notebook" id="notebook" aria-label="Notes for grown-ups" hidden></aside>
+
+<nav class="nav" aria-label="Pages">
+  <button id="first" type="button">First</button>
+  <button id="prev" type="button">Back</button>
+  <select id="jump" aria-label="Jump to page"></select>
+  <button id="next" type="button">Next</button>
+  <button id="last" type="button">Last</button>
+  <button id="notes-btn" type="button" aria-expanded="false" aria-controls="notebook">For grown-ups</button>
+  <span class="sr" id="status" aria-live="polite"></span>
+</nav>
+
+<script>
+(function () {
+  var root = document.documentElement;
+  var reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* Theme: system is the default. */
+  function setTheme(value) {
+    if (value === 'system') root.removeAttribute('data-theme');
+    else root.setAttribute('data-theme', value);
+  }
+  var savedTheme = 'system';
+  try { savedTheme = localStorage.getItem('book-theme') || 'system'; } catch (e) {}
+  setTheme(savedTheme);
+  document.querySelectorAll('input[name="theme"]').forEach(function (input) {
+    input.checked = input.value === savedTheme;
+    input.addEventListener('change', function () {
+      setTheme(input.value);
+      try { localStorage.setItem('book-theme', input.value); } catch (e) {}
+    });
+  });
+
+  /* Pages */
+  var pages = Array.prototype.slice.call(document.querySelectorAll('.page'));
+  var first = document.getElementById('first'), last = document.getElementById('last');
+  var prev = document.getElementById('prev'), next = document.getElementById('next');
+  var jump = document.getElementById('jump'), status = document.getElementById('status');
+  var notesBtn = document.getElementById('notes-btn'), notebook = document.getElementById('notebook');
+  var current = 0, finishTurn = null;
+
+  function pageTitle(page) {
+    var heading = document.getElementById(page.getAttribute('aria-labelledby'));
+    return heading.getAttribute('aria-label') || heading.textContent;
+  }
+  /* Pages sharing a running head are listed under that chapter. */
+  var lastGroup = null, lastGroupName = null;
+  pages.forEach(function (page, i) {
+    var option = document.createElement('option');
+    option.value = i;
+    option.textContent = (i + 1) + '. ' + pageTitle(page);
+    var running = page.querySelector('.running');
+    var name = running ? running.textContent : null;
+    if (name && name !== lastGroupName) {
+      lastGroup = document.createElement('optgroup');
+      lastGroup.label = name;
+      jump.appendChild(lastGroup);
+    }
+    lastGroupName = name;
+    (name ? lastGroup : jump).appendChild(option);
+  });
+
+  function setNotesOpen(open) {
+    notebook.hidden = !open;
+    notesBtn.setAttribute('aria-expanded', String(open));
+    notesBtn.textContent = open ? 'Close notes' : 'For grown-ups';
+  }
+  function refresh() {
+    first.disabled = prev.disabled = current === 0;
+    last.disabled = next.disabled = current === pages.length - 1;
+    jump.value = current;
+    status.textContent = 'Page ' + (current + 1) + ' of ' + pages.length + ': ' + pageTitle(pages[current]);
+    var src = pages[current].querySelector('.note-src');
+    notesBtn.hidden = !src;
+    if (src) notebook.innerHTML = src.innerHTML;
+    else setNotesOpen(false);
+    try { history.replaceState(null, '', '#' + (current + 1)); } catch (e) {}
+  }
+  function show(page) { page.hidden = false; page.classList.add('active'); }
+  function hide(page) { page.hidden = true; page.classList.remove('active'); page.style.zIndex = ''; }
+
+  function go(n) {
+    if (n < 0 || n >= pages.length || n === current) return;
+    if (finishTurn) finishTurn();
+    var from = pages[current], to = pages[n], forward = n > current;
+    current = n;
+    show(to);
+    refresh();
+    if (reduced) { hide(from); return; }
+    /* A small nudge in the reading direction, not a full-page swing. */
+    from.style.zIndex = 1;
+    to.style.zIndex = 2;
+    var shift = forward ? 22 : -22;
+    var turn = to.animate([
+      { opacity: 0, transform: 'translateX(' + shift + 'px) rotateY(' + (forward ? 2 : -2) + 'deg)' },
+      { opacity: 1, transform: 'none' }
+    ], { duration: 240, easing: 'ease-out' });
+    finishTurn = function () {
+      finishTurn = null;
+      turn.cancel();
+      hide(from);
+      to.style.zIndex = '';
+    };
+    turn.onfinish = function () { if (finishTurn) finishTurn(); };
+  }
+
+  first.addEventListener('click', function () { go(0); });
+  last.addEventListener('click', function () { go(pages.length - 1); });
+  jump.addEventListener('change', function () { go(parseInt(jump.value, 10)); });
+  prev.addEventListener('click', function () { go(current - 1); });
+  next.addEventListener('click', function () { go(current + 1); });
+  notesBtn.addEventListener('click', function () { setNotesOpen(notebook.hidden); });
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape') setNotesOpen(false);
+    if (e.target.matches('input, select')) return;
+    if (e.key === 'ArrowRight' || e.key === 'PageDown') go(current + 1);
+    if (e.key === 'ArrowLeft' || e.key === 'PageUp') go(current - 1);
+    if (e.key === 'Home') go(0);
+    if (e.key === 'End') go(pages.length - 1);
+  });
+  var touchX = null, touchY = null;
+  document.getElementById('book').addEventListener('touchstart', function (e) {
+    if (e.target.matches('input')) { touchX = null; return; }
+    touchX = e.touches[0].clientX; touchY = e.touches[0].clientY;
+  }, { passive: true });
+  document.getElementById('book').addEventListener('touchend', function (e) {
+    if (touchX === null) return;
+    var dx = e.changedTouches[0].clientX - touchX, dy = e.changedTouches[0].clientY - touchY;
+    if (Math.abs(dx) > 60 && Math.abs(dx) > Math.abs(dy) * 1.5) go(current + (dx < 0 ? 1 : -1));
+  }, { passive: true });
+  function pageFromHash() { return parseInt(location.hash.slice(1), 10) - 1; }
+  window.addEventListener('hashchange', function () { go(pageFromHash()); });
+
+  var start = pageFromHash();
+  if (start > 0 && start < pages.length) { hide(pages[0]); current = start; }
+  show(pages[current]);
+  refresh();
+
+  /* Before and after slider */
+  var compare = document.getElementById('compare'), slide = document.getElementById('slide');
+  slide.addEventListener('input', function () { compare.style.setProperty('--pos', slide.value + '%'); });
+
+  /* The hit and miss play */
+  var hazel = document.getElementById('hazelG'), flip = document.getElementById('hazelFlip');
+  var carry = document.getElementById('carry'), fly = document.getElementById('fly');
+  var stock = document.getElementById('stock'), pip = document.getElementById('pipG');
+  var caption = document.getElementById('caption');
+  var hitBtn = document.getElementById('hit'), missBtn = document.getElementById('miss');
+  var HOME = 380, PANTRY = 340, MORT = 690, Y = 240;
+
+  function wait(ms) { return new Promise(function (r) { setTimeout(r, reduced ? 0 : ms); }); }
+  function play(el, frames, ms, easing) {
+    return el.animate(frames, { duration: reduced ? 1 : ms, fill: 'forwards', easing: easing || 'ease-in-out' }).finished;
+  }
+  function pos(x, y) { return 'translate(' + x + 'px,' + y + 'px)'; }
+  function face(left) { flip.style.transform = left ? 'translate(170px,0) scaleX(-1)' : 'none'; }
+  function walk(fromX, toX, ms) {
+    var hops = Math.max(2, Math.round(Math.abs(toX - fromX) / 45)), frames = [];
+    for (var i = 0; i <= hops; i++) {
+      var x = fromX + (toX - fromX) * i / hops;
+      frames.push({ transform: pos(x, i % 2 ? Y - 18 : Y) });
+    }
+    return play(hazel, frames, ms, 'linear');
+  }
+  function hop(el) {
+    return play(el, [{ transform: 'none' }, { transform: 'translateY(-26px)' }, { transform: 'none' }], 360);
+  }
+  function shake() {
+    var f = [PANTRY, PANTRY - 10, PANTRY + 10, PANTRY - 8, PANTRY].map(function (x) { return { transform: pos(x, Y) }; });
+    return play(hazel, f, 500);
+  }
+  function giveAcornToPip() {
+    fly.style.opacity = 1;
+    return play(fly, [
+      { transform: pos(250, 330) }, { transform: pos(170, 230) }, { transform: pos(70, 320) }
+    ], 700).then(function () { fly.style.opacity = 0; return hop(pip); });
+  }
+  function setBusy(busy) { hitBtn.disabled = busy; missBtn.disabled = busy; }
+  function reset(hasStock) {
+    [hazel, fly, pip].forEach(function (el) { el.getAnimations().forEach(function (a) { a.cancel(); }); });
+    hazel.style.transform = pos(HOME, Y);
+    face(true);
+    carry.setAttribute('opacity', 0);
+    stock.style.opacity = hasStock ? 1 : 0;
+  }
+  function backHome() { face(true); return walk(PANTRY, HOME, 350); }
+
+  function runHit() {
+    setBusy(true); reset(true);
+    caption.innerHTML = 'Pip <span class="who">(the app)</span> asks for an acorn <span class="who">(a piece of data)</span>.';
+    return hop(pip).then(function () { return wait(250); })
+      .then(function () { return walk(HOME, PANTRY, 350); })
+      .then(function () { caption.innerHTML = 'Hazel <span class="who">(the cache)</span> looks in the pantry. There it is!'; return wait(800); })
+      .then(giveAcornToPip)
+      .then(backHome)
+      .then(function () { caption.innerHTML = 'Pip <span class="who">(the app)</span> eats right away, and nobody walked to Mort <span class="who">(the database)</span>.'; setBusy(false); });
+  }
+  function runMiss() {
+    setBusy(true); reset(false);
+    caption.innerHTML = 'Pip <span class="who">(the app)</span> asks for an acorn <span class="who">(a piece of data)</span>.';
+    return hop(pip).then(function () { return wait(250); })
+      .then(function () { return walk(HOME, PANTRY, 350); })
+      .then(function () { caption.innerHTML = 'Hazel <span class="who">(the cache)</span> looks in the pantry. Nothing there.'; return shake(); })
+      .then(function () { return wait(300); })
+      .then(function () {
+        caption.innerHTML = 'So she walks all the way to Mort <span class="who">(the database)</span>.';
+        face(false);
+        return walk(PANTRY, MORT, 2400);
+      })
+      .then(function () { carry.setAttribute('opacity', 1); return wait(650); })
+      .then(function () {
+        caption.innerHTML = 'She carries the acorn <span class="who">(a piece of data)</span> all the way back.';
+        face(true);
+        return walk(MORT, PANTRY, 2400);
+      })
+      .then(function () {
+        caption.innerHTML = 'She keeps a copy in the pantry, and gives Pip <span class="who">(the app)</span> his acorn.';
+        carry.setAttribute('opacity', 0);
+        stock.style.opacity = 1;
+        return wait(650);
+      })
+      .then(giveAcornToPip)
+      .then(backHome)
+      .then(function () { caption.innerHTML = 'Pip <span class="who">(the app)</span> eats. The next hedgehog <span class="who">(a request)</span> won’t need that walk.'; setBusy(false); });
+  }
+  hitBtn.addEventListener('click', runHit);
+  missBtn.addEventListener('click', runMiss);
+  reset(true);
+
+  window.addEventListener('beforeprint', function () { setNotesOpen(false); });
+})();
+</script>
+</body>
+</html>

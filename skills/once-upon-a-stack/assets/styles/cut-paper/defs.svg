@@ -1,0 +1,5 @@
+<filter id="cut" x="-12%" y="-12%" width="124%" height="130%">
+      <feTurbulence type="fractalNoise" baseFrequency=".03" numOctaves="2" seed="7" result="n"/>
+      <feDisplacementMap in="SourceGraphic" in2="n" scale="5" xChannelSelector="R" yChannelSelector="G" result="d"/>
+      <feDropShadow in="d" dx="2" dy="4" stdDeviation="2" flood-color="#0b1f2a" flood-opacity=".38"/>
+    </filter>

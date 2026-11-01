@@ -1,0 +1,29 @@
+{
+  "name": "Vintage poster",
+  "fonts": [
+    [
+      "Poster Display",
+      400,
+      "normal",
+      "bebas-neue-400.woff2"
+    ],
+    [
+      "Poster Body",
+      400,
+      "normal",
+      "libre-franklin-400.woff2"
+    ],
+    [
+      "Poster Body",
+      700,
+      "normal",
+      "libre-franklin-700.woff2"
+    ],
+    [
+      "Poster Body",
+      400,
+      "italic",
+      "libre-franklin-400i.woff2"
+    ]
+  ]
+}

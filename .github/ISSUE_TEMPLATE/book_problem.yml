@@ -1,0 +1,29 @@
+name: Problem in a book
+description: A wrong fact, a confusing story or broken art in a book the skill made
+labels: [book]
+body:
+  - type: input
+    id: book
+    attributes:
+      label: Which book and page?
+      placeholder: The Diner on Long Road, page 15
+    validations:
+      required: true
+  - type: dropdown
+    id: kind
+    attributes:
+      label: What kind of problem?
+      options:
+        - A fact is wrong
+        - The story doesn't follow (a character or chapter has no real cause)
+        - The art or layout is broken
+        - Something else
+    validations:
+      required: true
+  - type: textarea
+    id: details
+    attributes:
+      label: What's wrong?
+      description: For a wrong fact, please link a primary source (code, spec or paper).
+    validations:
+      required: true

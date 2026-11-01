@@ -1,0 +1,29 @@
+{
+  "name": "Mid-century",
+  "fonts": [
+    [
+      "Mid Display",
+      400,
+      "normal",
+      "fontdiner-swanky-400.woff2"
+    ],
+    [
+      "Mid Body",
+      400,
+      "normal",
+      "josefin-sans-400.woff2"
+    ],
+    [
+      "Mid Body",
+      700,
+      "normal",
+      "josefin-sans-700.woff2"
+    ],
+    [
+      "Mid Body",
+      400,
+      "italic",
+      "josefin-sans-400i.woff2"
+    ]
+  ]
+}

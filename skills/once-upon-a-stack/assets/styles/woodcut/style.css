@@ -1,0 +1,11 @@
+:root{--ink:#1A1510;--sheet:#EFE6CF;--note:#E4D8B8;--note-line:#CDBF98;--on-note:#1A1510;--page-a:#EFE6CF;--page-b:#B5301C;--page-c:#1A1510;--sky:#EFE6CF;--sun:#B5301C;--hill-back:#3A322A;--hill-mid:#2A231C;--hill-front:#1A1510;--tree:#1A1510;--path:#EFE6CF;--stump:#1A1510;--stump-top:#EFE6CF;--tag:#EFE6CF;--on-tag:#1A1510;--rose:#B5301C;--heading:#B5301C;--shadow:rgba(26,21,16,.9);--code:#F8F1DE;--cast-title:#EFE6CF;--accent:#1A1510;--on-accent:#EFE6CF;--accent2:#B5301C;--on-accent2:#EFE6CF;--marigold:#1A1510;--plum:#B5301C;--font-display:"Woodcut Display",serif;--font-body:"Woodcut Body",serif;--font-mono:ui-monospace,"DejaVu Sans Mono",Menlo,monospace}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--ink:#EFE6CF;--sheet:#1E1913;--note:#2A231B;--note-line:#3E352A;--on-note:#EFE6CF;--page-a:#15110C;--page-b:#4A1810;--page-c:#0F0C08;--sky:#15110C;--sun:#D14A2F;--hill-back:#2A231B;--hill-mid:#3A3025;--hill-front:#4A3D2F;--tree:#0A0805;--path:#4A3D2F;--stump:#2A231B;--stump-top:#8A7C62;--tag:#1E1913;--on-tag:#EFE6CF;--rose:#E0603F;--heading:#E8785C;--shadow:rgba(0,0,0,.6);--code:#2A231B;--cast-title:#EFE6CF;--accent:#EFE6CF;--on-accent:#15110C;--accent2:#D14A2F;--on-accent2:#15110C;--marigold:#EFE6CF;--plum:#D14A2F}}
+:root[data-theme="dark"]{--ink:#EFE6CF;--sheet:#1E1913;--note:#2A231B;--note-line:#3E352A;--on-note:#EFE6CF;--page-a:#15110C;--page-b:#4A1810;--page-c:#0F0C08;--sky:#15110C;--sun:#D14A2F;--hill-back:#2A231B;--hill-mid:#3A3025;--hill-front:#4A3D2F;--tree:#0A0805;--path:#4A3D2F;--stump:#2A231B;--stump-top:#8A7C62;--tag:#1E1913;--on-tag:#EFE6CF;--rose:#E0603F;--heading:#E8785C;--shadow:rgba(0,0,0,.6);--code:#2A231B;--cast-title:#EFE6CF;--accent:#EFE6CF;--on-accent:#15110C;--accent2:#D14A2F;--on-accent2:#15110C;--marigold:#EFE6CF;--plum:#D14A2F}
+body{font-size:1.28rem}
+.sheet,.notebook,.scrap,.drawer{border:3px solid var(--ink)}
+.sheet{box-shadow:6px 6px 0 var(--shadow)}
+.word{background:var(--sheet);padding:.06em .18em}
+.l{background:none;color:var(--ink);padding:0 .02em}
+.nav button:not(#first):not(#last){border:2px solid var(--ink)}
+.ntag rect{stroke:var(--on-tag);stroke-width:3}
+.scrap.villain{--c:#1A1510;color:#EFE6CF}

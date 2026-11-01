@@ -1,0 +1,40 @@
+:root{--accent:#F6B01E;--on-accent:#16262E;--accent2:#43216B;--on-accent2:#F7FBF8;--marigold:#F6B01E;--plum:#43216B;--font-display:"Bowlby One","Arial Black",sans-serif;--font-body:"Alegreya","Palatino Linotype",Palatino,serif;--font-mono:ui-monospace,"DejaVu Sans Mono",Menlo,monospace;
+  --ink:#16262E; --sheet:#F7FBF8; --note:#FFF3A6; --note-line:#9CCBD6; --on-note:#16262E;
+  --page-a:#A9DCE3; --page-b:#F6B01E; --page-c:#2E8B7F;
+  --sky:#A9DCE3; --sun:#F6B01E; --hill-back:#2E8B7F; --hill-mid:#5DB345; --hill-front:#8CCB4E;
+  --tree:#0F4C4A; --path:#F3DFA2; --stump:#7A4A2B; --stump-top:#E8C07A; --tag:#F7FBF8; --on-tag:#16262E;
+  --rose:#E8476A; --plum:#43216B; --marigold:#F6B01E;
+  --heading:#43216B; --shadow:rgba(11,31,42,.32); --code:#FFFFFF; --cast-title:#16262E;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --ink:#F2F4E8; --sheet:#232C5C; --note:#37306B; --note-line:#4C4890; --on-note:#F2F4E8;
+  --page-a:#141B3F; --page-b:#3B2470; --page-c:#0D2F3C;
+  --sky:#1B2A5E; --sun:#EDE9C8; --hill-back:#123C55; --hill-mid:#1F5F52; --hill-front:#2F7F57;
+  --tree:#0A2536; --path:#8D7FA8; --stump:#4A2E25; --stump-top:#A98655; --tag:#2E3873; --on-tag:#F2F4E8;
+  --heading:#F6C957;--accent2:#43216B;--on-accent2:#F7FBF8; --shadow:rgba(0,0,0,.5); --code:#2B2559; --cast-title:#F6C957;
+}}
+:root[data-theme="dark"]{
+  --ink:#F2F4E8; --sheet:#232C5C; --note:#37306B; --note-line:#4C4890; --on-note:#F2F4E8;
+  --page-a:#141B3F; --page-b:#3B2470; --page-c:#0D2F3C;
+  --sky:#1B2A5E; --sun:#EDE9C8; --hill-back:#123C55; --hill-mid:#1F5F52; --hill-front:#2F7F57;
+  --tree:#0A2536; --path:#8D7FA8; --stump:#4A2E25; --stump-top:#A98655; --tag:#2E3873; --on-tag:#F2F4E8;
+  --heading:#F6C957;--accent2:#43216B;--on-accent2:#F7FBF8; --shadow:rgba(0,0,0,.5); --code:#2B2559; --cast-title:#F6C957;
+}
+
+.word{filter:drop-shadow(2px 4px 0 var(--shadow))}
+.l:nth-child(4n+1){--b:#F6B01E;--c:#16262E;transform:rotate(-4deg);clip-path:polygon(0 3%,100% 0,96% 100%,4% 96%)}
+.l:nth-child(4n+2){--b:#E8476A;--c:#FFF;transform:rotate(3deg) translateY(.05em);clip-path:polygon(5% 0,98% 4%,100% 96%,0 100%)}
+.l:nth-child(4n+3){--b:#F7FBF8;--c:#43216B;transform:rotate(-2deg) translateY(-.04em);clip-path:polygon(0 0,95% 3%,100% 100%,3% 97%)}
+.l:nth-child(4n){--b:#43216B;--c:#F7FBF8;transform:rotate(5deg);clip-path:polygon(3% 4%,100% 0,97% 97%,0 100%)}
+.nav button,.drawer button,.journey-controls button,button[data-play]{clip-path:polygon(2% 8%,98% 0,100% 90%,4% 100%)}
+.stamp{transform:rotate(-1deg);clip-path:polygon(1% 5%,99% 0,100% 95%,0 100%)}
+.cast-grid{filter:drop-shadow(3px 6px 3px var(--shadow))}
+.scrap{clip-path:polygon(0 2%,99% 0,100% 97%,3% 100%)}
+.scrap:nth-child(even){clip-path:polygon(3% 0,100% 3%,97% 100%,0 96%);transform:rotate(1deg)}
+.scrap:nth-child(odd){transform:rotate(-.8deg)}
+.scrap.villain{clip-path:polygon(0 6%,8% 0,30% 3%,54% 0,78% 3%,100% 0,98% 34%,100% 66%,96% 100%,70% 97%,44% 100%,20% 96%,2% 100%,3% 56%)}
+.bubble{clip-path:polygon(2% 5%,98% 0,100% 88%,18% 90%,8% 100%,8% 90%,0 90%)}
+.knob{clip-path:polygon(5% 8%,96% 0,100% 92%,0 100%)}
+.dot{clip-path:polygon(10% 0,100% 12%,88% 100%,0 86%)}
+.b{clip-path:polygon(1% 5%,99% 0,100% 95%,0 100%)}
+.ntag rect{filter:url(#cut)}

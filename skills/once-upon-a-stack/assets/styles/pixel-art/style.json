@@ -1,0 +1,17 @@
+{
+  "name": "Pixel art",
+  "fonts": [
+    [
+      "Pixel Display",
+      400,
+      "normal",
+      "press-start-2p-400.woff2"
+    ],
+    [
+      "Pixel Body",
+      400,
+      "normal",
+      "vt323-400.woff2"
+    ]
+  ]
+}

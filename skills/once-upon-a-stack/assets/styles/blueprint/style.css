@@ -1,0 +1,11 @@
+:root{--ink:#0F3478;--sheet:#F2F6FB;--note:#DDE8F6;--note-line:#B3C8E4;--on-note:#0F3478;--page-a:#123F8C;--page-b:#0F3478;--page-c:#0B2A63;--sky:#123F8C;--sun:#FFD166;--hill-back:#1E5AAE;--hill-mid:#1A4E9C;--hill-front:#0F3478;--tree:#0F3478;--path:#EAF4FF;--stump:#0F3478;--stump-top:#EAF4FF;--tag:#123F8C;--on-tag:#EAF4FF;--rose:#A8410C;--heading:#0F3478;--shadow:rgba(15,52,120,.45);--code:#FFFFFF;--cast-title:#EAF4FF;--accent:#0F3478;--on-accent:#EAF4FF;--accent2:#1E5AAE;--on-accent2:#FFFFFF;--marigold:#0F3478;--plum:#8A5A00;--font-display:"Plan Display",serif;--font-body:"Plan Body",serif;--font-mono:ui-monospace,"DejaVu Sans Mono",Menlo,monospace}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--ink:#EAF4FF;--sheet:#0F3478;--note:#123F8C;--note-line:#2B5CA8;--on-note:#EAF4FF;--page-a:#0A2656;--page-b:#0C2C66;--page-c:#071B40;--sky:#0A2656;--sun:#FFD166;--hill-back:#123F8C;--hill-mid:#16489C;--hill-front:#1E5AAE;--tree:#071B40;--path:#2B5CA8;--stump:#071B40;--stump-top:#5C86C4;--tag:#0F3478;--on-tag:#EAF4FF;--rose:#FF9A76;--heading:#FFD166;--shadow:rgba(0,0,0,.5);--code:#0A2656;--cast-title:#FFD166;--accent:#FFD166;--on-accent:#0A2656;--accent2:#EAF4FF;--on-accent2:#0A2656;--marigold:#FFD166;--plum:#EAF4FF}}
+:root[data-theme="dark"]{--ink:#EAF4FF;--sheet:#0F3478;--note:#123F8C;--note-line:#2B5CA8;--on-note:#EAF4FF;--page-a:#0A2656;--page-b:#0C2C66;--page-c:#071B40;--sky:#0A2656;--sun:#FFD166;--hill-back:#123F8C;--hill-mid:#16489C;--hill-front:#1E5AAE;--tree:#071B40;--path:#2B5CA8;--stump:#071B40;--stump-top:#5C86C4;--tag:#0F3478;--on-tag:#EAF4FF;--rose:#FF9A76;--heading:#FFD166;--shadow:rgba(0,0,0,.5);--code:#0A2656;--cast-title:#FFD166;--accent:#FFD166;--on-accent:#0A2656;--accent2:#EAF4FF;--on-accent2:#0A2656;--marigold:#FFD166;--plum:#EAF4FF}
+body{font-size:1.1rem;line-height:1.5}
+.p-a,.p-b,.p-c{background-image:linear-gradient(rgba(255,255,255,.09) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.09) 1px,transparent 1px);background-size:24px 24px}
+.sheet{border:1.5px solid var(--ink);box-shadow:none}
+.notebook,.drawer,.scrap{border:1.5px solid var(--ink)}
+.art{border-width:1.5px}
+.word{background:var(--sheet);padding:.06em .18em}
+.l{background:none;color:var(--ink);padding:0 .02em}
+.ntag rect{stroke:var(--on-tag);stroke-width:1.5}

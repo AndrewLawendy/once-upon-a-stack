@@ -1,0 +1,58 @@
+---
+name: once-upon-a-stack
+description: Use when Andrew asks to build, write or rewrite a book, picture book, storybook or children's-book explanation of any topic (your company's architecture, React internals, Kubernetes, Grafana, a concept), asks to add to or change a book in the library, or wants a topic explained deeply as a story to keep and reread.
+---
+
+# Once Upon a Stack
+
+A book explains one topic deeply as a children's story with real engineering underneath. It is one self-contained offline HTML file in `<library>/<slug>--<topic>/index.html`, listed on the shelf at `<library>/index.html`. Reading it needs no Claude and no network. It changes only when Andrew asks for a rewrite.
+
+The folder always says what the book is about, in kebab case: the story name, a double hyphen, then the real topic, such as `the-squirrels-pantry--caching`. Below, `<book>` means that folder.
+
+Paths below are relative to this skill's directory.
+
+## Find the library
+
+Do this first, every time. `<library>` is the `library` value in `~/.config/once-upon-a-stack/config.json`. If that file doesn't exist, ask where to keep the books, suggest `~/once-upon-a-shelf`, and save the answer as `{"library": "~/once-upon-a-shelf"}`, creating the folders. Ask only once. Don't suggest `~/Library` or `~/library`: on macOS that is a hidden system folder.
+
+## Build a new book
+
+1. **Scope.** Do a quick map pass of the topic: what exists, who talks to whom, and which problem forced each part to exist. Choose a world that does some of the explaining (`references/story.md`) and an art style that suits it (`references/styles.md`).
+2. **Table of contents: the only stop.** Show the world, art style, and the chapters from `references/story.md`. For each chapter: its goal, what it comes from (the price or the next want), each attempt, why it breaks and who arrives, and where the goal is met. Also show what's left out and a rough size. Wait for Andrew's approval. Adjust and re-show until he approves. Approval covers everything through step 7.
+3. **Set up** `<library>/<book>/.source/` as described in `references/craft.md`. Save the approved plan in `plan.md` and the chain in `chain.json`. Every later step updates `plan.md`, so an interrupted build can resume from it.
+4. **Research** each chapter per `references/research.md`, using one subagent per journey in parallel. Each writes its dossier to `.source/facts/`. Read the dossiers yourself and chase anything thin.
+5. **Write and draw** the pages per `references/story.md`, `references/craft.md` and `references/styles.md`. Write the story and art yourself, not through subagents, so voice and characters stay consistent.
+6. **Build:** `python3 scripts/build.py "<library>/<book>"`. Fix everything it reports.
+7. **Check it visually, headless:** `node scripts/check.mjs "<library>/<book>"`. Read the report and look at every screenshot. Fix, rebuild and re-check until clean. Open a visible browser only for something headless can't settle. Then audit the story: walk `chain.json` against the pages and confirm that each break is shown, each character arrives because of the break before it, and each chapter's goal is met with the hero there. Say each chapter boundary aloud as one sentence ("Because X, the hero now wants Y"). If it only works as "and also", it's a side topic: move it to a "Wait, how?" page or the reference pages. Confirm the full picture shows the hero's last trip as a scene.
+8. **Hand over** the path, the open command, and what's weakest: thin chapters and the count of unknowns. Stop there. Publishing or committing needs its own request.
+
+## Rewrite
+
+- **Whole book:** repeat steps 1-8. Keep the world, cast and art style unless Andrew asks otherwise.
+- **One chapter or topic:** read `plan.md`, `book.json` and that chapter's dossier. Re-research against current sources, update that part of `chain.json`, rewrite only those pages, and add an entry to `rewrites` in `book.json` so the cover shows that chapter's own date. Then build and check. No table of contents approval is needed.
+- **Resume:** when `.source/plan.md` shows unfinished work, continue from there.
+
+## Requirements every book meets
+
+- **Everything is explained.** Each character, method and step says what problem it solves and what happens without it. Follow every "wait, how?" until it has a source or is logged as unknown.
+- **The story is a series of goals, linked by cause and effect.** Each chapter opens on something the hero wants, caused by the chapter before. Each attempt breaks for a real engineering reason, and each break brings the next character. The cast and whole path appear only near the end. The build enforces this from `chain.json`.
+- **Whole-topic stories.** The book teaches the topic. Don't build it around one incident from the conversation unless asked.
+- **Nothing is stated beyond its evidence.** Verified, inferred and unknown are labeled, and sources are cited. Unknowns go on the "What we don't know yet" page.
+- **The real name stays next to the story name.** Use the `[[Hazel|the cache]]` macro for every mention and `{{tag|...}}` tags in every scene. The build fails on an unlabeled name.
+- **Motion stays out of the way, and pages fit a laptop screen.** See `references/craft.md`.
+
+## Common mistakes
+
+| Mistake | Instead |
+|---|---|
+| Answering from a KB, docs summary or memory | Trace it in the primary source. In the sample session, three "facts" taken from the KB level turned out wrong once the code was read. |
+| Splitting chapters by repo or module | Split by journey, because bugs live between components |
+| Explaining the trip without the need | Start from the tempting wrong answer and show why it breaks |
+| Opening with a cast page or system map | Characters arrive one by one, and the full picture comes last |
+| Checking only that facts are right | Also check that each character is caused by the failure before it |
+| The goal is met early and the book turns into a manual | Give each chapter its own goal, caused by the chapter before. In the first DNS chain book, the hero got the number on page 11 and the next 30 pages had no goal. |
+| A table of fields, codes or types as a story page | Put it on the reference pages, or a "Wait, how?" page starting from something the hero holds |
+| A villain for every problem | Personify only what recurs or seems to have a will of its own |
+| Fast, large ambient animation | Slow and small. A moth flapping three times a second was the first thing rejected. |
+| Declaring it done from a passing build | Look at the screenshots |
+| A long scrolling chapter | One idea per page |

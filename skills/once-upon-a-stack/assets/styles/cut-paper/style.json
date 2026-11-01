@@ -1,0 +1,29 @@
+{
+  "name": "Cut paper",
+  "fonts": [
+    [
+      "Bowlby One",
+      400,
+      "normal",
+      "bowlby.woff2"
+    ],
+    [
+      "Alegreya",
+      400,
+      "normal",
+      "alegreya.woff2"
+    ],
+    [
+      "Alegreya",
+      400,
+      "italic",
+      "alegreya-i.woff2"
+    ],
+    [
+      "Alegreya",
+      700,
+      "normal",
+      "alegreya-b.woff2"
+    ]
+  ]
+}

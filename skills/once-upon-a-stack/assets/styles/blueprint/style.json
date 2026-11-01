@@ -1,0 +1,17 @@
+{
+  "name": "Blueprint",
+  "fonts": [
+    [
+      "Plan Display",
+      400,
+      "normal",
+      "architects-daughter-400.woff2"
+    ],
+    [
+      "Plan Body",
+      400,
+      "normal",
+      "share-tech-mono-400.woff2"
+    ]
+  ]
+}

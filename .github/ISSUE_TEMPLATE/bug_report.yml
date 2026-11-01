@@ -1,0 +1,25 @@
+name: Bug report
+description: The skill, the build or the check script did something wrong
+labels: [bug]
+body:
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: What happened?
+      description: What you asked for, what you expected, and what you got.
+    validations:
+      required: true
+  - type: textarea
+    id: output
+    attributes:
+      label: Error output
+      description: Paste what `build.py` or `check.mjs` printed, if anything.
+      render: text
+  - type: input
+    id: environment
+    attributes:
+      label: Environment
+      description: OS, Node version, Python version and browser.
+      placeholder: macOS 15, Node 22, Python 3.12, Chrome
+    validations:
+      required: true
