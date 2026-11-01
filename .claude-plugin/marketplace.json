@@ -8,7 +8,7 @@
     {
       "name": "once-upon-a-stack",
       "source": "./",
-      "description": "Explains any technical topic as an illustrated, offline picture book you can keep and reread."
+      "description": "Turns any codebase or technical topic into an illustrated, interactive picture book: a visual explainer you keep and read offline."
     }
   ]
 }

@@ -1,8 +1,8 @@
 # Once Upon a Stack
 
-**Understand any technical topic properly, as a picture book you keep.**
+**Understand any codebase or technical topic properly, as a picture book you keep.**
 
-Ask your coding agent once, and you get an illustrated book about DNS, Kubernetes, React, or your own company's system. It's one HTML file you can open any time, offline, for free, without asking anyone again.
+An Agent Skill for Claude Code, Codex, Cursor, Gemini CLI and GitHub Copilot that turns a topic into an illustrated, interactive visual explainer. Ask your coding agent once, and you get a book about DNS, Kubernetes, React, or your own company's system. It's one HTML file you can open any time, offline, for free, without asking anyone again.
 
 ![The cover of The Diner on Long Road](docs/screenshots/cover.png)
 
@@ -58,7 +58,7 @@ For engineers, every page has a "For grown-ups" drawer with the real terms, conf
 ```
 /once-upon-a-stack DNS
 /once-upon-a-stack how React decides what to re-render
-/once-upon-a-stack rewrite the caching chapter of The Thirteen Roots
+/once-upon-a-stack rewrite the eviction chapter of The Diner on Long Road
 ```
 
 The first time you run it, the agent asks where to keep your books and suggests `~/once-upon-a-shelf`. Open `index.html` in that folder to see your shelf: one spine per book with its title, topic and age, and a click opens the book. It updates itself every time a book is built.
@@ -80,30 +80,26 @@ A 30-page book takes about 25-45 minutes, and the agent tells you how far along 
 
 ## Install
 
-In Claude Code (2.1.275 or later):
+One command for any agent (Claude Code, Codex, Cursor, Gemini CLI, GitHub Copilot and more). It asks which agents to install it for:
+
+```
+npx skills add AndrewLawendy/once-upon-a-stack -g
+```
+
+Or, in Claude Code (2.1.275 or later), as a plugin:
 
 ```
 /plugin install once-upon-a-stack --marketplace AndrewLawendy/once-upon-a-stack
 ```
 
-Or clone the repo and link the skill into your skills folder:
+Or by hand: clone the repo and link the skill into your agent's skills folder, `~/.claude/skills` for Claude Code or `~/.agents/skills` for Codex, Gemini CLI, GitHub Copilot and Cursor:
 
 ```
 git clone https://github.com/AndrewLawendy/once-upon-a-stack.git ~/once-upon-a-stack
 ln -s ~/once-upon-a-stack/skills/once-upon-a-stack ~/.claude/skills/once-upon-a-stack
 ```
 
-### Other coding agents
-
-Codex, Gemini CLI, GitHub Copilot and Cursor all read skills from `~/.agents/skills`, so one link covers them:
-
-```
-git clone https://github.com/AndrewLawendy/once-upon-a-stack.git ~/once-upon-a-stack
-mkdir -p ~/.agents/skills
-ln -s ~/once-upon-a-stack/skills/once-upon-a-stack ~/.agents/skills/once-upon-a-stack
-```
-
-Then ask for a book in plain words, such as "make a picture book about DNS". These agents are supported by their documentation but not tested yet. Agents that can't start subagents or view images still work, with a few extra steps the skill explains.
+In agents other than Claude Code, ask for a book in plain words, such as "make a picture book about DNS". These agents are supported by their documentation but not tested yet. Agents that can't start subagents or view images still work, with a few extra steps the skill explains.
 
 ## Status
 

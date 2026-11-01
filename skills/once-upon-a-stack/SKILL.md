@@ -1,6 +1,6 @@
 ---
 name: once-upon-a-stack
-description: Use when the user asks to build, write or rewrite a book, picture book, storybook or children's-book explanation of any topic (your company's architecture, React internals, Kubernetes, Grafana, a concept), asks to add to or change a book in the library, or wants a topic explained deeply as a story to keep and reread.
+description: Use when the user asks to build, write or rewrite a book, picture book, storybook or children's-book explanation of any topic (a codebase or repo, your company's architecture, React internals, Kubernetes, TCP, a concept), wants a visual, illustrated or interactive explainer of how a system or codebase works (for onboarding, learning or teaching someone else), asks to add to or change a book in the library, or wants a topic explained deeply as a story to keep and reread.
 compatibility: Works with any agent that reads Agent Skills. Needs Python 3, Node.js 22+ and a Chromium-based browser (Chrome, Chromium, Edge or Brave).
 ---
 
