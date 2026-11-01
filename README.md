@@ -57,7 +57,9 @@ For engineers, every page has a "For grown-ups" drawer with the real terms, conf
 /once-upon-a-stack rewrite the caching chapter of The Thirteen Roots
 ```
 
-The first time you run it, the agent asks where to keep your books and suggests `~/once-upon-a-shelf`. Open `index.html` in that folder to see your shelf.
+The first time you run it, the agent asks where to keep your books and suggests `~/once-upon-a-shelf`. Open `index.html` in that folder to see your shelf: one spine per book with its title, topic and age, and a click opens the book. It updates itself every time a book is built.
+
+![A shelf with five books](docs/screenshots/shelf.png)
 
 1. The agent maps the topic and shows you a table of contents: the world, the art style, and each chapter's goal, attempts, breaks and new characters. This is the only stop. Nothing is built until you approve it.
 2. It researches each journey in parallel, writes and draws the pages, builds the book, and checks every page in a headless browser, in light and dark.
