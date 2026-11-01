@@ -63,7 +63,7 @@ The first time you run it, the agent asks where to keep your books and suggests 
 2. It researches each journey in parallel, writes and draws the pages, builds the book, and checks every page in a headless browser, in light and dark.
 3. It hands you the path to the book and says which parts are weakest.
 
-A big topic can take a while and use a lot of tokens: a 45-page book runs several research agents.
+A 30-page book takes about 35-60 minutes, and the agent tells you how far along it is as it goes. A big topic uses a lot of tokens, since it runs several research agents.
 
 ## Requirements
 
