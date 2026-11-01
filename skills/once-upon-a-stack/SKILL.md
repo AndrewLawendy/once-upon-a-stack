@@ -18,18 +18,19 @@ Do this first, every time. `<library>` is the `library` value in `~/.config/once
 ## Build a new book
 
 1. **Scope.** Do a quick map pass of the topic: what exists, who talks to whom, and which problem forced each part to exist. Choose a world that does some of the explaining (`references/story.md`) and an art style that suits it (`references/styles.md`).
-2. **Table of contents: the only stop.** Show the world, art style, and the chapters from `references/story.md`. For each chapter: its goal, what it comes from (the price or the next want), each attempt, why it breaks and who arrives, and where the goal is met. Also show what's left out and a rough size. Wait for the user's approval. Adjust and re-show until they approve. Approval covers everything through step 7.
+2. **Table of contents: the only stop.** Show the world, art style, and the chapters from `references/story.md`. For each chapter: its goal, what it comes from (the price or the next want), each attempt, why it breaks and who arrives, and where the goal is met. Also show what's left out and a rough size. Wait for the user's approval. Adjust and re-show until they approve. Approval covers everything through step 8.
 3. **Set up** `<library>/<book>/.source/` as described in `references/craft.md`. Save the approved plan in `plan.md` and the chain in `chain.json`. Every later step updates `plan.md`, so an interrupted build can resume from it.
 4. **Research** each chapter per `references/research.md`, using one subagent per journey in parallel. Each writes its dossier to `.source/facts/`. Read the dossiers yourself and chase anything thin.
 5. **Write and draw** the pages per `references/story.md`, `references/craft.md` and `references/styles.md`. Write the story and art yourself, not through subagents, so voice and characters stay consistent.
 6. **Build:** `python3 scripts/build.py "<library>/<book>"`. Fix everything it reports.
 7. **Check it visually, headless:** `node scripts/check.mjs "<library>/<book>"`. Read the report and look at every screenshot. Fix, rebuild and re-check until clean. Open a visible browser only for something headless can't settle. Then audit the story: walk `chain.json` against the pages and confirm that each break is shown, each character arrives because of the break before it, and each chapter's goal is met with the hero there. Say each chapter boundary aloud as one sentence ("Because X, the hero now wants Y"). If it only works as "and also", it's a side topic: move it to a "Wait, how?" page or the reference pages. Confirm the full picture shows the hero's last trip as a scene.
-8. **Hand over** the path, the open command, and what's weakest: thin chapters and the count of unknowns. Stop there. Publishing or committing needs its own request.
+8. **Fact-check** with a fresh subagent that didn't write the book, using the brief in `references/research.md`. It checks every claim in the story text, the notes and the scene labels against its cited source. Fix or relabel everything it reports, then rebuild and re-check.
+9. **Hand over** the path, the open command, and what's weakest: thin chapters, the count of unknowns, and anything the fact-check couldn't settle. Stop there. Publishing or committing needs its own request.
 
 ## Rewrite
 
-- **Whole book:** repeat steps 1-8. Keep the world, cast and art style unless the user asks otherwise.
-- **One chapter or topic:** read `plan.md`, `book.json` and that chapter's dossier. Re-research against current sources, update that part of `chain.json`, rewrite only those pages, and add an entry to `rewrites` in `book.json` so the cover shows that chapter's own date. Then build and check. No table of contents approval is needed.
+- **Whole book:** repeat steps 1-9. Keep the world, cast and art style unless the user asks otherwise.
+- **One chapter or topic:** read `plan.md`, `book.json` and that chapter's dossier. Re-research against current sources, update that part of `chain.json`, rewrite only those pages, and add an entry to `rewrites` in `book.json` so the cover shows that chapter's own date. Then build, check and fact-check those pages. No table of contents approval is needed.
 - **Resume:** when `.source/plan.md` shows unfinished work, continue from there.
 
 ## Requirements every book meets
@@ -55,4 +56,5 @@ Do this first, every time. `<library>` is the `library` value in `~/.config/once
 | A villain for every problem | Personify only what recurs or seems to have a will of its own |
 | Fast, large ambient animation | Slow and small. A moth flapping three times a second was the first thing rejected. |
 | Declaring it done from a passing build | Look at the screenshots |
+| The writer checking their own facts | A fresh subagent fact-checks. Checking the first DNS book found six claims stated beyond their source. |
 | A long scrolling chapter | One idea per page |

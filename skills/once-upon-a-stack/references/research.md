@@ -63,3 +63,33 @@ Write a dossier with these parts, in order:
 Label every claim Verified, Inferred or Unknown. Verified claims need a
 file and function or a URL. No story language.
 ```
+
+## Fact-check brief
+
+Give a fresh subagent, one that didn't research or write the book, this contract. It reads the built pages in `.source/pages/`, the dossiers in `.source/facts/`, and the cited sources themselves, and writes `.source/facts/fact-check.md`.
+
+```
+Book: <library>/<book>/.source/pages/ (story text, scene labels and For grown-ups notes)
+Dossiers: <library>/<book>/.source/facts/
+Read only. Don't edit the pages.
+
+For every factual claim on every page, including numbers, dates, names, quotes,
+defaults and "what people see" lines:
+1. Find its source: the citation on the page, or the dossier.
+2. Open the source itself, not the dossier's summary of it.
+3. Give one verdict:
+   - Correct
+   - Overstated: the page says more than the source (wider, stronger, "only", "always")
+   - Wrong: the source says otherwise
+   - Mislabelled: marked Verified but only Inferred, or the reverse
+   - Unsupported: no source found
+   - Misquoted: quotation marks around words the source doesn't use
+
+Also flag any character named by description without its label ("the runner"
+for a labelled character), and any story beat with no real counterpart.
+
+Report only the claims that aren't Correct, with page, the exact text, the
+source and its exact words, and the fix. End with the count checked per page.
+```
+
+Story simplifications are fine when the notes give the exact version. A claim the story makes stronger than its notes is Overstated.
