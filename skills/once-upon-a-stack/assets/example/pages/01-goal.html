@@ -1,0 +1,31 @@
+<section class="page p-c" id="goal" aria-labelledby="h-goal" tabindex="-1" hidden>
+  <div class="scroller"><div class="leaf">
+    <div class="art">
+      <svg viewBox="0 0 1000 460" role="img" aria-label="Rosie stands at the diner counter at lunchtime, looking at a clock. The counter is empty.">
+        <use href="#counter-bg" width="1000" height="460"/>
+        <g class="bob"><use href="#rosie" x="420" y="150" width="140" height="198"/></g>
+        <rect x="640" y="180" width="250" height="70" rx="35" fill="#FBF6E9" stroke="#1B1B1B" stroke-width="2"/>
+        <text x="765" y="224" text-anchor="middle" font-size="26" font-family="var(--font-body)" fill="#1B1B1B">One slice, please!</text>
+        {{tag|490|86|Rosie|your app}}
+      </svg>
+    </div>
+    <div class="sheet">
+      <p class="running">A Slice, Now</p>
+      <h2 id="h-goal">One slice, please</h2>
+      <p>Every day at lunch, [[Rosie|your app]] walks into the little diner at the end of Long Road and asks for one thing: a slice of pie.</p>
+      <p>She has a short lunch break. If the pie takes too long, she leaves hungry.</p>
+      <p>That's the whole story, really. Someone wants something, and wants it <b>now</b>.</p>
+      <p>Every app is like this. Each time a person opens a page, the app needs some data to show: a name, a price, a list of messages. That data is the pie.</p>
+    </div>
+  </div></div>
+  <div class="note-src">
+    <h3>For grown-ups</h3>
+    <dl>
+      <dt>Who she is</dt>
+      <dd><span class="b i">Inferred</span> [[Rosie|your app]] stands for the code that serves a request, such as a web server. <span class="b v">Verified</span> The memcache paper describes the read path the same way: "When a web server needs data, it first requests the value from memcache by providing a string key", and on a miss reads the database (s2).</dd>
+      <dt>Why "now" matters</dt>
+      <dd><span class="b v">Verified</span> "A single user web request can often result in hundreds of individual memcache get requests." Every small delay is multiplied by how many pieces of data one page needs.</dd>
+    </dl>
+    <p class="src">Nishtala et al., Scaling Memcache at Facebook, NSDI 2013, s2 and s3.1</p>
+  </div>
+</section>

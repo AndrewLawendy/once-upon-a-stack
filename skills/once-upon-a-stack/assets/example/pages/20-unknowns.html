@@ -1,0 +1,14 @@
+<section class="page p-a plain" id="unknowns" aria-labelledby="h-unknowns" tabindex="-1" hidden>
+  <div class="scroller"><div class="ref"><div class="sheet">
+    <h2 id="h-unknowns">What we don't know yet</h2>
+    <p>Things this book couldn't settle from primary sources, and what would.</p>
+    <div class="cols">
+      <p><b>A public stampede post-mortem.</b> No dated, public incident report of a cache-expiry stampede was found. Facebook's 23 Sep 2010 outage was a refill feedback loop, not an expiry. <i>Settle:</i> a post-mortem collection such as danluu/post-mortems. <a href="#" data-goto="p-rush">p.</a></p>
+      <p><b>A stale-cache post-mortem.</b> Candidates (GitLab, Jan 2022) were seen only as search snippets. <i>Settle:</i> read GitLab production issue 6182. <a href="#" data-goto="old-recipe">p.</a></p>
+      <p><b>What happens to a lost lease.</b> The memcache paper doesn't say what happens if the token holder never sets the value. <i>Settle:</i> memcached lease code at Facebook (not public) or the authors. <a href="#" data-goto="right-pie">p.</a></p>
+      <p><b>How long "wait a short time" is.</b> The paper doesn't give the retry delay for clients told to wait. <a href="#" data-goto="p-tess">p.</a></p>
+      <p><b>How long stale values are kept.</b> Facebook keeps recently deleted values "for a short time", with no number. <a href="#" data-goto="noon-pie">p.</a></p>
+      <p><b>Facebook's overall hit rate.</b> Not found in the parts of the paper read. <i>Settle:</i> its section 7, workload. <a href="#" data-goto="p-della">p.</a></p>
+          </div>
+  </div></div></div>
+</section>

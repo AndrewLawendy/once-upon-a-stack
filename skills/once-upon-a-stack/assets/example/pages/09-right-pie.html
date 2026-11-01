@@ -1,0 +1,38 @@
+<section class="page p-a" id="right-pie" aria-labelledby="h-right-pie" tabindex="-1" hidden>
+  <div class="scroller"><div class="leaf">
+    <div class="art">
+      <svg viewBox="0 0 1000 460" role="img" aria-label="Rosie holds a slice of today's apple pie. On the case, each pie has a date sticker and a numbered claim ticket. A late truck with a cancelled ticket is turned away.">
+        <use href="#counter-bg" width="1000" height="460"/>
+        <use href="#della" x="400" y="128" width="200" height="222"/>
+        <use href="#sticker" x="455" y="220" width="70" height="40"/>
+        <use href="#rosie" x="160" y="170" width="120" height="170"/>
+        <use href="#slice" x="260" y="254" width="50" height="34"/>
+        <rect x="680" y="110" width="260" height="140" rx="14" fill="#FBF6E9" stroke="#1B1B1B" stroke-width="2"/>
+        <text x="810" y="150" text-anchor="middle" font-size="22" font-family="var(--font-body)" fill="#1B1B1B">claim ticket 417</text>
+        <path d="M720 170 L900 230 M900 170 L720 230" stroke="#B93C1C" stroke-width="6"/>
+        <text x="810" y="282" text-anchor="middle" font-size="20" font-family="var(--font-body)" fill="#FBF6E9">cancelled by the phone call</text>
+        {{tag|220|104|Rosie|your app}}
+        {{tag|500|62|Della|the cache}}
+      </svg>
+    </div>
+    <div class="sheet">
+      <p class="running">The Right Pie</p>
+      <h2 id="h-right-pie">Good enough, and honest about it</h2>
+      <p>The phone call makes most changes show up at once. The sticker makes sure that even a pie that slips through can't last longer than its date.</p>
+      <p>Big diners close the last gap with a <b>claim ticket</b>. On a miss, [[Della|the cache]] hands out a numbered ticket, and the delivery must show it. The phone call cancels the ticket, so the slow truck's old pie, with its dead ticket, is turned away.</p>
+      <p>And [[Rosie|your app]] gets today's pie, almost always. A cache never promises "always". It promises fast, and fresh enough.</p>
+    </div>
+  </div></div>
+  <div class="note-src">
+    <h3>For grown-ups</h3>
+    <dl>
+      <dt>Leases</dt>
+      <dd><span class="b v">Verified</span> "A memcached instance gives a lease to a client to set data back into the cache when that client experiences a cache miss. The lease is a 64-bit token bound to the specific key the client originally requested." The set carries the token, and "verification can fail if memcached has invalidated the lease token due to receiving a delete request for that item".</dd>
+      <dt>The deal</dt>
+      <dd><span class="b v">Verified</span> "We are willing to expose slightly stale data in exchange for insulating a backend storage service from excessive load."</dd>
+      <dt>Not everywhere</dt>
+      <dd><span class="b i">Inferred</span> Leases need a cache and client that support them. Stock Redis has none; check what your memcached version and client offer. Most apps live with TTL plus delete.</dd>
+    </dl>
+    <p class="src">Nishtala et al., NSDI 2013, s2, s3.2.1</p>
+  </div>
+</section>

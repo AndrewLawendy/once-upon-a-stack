@@ -16,7 +16,7 @@
     facts/NN-journey.md  Research dossiers
 ```
 
-`assets/example-pantry.html` is a complete reviewed sample with scenes, a hit/miss play and character art. Read its parts as a guide to structuring scenes and animating them. Its look is cut paper only, so take the art direction from `references/styles.md`. Its page markup predates the macros below.
+`assets/example/` is the `.source` of a complete, fact-checked book about caching in the mid-century style: `book.json`, `chain.json`, `symbols.svg` and `pages/`. Read it as a guide to the chain, the macros, scenes, journeys and the reference pages. Take each new book's art direction from `references/styles.md`, not from the example.
 
 `book.json`:
 ```json
@@ -35,31 +35,39 @@
 
 `topic` is the plain name someone would search for. The build requires the folder to be `<slug>--<topic in kebab case>`, such as `the-busy-harbor--kubernetes`. It shows the readable topic in the browser tab, on the cover stamp and on the shelf.
 
-`chain.json`, approved with the table of contents:
+`chain.json`, approved with the table of contents (the first two chapters of the example):
 ```json
 {
-  "opening": "Pip",
+  "opening": "Rosie",
   "chapters": [
     {
-      "goal": "Pip wants the number for google.com",
+      "goal": "Rosie wants her slice of pie quickly",
       "from": "start",
-      "met": "pip-gets-it",
+      "met": "hit-miss",
       "links": [
         {
-          "attempt": "Everyone copies one master list",
-          "breaks": "Copying grows with the square of the hosts, and owners wait for the office",
+          "attempt": "Every slice is ordered from the farm",
+          "breaks": "Each read is a slow database trip, and repeated reads of the same hot data overload it",
           "evidence": "Verified",
-          "source": "RFC 1034 2.1",
+          "source": "Nishtala et al. NSDI 2013 s2, s3.2, s3.3",
           "arrives": "Della",
-          "page": "big-list"
+          "page": "p-della"
         }
       ]
     },
     {
-      "goal": "Pip wants it fast, every time",
-      "from": "next want: every visit climbs the whole tree",
-      "met": "notebook-works",
-      "links": []
+      "goal": "Rosie wants today's pie, not last week's",
+      "from": "price: the case keeps showing a pie after the farm changes the recipe",
+      "met": "right-pie",
+      "links": [
+        {
+          "attempt": "A date sticker (TTL) on each pie",
+          "breaks": "Short TTL means constant refills and load; long TTL means long staleness",
+          "evidence": "Inferred",
+          "arrives": null,
+          "page": "date-sticker"
+        }
+      ]
     }
   ]
 }
@@ -98,7 +106,7 @@ Every page: `<section class="page p-c" id="unique-id" aria-labelledby="heading-i
 | What people see | `<p class="seen">` |
 | Before and after | `<div class="compare">` with two SVGs (second inside `.with`), `.tagline.left`, `.tagline.right`, `<input type="range" min="0" max="100" value="50" aria-label="...">`, `<div class="bar"><div class="knob" aria-hidden="true">&#8596;</div></div>` |
 | Step-through journey | `<div class="journey">` containing the SVG and `<ol class="steps"><li>...</li></ol>`. Inside the SVG: `data-show="2 3"` shows an element on those steps, and `data-move='{"1":"translate(0px,0px)","3":"translate(400px,0px)"}'` moves it. The shell adds the buttons. |
-| A play you trigger | `<button data-play>` plus your own code in `book.js`. See the hit/miss play in the example. |
+| A play you trigger | `<button data-play>` plus your own code in `book.js` |
 | Speech | `<p class="bubble">` |
 | Recap | `<div class="recap">` |
 | Quiz | `<details class="quiz"><summary>Question</summary>Answer</details>` |
@@ -112,7 +120,7 @@ Every page: `<section class="page p-c" id="unique-id" aria-labelledby="heading-i
 Follow `references/styles.md`. Draw in hand-written SVG from simple shapes, and reuse one set of `<symbol>`s so characters stay identical across pages.
 
 - Scenes use `viewBox="0 0 1000 460"` unless they need otherwise, with a reusable backdrop symbol.
-- `book.css` may fine-tune colors, but the style sets the look.
+- `book.css` may fine-tune colors and add scene motion, but the style sets the look.
 
 ## Motion
 
@@ -126,6 +134,5 @@ Only animate inside `.active` pages. Don't combine an attribute `transform` with
 ## Layout
 
 The shell shows a "who's here so far" strip above the bottom bar on story pages, generated from `chain.json`. Don't draw your own.
-
 
 Laptop first, around 1366x768. Each page should fit without scrolling. Inner scrolling is only a fallback for small screens. Keep name tags clear of each other and of faces.

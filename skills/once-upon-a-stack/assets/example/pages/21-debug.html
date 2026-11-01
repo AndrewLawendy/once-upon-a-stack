@@ -1,0 +1,17 @@
+<section class="page p-c plain" id="debug-index" aria-labelledby="h-debug-index" tabindex="-1" hidden>
+  <div class="scroller"><div class="ref"><div class="sheet">
+    <h2 id="h-debug-index">When something's wrong</h2>
+    <table>
+      <tr><th>You see</th><th>Likely cause</th><th>Read</th></tr>
+      <tr><td>Old data after a change</td><td>Copy still within its TTL, or the delete was missed</td><td><a href="#" data-goto="old-recipe">Today's pie</a>, <a href="#" data-goto="date-sticker">Date sticker</a></td></tr>
+      <tr><td>One item stays wrong after a save, then fixes itself</td><td>Stale set: a slow refill landed after the delete</td><td><a href="#" data-goto="phone-call">Phones ahead</a>, <a href="#" data-goto="right-pie">Claim ticket</a></td></tr>
+      <tr><td>Database load high, hit ratio low</td><td>TTL too short, or keys evicted too soon</td><td><a href="#" data-goto="date-sticker">Date sticker</a>, <a href="#" data-goto="random">At random</a></td></tr>
+      <tr><td><code>OOM command not allowed when used memory &gt; 'maxmemory'.</code></td><td><code>maxmemory-policy noeviction</code> at the limit</td><td><a href="#" data-goto="full-case">The full case</a></td></tr>
+      <tr><td>Popular pages slow even with a cache</td><td>Hot keys evicted by a blind policy</td><td><a href="#" data-goto="random">At random</a>, <a href="#" data-goto="p-eddie">Eddie</a></td></tr>
+      <tr><td>Database spikes on a schedule, site slows at peak</td><td>Hot key expiring: a stampede</td><td><a href="#" data-goto="p-rush">The Rush</a>, <a href="#" data-goto="p-tess">Tess</a></td></tr>
+      <tr><td>Many identical queries at the same second</td><td>No request coalescing</td><td><a href="#" data-goto="p-tess">Tess</a></td></tr>
+      <tr><td>Everyone stalls for one slow query</td><td>Coalescing without serving stale or a timeout</td><td><a href="#" data-goto="noon-pie">A slice while you wait</a></td></tr>
+    </table>
+    <p>First commands (Redis): <code>INFO stats</code> for <code>keyspace_hits</code>, <code>keyspace_misses</code>, <code>evicted_keys</code>, <code>expired_keys</code>; <code>CONFIG GET maxmemory*</code>; <code>TTL key</code>.</p>
+  </div></div></div>
+</section>

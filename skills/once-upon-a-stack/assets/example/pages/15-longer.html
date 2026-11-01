@@ -1,0 +1,35 @@
+<section class="page p-a" id="longer-sticker" aria-labelledby="h-longer-sticker" tabindex="-1" hidden>
+  <div class="scroller"><div class="leaf">
+    <div class="art">
+      <svg viewBox="0 0 1000 460" role="img" aria-label="A longer sticker on the apple pie says sell by 6pm. The clock moves to six, and the dark crowd is back at the door.">
+        <use href="#counter-bg" width="1000" height="460"/>
+        <use href="#della" x="300" y="128" width="200" height="222"/>
+        <rect x="320" y="214" width="160" height="44" rx="10" fill="#FBF6E9" stroke="#1B1B1B" stroke-width="2"/>
+        <text x="400" y="244" text-anchor="middle" font-size="20" font-family="var(--font-body)" fill="#B93C1C">sell by 6pm</text>
+        <use href="#rush" x="620" y="160" width="300" height="200"/>
+        <text x="770" y="140" text-anchor="middle" font-size="30" font-family="var(--font-display)" fill="#F2C14E">6pm. Dinner.</text>
+        {{tag|770|366|Rush|a cache stampede}}
+        {{tag|400|62|Della|the cache}}
+      </svg>
+    </div>
+    <div class="sheet">
+      <p class="running">Noon</p>
+      <h2 id="h-longer-sticker">Just make the sticker longer?</h2>
+      <p class="origin">Imagine if</p>
+      <p>If the pie runs out at noon, put a longer sticker on it. Sell by six!</p>
+      <p>At six, the dinner crowd walks in, the sticker runs out, and the [[Rush|a cache stampede]] is back. A longer sticker only moves him. It never sends him away.</p>
+      <p>And it costs something: the longer the sticker, the older the pie, which is exactly what chapter two was about.</p>
+      <p>[[Rosie|your app]] needs something that stops the two hundred orders, not just one that delays them.</p>
+    </div>
+  </div></div>
+  <div class="note-src">
+    <h3>For grown-ups</h3>
+    <dl>
+      <dt>TTL doesn't fix it</dt>
+      <dd><span class="b i">Inferred</span> A stampede happens at every expiry of a hot key. A longer TTL lowers how often, not how hard, and widens the staleness window.</dd>
+      <dt>Other dead ends</dt>
+      <dd><span class="b v">Verified</span> The VLDB paper lists a background recompute job ("would even regenerate cache items that were never requested") and a lock, which needs its own expiry and is "not fault-tolerant: if the request acquiring the lock fails while re-generating the item, no item or a stale item will be served until the lock expires".</dd>
+    </dl>
+    <p class="src">Vattani et al., PVLDB 8(8) 2015, s1</p>
+  </div>
+</section>

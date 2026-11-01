@@ -1,0 +1,39 @@
+<section class="page p-b" id="full-case" aria-labelledby="h-full-case" tabindex="-1" hidden>
+  <div class="scroller"><div class="leaf">
+    <div class="art">
+      <svg viewBox="0 0 1000 460" role="img" aria-label="Della's case is crammed with pies stacked to the glass. A new plum pie can't fit. Rosie looks worried.">
+        <use href="#counter-bg" width="1000" height="460"/>
+        <use href="#della-empty" x="360" y="70" width="270" height="300"/>
+        <use href="#pie" x="400" y="232" width="80" height="40"/><use href="#pie" x="480" y="232" width="80" height="40"/>
+        <use href="#pie" x="410" y="194" width="80" height="40"/><use href="#pie" x="490" y="194" width="80" height="40"/>
+        <use href="#pie" x="420" y="156" width="80" height="40"/><use href="#pie" x="490" y="156" width="70" height="36"/>
+        <use href="#pie" x="450" y="122" width="80" height="40"/>
+        <use href="#pie" x="720" y="230" width="100" height="50"/>
+        <text x="770" y="210" text-anchor="middle" font-size="24" font-family="var(--font-body)" fill="#FBF6E9">plum: no room</text>
+        <use href="#rosie" x="150" y="170" width="120" height="170"/>
+        {{tag|210|104|Rosie|your app}}
+        {{tag|495|0|Della|the cache}}
+      </svg>
+    </div>
+    <div class="sheet">
+      <p class="running">Room in the Case</p>
+      <h2 id="h-full-case">Keep my favourite</h2>
+      <p>[[Della|the cache]] is fast because she's small and close. Small means she fills up.</p>
+      <p>On a busy day the case is full before any sticker runs out. A plum pie arrives, and there's nowhere to put it.</p>
+      <p>[[Rosie|your app]] has a favourite, and she wants it in the case when she comes in. For that, something has to go. But what?</p>
+      <p class="seen">What people see, if nothing goes: saving fails with <code>OOM command not allowed when used memory &gt; 'maxmemory'.</code></p>
+    </div>
+  </div></div>
+  <div class="note-src">
+    <h3>For grown-ups</h3>
+    <dl>
+      <dt>The size of the case</dt>
+      <dd><span class="b v">Verified</span> Redis's limit is <code>maxmemory</code> (default <code>0</code>, no limit on 64-bit). "Whenever a client runs a new command that adds more data to the cache, Redis checks the memory usage. If it is greater than the limit, Redis evicts keys according to the chosen eviction policy until the total memory used is back below the limit."</dd>
+      <dt>The default is: don't throw anything out</dt>
+      <dd><span class="b v">Verified</span> <code>maxmemory-policy</code> defaults to <code>noeviction</code>. At the limit, writes are rejected with the error above, and "commands that only read existing data still work as normal". Redis 7.4.0, <code>src/config.c</code> and <code>src/server.c</code> (<code>shared.oomerr</code>).</dd>
+      <dt>Why not keep everything</dt>
+      <dd><span class="b i">Inferred</span> RAM is finite and costly. With no limit, the process grows until the operating system kills it.</dd>
+    </dl>
+    <p class="src">redis.io key eviction docs, fetched 2026-11-01; Redis 7.4.0 src/config.c, src/server.c</p>
+  </div>
+</section>

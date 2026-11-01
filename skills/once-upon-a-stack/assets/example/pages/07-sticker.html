@@ -1,0 +1,50 @@
+<section class="page p-a" id="date-sticker" aria-labelledby="h-sticker" tabindex="-1" hidden>
+  <div class="scroller"><div class="leaf">
+    <div class="compare">
+      <svg viewBox="0 0 1000 460" role="img" aria-label="Short sticker: every pie says 'sell within 1 minute', and trucks race back and forth all day. Long sticker: the pie says 'sell within 1 week', no trucks, but the pie is from last week.">
+        <use href="#road-bg" width="1000" height="460"/>
+        <use href="#diner" x="20" y="200" width="160" height="124"/>
+        <use href="#farm" x="800" y="160" width="180" height="164"/>
+        <use href="#truck" x="230" y="290" width="110" height="70"/><use href="#truck" x="390" y="282" width="110" height="70"/><use href="#truck" x="550" y="276" width="110" height="70"/>
+        <rect x="290" y="70" width="380" height="80" rx="14" fill="#FBF6E9" stroke="#1B1B1B" stroke-width="2"/>
+        <circle cx="330" cy="110" r="14" fill="#E4572E"/>
+        <text x="500" y="122" text-anchor="middle" font-size="30" font-family="var(--font-body)" fill="#1B1B1B">sell within 1 minute</text>
+      </svg>
+      <div class="with" aria-hidden="true">
+        <svg viewBox="0 0 1000 460">
+          <use href="#road-bg" width="1000" height="460"/>
+          <use href="#diner" x="20" y="200" width="160" height="124"/>
+          <use href="#farm" x="800" y="160" width="180" height="164"/>
+          <rect x="290" y="70" width="380" height="80" rx="14" fill="#FBF6E9" stroke="#1B1B1B" stroke-width="2"/>
+          <circle cx="330" cy="110" r="14" fill="#E4572E"/>
+          <text x="500" y="122" text-anchor="middle" font-size="30" font-family="var(--font-body)" fill="#1B1B1B">sell within 1 week</text>
+          <text x="480" y="250" text-anchor="middle" font-size="34" font-family="var(--font-display)" fill="#B93C1C">last week's pie</text>
+        </svg>
+      </div>
+      <span class="tagline left">Short sticker</span>
+      <span class="tagline right">Long sticker</span>
+      <input type="range" min="0" max="100" value="50" aria-label="Compare a short and a long date sticker">
+      <div class="bar"><div class="knob" aria-hidden="true">&#8596;</div></div>
+    </div>
+    <div class="sheet">
+      <p class="running">The Right Pie</p>
+      <h2 id="h-sticker">A date sticker on every pie</h2>
+      <p>First fix: every pie that goes into [[Della|the cache]] gets a sticker, "sell within ten minutes". When it runs out, the pie is thrown away, and the next order goes back to the farm for a fresh one.</p>
+      <p>Now a wrong pie can't last forever. But how long should the sticker be? Drag across.</p>
+      <p><b>Short</b>: pies are nearly always right, but the trucks never stop, and the [[Baker|the database]] is busy again. <b>Long</b>: hardly any trips, and [[Rosie|your app]] gets old pie for days.</p>
+      
+    </div>
+  </div></div>
+  <div class="note-src">
+    <h3>For grown-ups</h3>
+    <dl>
+      <dt>The sticker is the TTL</dt>
+      <dd><span class="b v">Verified</span> HTTP: <code>Cache-Control: max-age=600</code> gives a freshness lifetime in seconds; the cache sends <code>Age</code>, its estimate of how long ago the response was generated or last successfully validated. Redis: keys can carry an expiration (TTL), for example <code>SET k v EX 600</code>.</dd>
+      <dt>Signs your sticker is wrong</dt>
+      <dd><span class="b v">Verified</span> Redis's docs say a high <code>expired_keys</code> count can mean "a TTL that is too low". Hit ratio is <code>keyspace_hits / (keyspace_hits + keyspace_misses)</code>.</dd>
+      <dt>The trade-off</dt>
+      <dd><span class="b i">Inferred</span> Without invalidation, the worst-case staleness is about one TTL. Halving the TTL roughly doubles the refills for a steadily read key.</dd>
+    </dl>
+    <p class="src">RFC 9111 s4.2, s5.1, s5.2.2.1; redis.io key eviction docs (INFO section), fetched 2026-11-01</p>
+  </div>
+</section>

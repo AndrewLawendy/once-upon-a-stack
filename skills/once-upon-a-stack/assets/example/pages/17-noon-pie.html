@@ -1,0 +1,50 @@
+<section class="page p-c" id="noon-pie" aria-labelledby="h-noon-pie" tabindex="-1" hidden>
+  <div class="scroller"><div class="leaf">
+    <div class="compare">
+      <svg viewBox="0 0 1000 460" role="img" aria-label="Waiting: everyone on the spike stands still for the whole trip. Serving the old pie: Rosie gets a slice of the morning's apple right away while one truck fetches a fresh one.">
+        <use href="#counter-bg" width="1000" height="460"/>
+        <use href="#della-empty" x="120" y="128" width="200" height="222"/>
+        <use href="#tess" x="380" y="140" width="120" height="180"/>
+        <use href="#rosie" x="560" y="170" width="120" height="170"/>
+        <text x="800" y="140" text-anchor="middle" font-size="34" font-family="var(--font-display)" fill="#F2C14E">wait...</text>
+        <text x="800" y="180" text-anchor="middle" font-size="20" font-family="var(--font-body)" fill="#FBF6E9">the whole trip</text>
+      </svg>
+      <div class="with" aria-hidden="true">
+        <svg viewBox="0 0 1000 460">
+          <use href="#counter-bg" width="1000" height="460"/>
+          <use href="#della" x="120" y="128" width="200" height="222"/>
+          <use href="#tess" x="380" y="140" width="120" height="180"/>
+          <use href="#rosie" x="560" y="170" width="120" height="170"/>
+          <use href="#slice" x="660" y="254" width="50" height="34"/>
+          <use href="#truck" x="760" y="250" width="130" height="82"/>
+          <text x="820" y="140" text-anchor="middle" font-size="30" font-family="var(--font-display)" fill="#F2C14E">slice now</text>
+          <text x="820" y="180" text-anchor="middle" font-size="20" font-family="var(--font-body)" fill="#FBF6E9">fresh pie on its way</text>
+        </svg>
+      </div>
+      <span class="tagline left">Wait for the truck</span>
+      <span class="tagline right">Serve the old pie</span>
+      <input type="range" min="0" max="100" value="50" aria-label="Compare waiting for the truck with serving the old pie meanwhile">
+      <div class="bar"><div class="knob" aria-hidden="true">&#8596;</div></div>
+    </div>
+    <div class="sheet">
+      <p class="running">Noon</p>
+      <h2 id="h-noon-pie">A slice while you wait</h2>
+      <p>[[Tess|request coalescing]] saved the [[Baker|the database]], but everyone on her spike still waits the whole trip.</p>
+      <p>Last trick: when the sticker runs out, [[Della|the cache]] doesn't throw the pie away just yet. For a few more minutes she keeps serving it, while <b>one</b> truck fetches a fresh one. Drag across.</p>
+      <p>It's this morning's pie, a few minutes past its sticker. That's the same trade from chapter two, kept small on purpose.</p>
+      <p>And at noon, [[Rosie|your app]] gets her slice straight away, and the [[Baker|the database]] bakes one pie.</p>
+    </div>
+  </div></div>
+  <div class="note-src">
+    <h3>For grown-ups</h3>
+    <dl>
+      <dt>stale-while-revalidate</dt>
+      <dd><span class="b v">Verified</span> RFC 5861: with <code>Cache-Control: max-age=600, stale-while-revalidate=30</code> a cache "may continue to be served stale for up to an additional 30 seconds while an asynchronous validation is attempted". After the window, "the next request will block and be handled normally".</dd>
+      <dt>Facebook's version</dt>
+      <dd><span class="b v">Verified</span> Recently deleted values are kept "for a short time", and "a get request can return a lease token or data that is marked as stale". "Applications that can continue to make forward progress with stale data do not need to wait for the latest value to be fetched from the databases."</dd>
+      <dt>Refreshing early</dt>
+      <dd><span class="b v">Verified</span> Another fix refreshes a hot key just before it expires, at random, so a stampede becomes very unlikely: XFetch, with <code>beta = 1</code> and the last rebuild time stored beside the value.</dd>
+    </dl>
+    <p class="src">RFC 5861 s3; Nishtala et al., NSDI 2013, s3.2.1; Vattani et al., PVLDB 8(8) 2015, s5</p>
+  </div>
+</section>

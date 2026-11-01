@@ -1,0 +1,18 @@
+{
+  "title": "The Diner on Long Road",
+  "slug": "the-diner-on-long-road",
+  "topic": "caching",
+  "style": "mid-century",
+  "written": "2026-11-01",
+  "sources": ["RFC 9111, RFC 5861", "Redis key eviction docs", "Nishtala et al., Scaling Memcache at Facebook, NSDI 2013", "golang.org/x/sync/singleflight"],
+  "rewrites": [],
+  "spine": {"bg": "#1F7A7A", "fg": "#F2C14E"},
+  "cast": [
+    {"name": "Rosie", "real": "your app"},
+    {"name": "Baker", "real": "the database"},
+    {"name": "Della", "real": "the cache"},
+    {"name": "Eddie", "real": "the eviction policy"},
+    {"name": "Rush", "real": "a cache stampede"},
+    {"name": "Tess", "real": "request coalescing"}
+  ]
+}

@@ -6,7 +6,7 @@ compatibility: Works with any agent that reads Agent Skills. Needs Python 3, Nod
 
 # Once Upon a Stack
 
-A book explains one topic deeply as a children's story with real engineering underneath. It is one self-contained offline HTML file in `<library>/<slug>--<topic>/index.html`, listed on the shelf at `<library>/index.html`. Reading it needs no Claude and no network. It changes only when the user asks for a rewrite.
+A book explains one topic deeply as a children's story with real engineering underneath. It is one self-contained offline HTML file in `<library>/<slug>--<topic>/index.html`, listed on the shelf at `<library>/index.html`. Reading it needs no agent and no network. It changes only when the user asks for a rewrite.
 
 The folder always says what the book is about, in kebab case: the story name, a double hyphen, then the real topic, such as `the-squirrels-pantry--caching`. Below, `<book>` means that folder.
 
@@ -37,7 +37,7 @@ Do this next, every time. `<library>` is the `library` value in `~/.config/once-
 3. **Set up** `<library>/<book>/.source/` as described in `references/craft.md`. Save the approved plan in `plan.md` and the chain in `chain.json`. Every later step updates `plan.md`, so an interrupted build can resume from it.
 4. **Research** each chapter per `references/research.md`, using one subagent per journey in parallel. Each writes its dossier to `.source/facts/`. Read the dossiers yourself and chase anything thin.
 5. **Write and draw** the pages per `references/story.md`, `references/craft.md` and `references/styles.md`. Write the story and art yourself, not through subagents, so voice and characters stay consistent.
-6. **Build:** `python3 scripts/build.py "<library>/<book>"`. Fix everything it reports.
+6. **Build:** `python3 scripts/build.py "<library>/<book>"` (on Windows, `python`). Fix everything it reports.
 7. **Check it visually, headless:** `node scripts/check.mjs "<library>/<book>"`. Read the report and look at every screenshot. Fix, rebuild and re-check until clean. Open a visible browser only for something headless can't settle. Then audit the story: walk `chain.json` against the pages and confirm that each break is shown, each character arrives because of the break before it, and each chapter's goal is met with the hero there. Say each chapter boundary aloud as one sentence ("Because X, the hero now wants Y"). If it only works as "and also", it's a side topic: move it to a "Wait, how?" page or the reference pages. Confirm the full picture shows the hero's last trip as a scene.
 8. **Fact-check** with a fresh subagent that didn't write the book, using the brief in `references/research.md`. It checks every claim in the story text, the notes and the scene labels against its cited source. Fix or relabel everything it reports, then rebuild and re-check.
 9. **Hand over** the path, the open command, and what's weakest: thin chapters, the count of unknowns, and anything the fact-check couldn't settle. Stop there. Publishing or committing needs its own request.
@@ -61,15 +61,15 @@ Do this next, every time. `<library>` is the `library` value in `~/.config/once-
 
 | Mistake | Instead |
 |---|---|
-| Answering from a KB, docs summary or memory | Trace it in the primary source. In the sample session, three "facts" taken from the KB level turned out wrong once the code was read. |
+| Answering from a KB, docs summary or memory | Trace it in the primary source. Facts taken from summaries are often wrong once the code or spec is read. |
 | Splitting chapters by repo or module | Split by journey, because bugs live between components |
 | Explaining the trip without the need | Start from the tempting wrong answer and show why it breaks |
 | Opening with a cast page or system map | Characters arrive one by one, and the full picture comes last |
 | Checking only that facts are right | Also check that each character is caused by the failure before it |
-| The goal is met early and the book turns into a manual | Give each chapter its own goal, caused by the chapter before. In the first DNS chain book, the hero got the number on page 11 and the next 30 pages had no goal. |
+| The goal is met early and the book turns into a manual | Give each chapter its own goal, caused by the chapter before, so no stretch of pages runs without one. |
 | A table of fields, codes or types as a story page | Put it on the reference pages, or a "Wait, how?" page starting from something the hero holds |
 | A villain for every problem | Personify only what recurs or seems to have a will of its own |
-| Fast, large ambient animation | Slow and small. A moth flapping three times a second was the first thing rejected. |
+| Fast, large ambient animation | Slow and small, so it never pulls the eye from the text. |
 | Declaring it done from a passing build | Look at the screenshots |
-| The writer checking their own facts | A fresh subagent fact-checks. Checking the first DNS book found six claims stated beyond their source. |
+| The writer checking their own facts | A fresh subagent fact-checks. Writers miss their own overstatements. |
 | A long scrolling chapter | One idea per page |

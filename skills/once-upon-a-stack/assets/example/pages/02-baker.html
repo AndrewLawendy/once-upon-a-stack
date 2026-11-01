@@ -1,0 +1,32 @@
+<section class="page p-a" id="p-baker" aria-labelledby="h-baker" tabindex="-1" hidden>
+  <div class="scroller"><div class="leaf">
+    <div class="art">
+      <svg viewBox="0 0 1000 460" role="img" aria-label="Far down the long road stands a red barn, the farm. The Baker stands in front of it with a rolling pin. The diner is a tiny shape at the other end of the road.">
+        <use href="#road-bg" width="1000" height="460"/>
+        <use href="#diner" x="20" y="250" width="110" height="85"/>
+        <use href="#farm" x="680" y="120" width="230" height="210"/>
+        <use href="#baker" x="560" y="196" width="130" height="180"/>
+        <use href="#pie" x="700" y="356" width="90" height="45"/>
+        {{tag|625|132|Baker|the database}}
+      </svg>
+    </div>
+    <div class="sheet">
+      <p class="running">A Slice, Now</p>
+      <h2 id="h-baker">The pies live at the farm</h2>
+      <p>The diner has no oven. Every pie in the county is baked at one farm, far down Long Road, by the [[Baker|the database]].</p>
+      <p>Why only one place? Because everyone must get the <b>same</b> pie. If every diner baked its own, each would follow its own recipe, and nobody could say which apple pie is the real one.</p>
+      <p>So the farm keeps the one true recipe book. When a recipe changes, it changes there, and only there.</p>
+      <p>[[Rosie|your app]] orders her slice from the farm.</p>
+    </div>
+  </div></div>
+  <div class="note-src">
+    <h3>For grown-ups</h3>
+    <dl>
+      <dt>The source of truth</dt>
+      <dd>The [[Baker|the database]] is the system of record: durable storage that every app instance reads and writes, so they all agree. <span class="b i">Inferred</span> from the standard look-aside design, where writes go to the database and the cache is only a copy.</dd>
+      <dt>Writes go to the farm</dt>
+      <dd><span class="b v">Verified</span> At Facebook, a web server that changes data "issues SQL statements to the database and then sends a delete request to memcache". The database is updated; the cache is only told to forget.</dd>
+    </dl>
+    <p class="src">Nishtala et al., NSDI 2013, s2 (Figure 1)</p>
+  </div>
+</section>

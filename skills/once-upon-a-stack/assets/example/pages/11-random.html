@@ -1,0 +1,36 @@
+<section class="page p-a" id="random" aria-labelledby="h-random" tabindex="-1" hidden>
+  <div class="scroller"><div class="leaf">
+    <div class="art">
+      <svg viewBox="0 0 1000 460" role="img" aria-label="A pie is pulled from the case at random and dropped in the bin. It is apple, Rosie's favourite. Rosie's face falls.">
+        <use href="#counter-bg" width="1000" height="460"/>
+        <use href="#della" x="380" y="128" width="200" height="222"/>
+        <rect x="720" y="250" width="120" height="100" fill="#1B1B1B"/><rect x="710" y="240" width="140" height="18" fill="#1B1B1B"/>
+        <use href="#pie" x="730" y="170" width="100" height="50"/>
+        <text x="780" y="150" text-anchor="middle" font-size="24" font-family="var(--font-body)" fill="#FBF6E9">apple?!</text>
+        <path d="M600 200 Q680 130 730 180" fill="none" stroke="#FBF6E9" stroke-width="3" stroke-dasharray="4 10" stroke-linecap="round"/>
+        <use href="#rosie" x="150" y="170" width="120" height="170"/>
+        {{tag|210|104|Rosie|your app}}
+        {{tag|480|62|Della|the cache}}
+      </svg>
+    </div>
+    <div class="sheet">
+      <p class="running">Room in the Case</p>
+      <h2 id="h-random">Throw one out at random?</h2>
+      <p class="origin">Imagine if</p>
+      <p>The quickest rule: when the case is full, close your eyes and take out any pie.</p>
+      <p>It's cheap, and blind. The pie that goes might be one nobody wanted all week, or the apple pie that is [[Rosie|your app]]'s favourite.</p>
+      <p>Throw out the popular pie, and the next twenty customers all miss: twenty trips down Long Road.</p>
+      <p class="seen">What people see: the cache "works" but pages are slow, because the busiest data keeps vanishing.</p>
+    </div>
+  </div></div>
+  <div class="note-src">
+    <h3>For grown-ups</h3>
+    <dl>
+      <dt>Random eviction is real</dt>
+      <dd><span class="b v">Verified</span> Redis offers <code>allkeys-random</code> and <code>volatile-random</code>. Its docs suggest <code>allkeys-random</code> "when you expect all keys to be accessed with roughly equal frequency".</dd>
+      <dt>Why it hurts</dt>
+      <dd><span class="b i">Inferred</span> Real traffic is uneven, so a random victim is usually cold but sometimes very hot; each hot-key eviction costs one miss per reader until it's refilled.</dd>
+    </dl>
+    <p class="src">redis.io key eviction docs, fetched 2026-11-01</p>
+  </div>
+</section>

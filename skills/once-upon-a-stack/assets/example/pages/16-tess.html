@@ -1,0 +1,43 @@
+<section class="page p-b" id="p-tess" aria-labelledby="h-tess" tabindex="-1" hidden>
+  <div class="scroller"><div class="leaf">
+    <div class="journey">
+      <div class="art"><svg viewBox="0 0 1000 460" role="img" aria-label="Tess the ticket spike stands on the counter. The first apple order goes to the farm. Every other apple order is pinned on Tess to wait. One truck returns, and everyone on the spike gets a slice from the same pie.">
+        <use href="#counter-bg" width="1000" height="460"/>
+        <use href="#tess" x="400" y="120" width="140" height="210"/>
+        <g data-show="1 2 3"><use href="#della-empty" x="140" y="128" width="200" height="222"/></g>
+        <g data-show="4"><use href="#della" x="140" y="128" width="200" height="222"/></g>
+        <g data-show="2 3"><rect x="600" y="90" width="320" height="70" rx="14" fill="#FBF6E9" stroke="#1B1B1B" stroke-width="2"/><text x="760" y="134" text-anchor="middle" font-size="24" font-family="var(--font-body)" fill="#1B1B1B">1 order to the farm</text></g>
+        <g data-show="3"><rect x="600" y="180" width="320" height="70" rx="14" fill="#FBF6E9" stroke="#1B1B1B" stroke-width="2"/><text x="760" y="224" text-anchor="middle" font-size="24" font-family="var(--font-body)" fill="#1B1B1B">199 orders on the spike</text></g>
+        <g data-show="4"><use href="#truck" x="640" y="230" width="140" height="88"/><text x="760" y="160" text-anchor="middle" font-size="30" font-family="var(--font-display)" fill="#F2C14E">one pie for all</text></g>
+        <use href="#crowd" x="620" y="300" width="200" height="140"/>
+        {{tag|470|56|Tess|request coalescing}}
+        {{tag|240|62|Della|the cache}}
+      </svg></div>
+      <ol class="steps">
+        <li>Noon. Apple has run out, and the orders start coming.</li>
+        <li>The first apple order goes to the farm, as usual.</li>
+        <li>Every other apple order is pinned on [[Tess|request coalescing]] to wait. No more trucks.</li>
+        <li>One pie comes back, and everyone on the spike gets a slice of it.</li>
+      </ol>
+    </div>
+    <div class="sheet">
+      <p class="running">Noon</p>
+      <h2 id="h-tess">One order per pie</h2>
+      <p>Meet [[Tess|request coalescing]], the ticket spike by the till. Her rule is short: <b>one order per pie</b>.</p>
+      <p>The first person to miss apple sends the order. Everyone after that who wants apple gets their ticket pinned on her, and waits. When the pie comes back, they all get slices from it.</p>
+      <p>Two hundred misses, one truck. The [[Baker|the database]] bakes one pie instead of two hundred, and the [[Rush|a cache stampede]] has nothing to push.</p>
+    </div>
+  </div></div>
+  <div class="note-src">
+    <h3>For grown-ups</h3>
+    <dl>
+      <dt>singleflight</dt>
+      <dd><span class="b v">Verified</span> Go's <code>golang.org/x/sync/singleflight</code> (v0.24.0): <code>Do</code> "executes and returns the results of the given function, making sure that only one execution is in-flight for a given key at a time. If a duplicate comes in, the duplicate caller waits for the original to complete and receives the same results."</dd>
+      <dt>One spike per diner</dt>
+      <dd><span class="b i">Inferred</span> A <code>singleflight.Group</code> lives in one process's memory, so 100 app servers still send up to 100 queries. <span class="b v">Verified</span> Facebook limits this in the cache instead: each memcached hands out a lease token for a key "only once every 10 seconds per key", and other clients are told "to wait a short amount of time" and retry, rather than sharing the first caller's result. On herd-prone keys, peak database load fell from 17K/s to 1.3K/s.</dd>
+      <dt>When the first order fails</dt>
+      <dd><span class="b i">Inferred</span> Everyone waiting shares its result, including its error, and a hung fetch holds everyone. Use a timeout.</dd>
+    </dl>
+    <p class="src">pkg.go.dev/golang.org/x/sync/singleflight (v0.24.0); Nishtala et al., NSDI 2013, s3.2.1</p>
+  </div>
+</section>

@@ -1,0 +1,46 @@
+<section class="page p-c" id="p-rush" aria-labelledby="h-rush" tabindex="-1" hidden>
+  <div class="scroller"><div class="leaf">
+    <div class="journey">
+      <div class="art"><svg viewBox="0 0 1000 460" role="img" aria-label="The Rush, a dark crowd with red eyes, pours out of the diner. Every one of them sends an order down the road. Trucks jam the road and the Baker is buried in tickets.">
+        <use href="#road-bg" width="1000" height="460"/>
+        <use href="#diner" x="10" y="200" width="160" height="124"/>
+        <use href="#farm" x="810" y="150" width="180" height="164"/>
+        <use href="#baker" x="720" y="220" width="90" height="125"/>
+        <g data-show="1 2 3 4"><use href="#rush" x="140" y="150" width="270" height="180"/></g>
+        <g data-show="2 3 4"><use href="#truck" x="420" y="290" width="100" height="64"/><use href="#truck" x="540" y="282" width="100" height="64"/></g>
+        <g data-show="3 4"><use href="#truck" x="420" y="220" width="90" height="58"/><use href="#truck" x="530" y="214" width="90" height="58"/><use href="#truck" x="630" y="206" width="90" height="58"/></g>
+        <g data-show="4"><rect x="560" y="40" width="400" height="90" fill="#FBF6E9" stroke="#1B1B1B" stroke-width="2"/>
+          <text x="760" y="78" text-anchor="middle" font-size="24" font-family="var(--font-body)" fill="#B93C1C" font-weight="700">each pie now takes longer</text>
+          <text x="760" y="112" text-anchor="middle" font-size="20" font-family="var(--font-body)" fill="#1B1B1B">so even more people are waiting</text></g>
+        {{tag|275|80|Rush|a cache stampede}}
+        {{tag|765|150|Baker|the database}}
+      </svg></div>
+      <ol class="steps">
+        <li>The case is empty, and two hundred people want apple.</li>
+        <li>Every one of them misses, and every one sends an order to the farm.</li>
+        <li>Two hundred orders for the same pie jam the road.</li>
+        <li>The [[Baker|the database]] slows down, so each pie takes longer, so more people pile up. It feeds itself.</li>
+      </ol>
+    </div>
+    <div class="sheet">
+      <p class="running">Noon</p>
+      <h2 id="h-rush">Two hundred orders at once</h2>
+      <p>Every miss sends its own order. That rule was fine for one person. At noon it turns two hundred hungry people into the [[Rush|a cache stampede]].</p>
+      <p>He comes back every time a busy pie's sticker runs out at a busy hour. Step through it.</p>
+      <p>The cruel part: the [[Baker|the database]] was protected only while [[Della|the cache]] had the pie. The moment she doesn't, he gets the whole town at once.</p>
+      <p class="seen">What people see: the site slows to a crawl or falls over, at exactly its busiest moment, for no obvious reason.</p>
+    </div>
+  </div></div>
+  <div class="note-src">
+    <h3>For grown-ups</h3>
+    <dl>
+      <dt>Cache stampede</dt>
+      <dd><span class="b v">Verified</span> "A cache stampede is often referred to as a cascading failure because several concurrent re-computations will increase the time of each individual recomputation by bogging down the system, in turn causing even more requests to be part of the stampede." Also called dog-piling or a cache miss storm.</dd>
+      <dt>Measured</dt>
+      <dd><span class="b v">Verified</span> On a set of Facebook keys prone to this, without protection "all of the cache misses resulted in a peak database query rate of 17K/s". Facebook's paper calls its version a thundering herd, driven by frequent deletes rather than expiry.</dd>
+      <dt>Why a villain</dt>
+      <dd>It recurs on every hot-key expiry, and it grows itself: that's why it's drawn as a character, not weather.</dd>
+    </dl>
+    <p class="src">Vattani et al., PVLDB 8(8) 2015, s1; Nishtala et al., NSDI 2013, s3.2.1</p>
+  </div>
+</section>

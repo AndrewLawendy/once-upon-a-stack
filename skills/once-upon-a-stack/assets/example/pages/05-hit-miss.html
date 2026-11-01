@@ -1,0 +1,48 @@
+<section class="page p-a" id="hit-miss" aria-labelledby="h-hit-miss" tabindex="-1" hidden>
+  <div class="scroller"><div class="leaf">
+    <div class="journey">
+      <div class="art"><svg viewBox="0 0 1000 460" role="img" aria-label="Rosie asks Della for a pie by name. On a hit she takes a slice straight away. On a miss, Rosie orders from the farm herself and puts the new pie into the case.">
+        <use href="#counter-bg" width="1000" height="460"/>
+        <use href="#rosie" x="150" y="170" width="120" height="170"/>
+        <g data-show="1 2"><use href="#della" x="420" y="128" width="200" height="222"/></g>
+        <g data-show="3 4"><use href="#della-empty" x="420" y="128" width="200" height="222"/></g>
+        <g data-show="4"><use href="#truck" x="720" y="250" width="130" height="82"/></g>
+        <rect x="660" y="70" width="300" height="100" rx="18" fill="#FBF6E9" stroke="#1B1B1B" stroke-width="2"/>
+        <text data-show="1" x="810" y="112" text-anchor="middle" font-size="24" font-family="var(--font-body)" fill="#1B1B1B">key: "apple pie"</text>
+        <text data-show="1" x="810" y="146" text-anchor="middle" font-size="20" font-family="var(--font-body)" fill="#1B1B1B">Got one?</text>
+        <text data-show="2" x="810" y="124" text-anchor="middle" font-size="40" font-family="var(--font-display)" fill="#135F5F">HIT</text>
+        <text data-show="3" x="810" y="112" text-anchor="middle" font-size="24" font-family="var(--font-body)" fill="#1B1B1B">key: "plum pie"</text>
+        <text data-show="3" x="810" y="150" text-anchor="middle" font-size="32" font-family="var(--font-display)" fill="#B93C1C">MISS</text>
+        <text data-show="4" x="810" y="112" text-anchor="middle" font-size="22" font-family="var(--font-body)" fill="#1B1B1B">Rosie orders it,</text>
+        <text data-show="4" x="810" y="146" text-anchor="middle" font-size="22" font-family="var(--font-body)" fill="#1B1B1B">then fills the case</text>
+        {{tag|210|104|Rosie|your app}}
+        {{tag|520|62|Della|the cache}}
+      </svg></div>
+      <ol class="steps">
+        <li>[[Rosie|your app]] asks for a pie <b>by name</b>. The name is the key.</li>
+        <li>It's there: a <b>hit</b>. A slice in seconds.</li>
+        <li>Plum? Not in the case: a <b>miss</b>.</li>
+        <li>[[Rosie|your app]] orders plum from the farm herself, then puts the pie in the case for next time.</li>
+      </ol>
+    </div>
+    <div class="sheet">
+      <p class="running">A Slice, Now</p>
+      <h2 id="h-hit-miss">Wait, how does the case know?</h2>
+      <p>[[Della|the cache]] doesn't understand pies. She keeps <b>labels</b> and what's under them. Ask for "apple pie" and she either has a pie under that label, or she doesn't.</p>
+      <p>The surprise is step 4: on a miss, the case doesn't drive to the farm. [[Rosie|your app]] does. She orders from the [[Baker|the database]], gets her slice, and puts the rest in the case herself.</p>
+      <p>And that's the goal met. Whenever her pie is already in the case, she's eating in seconds.</p>
+    </div>
+  </div></div>
+  <div class="note-src">
+    <h3>For grown-ups</h3>
+    <dl>
+      <dt>Key and value</dt>
+      <dd><span class="b v">Verified</span> The web server "first requests the value from memcache by providing a string key". The pie's name is the key; the pie is the value.</dd>
+      <dt>Who fills the cache</dt>
+      <dd><span class="b v">Verified</span> On a miss, the web server "retrieves the data from the database or other backend service and populates the cache with the key-value pair". This is a "demand-filled look-aside cache": the app looks aside to the cache, and fills it only when asked. memcached itself "provides no server-to-server coordination" (s3).</dd>
+      <dt>Other designs</dt>
+      <dd>Some caches sit in front and fetch on a miss themselves (read-through), such as HTTP proxies and CDNs. This book follows look-aside, the common pattern with Redis and memcached. <span class="b i">Inferred</span></dd>
+    </dl>
+    <p class="src">Nishtala et al., NSDI 2013, s2</p>
+  </div>
+</section>

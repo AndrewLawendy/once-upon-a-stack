@@ -1,0 +1,51 @@
+<section class="page p-b" id="old-recipe" aria-labelledby="h-old-recipe" tabindex="-1" hidden>
+  <div class="scroller"><div class="leaf">
+    <div class="compare">
+      <svg viewBox="0 0 1000 460" role="img" aria-label="Monday: the farm's recipe card says apple pie costs 4, and the pie in Della's case matches. Later: the farm's card now says 5 with a new recipe, but the pie in the case is still Monday's.">
+        <use href="#counter-bg" width="1000" height="460"/>
+        <use href="#della" x="150" y="128" width="200" height="222"/>
+        <rect x="560" y="120" width="320" height="170" fill="#FBF6E9" stroke="#1B1B1B" stroke-width="2"/>
+        <text x="720" y="166" text-anchor="middle" font-size="22" font-family="var(--font-body)" fill="#1B1B1B">The farm's recipe card</text>
+        <text x="720" y="226" text-anchor="middle" font-size="40" font-family="var(--font-display)" fill="#135F5F">apple: 4</text>
+        <text x="720" y="268" text-anchor="middle" font-size="20" font-family="var(--font-body)" fill="#1B1B1B">Monday</text>
+        <rect x="170" y="80" width="160" height="40" rx="20" fill="#FBF6E9" stroke="#1B1B1B" stroke-width="2"/>
+        <text x="250" y="108" text-anchor="middle" font-size="22" font-family="var(--font-body)" fill="#1B1B1B">case: apple 4</text>
+      </svg>
+      <div class="with" aria-hidden="true">
+        <svg viewBox="0 0 1000 460">
+          <use href="#counter-bg" width="1000" height="460"/>
+          <use href="#della" x="150" y="128" width="200" height="222"/>
+          <rect x="560" y="120" width="320" height="170" fill="#FBF6E9" stroke="#1B1B1B" stroke-width="2"/>
+          <text x="720" y="166" text-anchor="middle" font-size="22" font-family="var(--font-body)" fill="#1B1B1B">The farm's recipe card</text>
+          <text x="720" y="226" text-anchor="middle" font-size="40" font-family="var(--font-display)" fill="#B93C1C">apple: 5</text>
+          <text x="720" y="268" text-anchor="middle" font-size="20" font-family="var(--font-body)" fill="#1B1B1B">new recipe, Thursday</text>
+          <rect x="170" y="80" width="160" height="40" rx="20" fill="#FBF6E9" stroke="#1B1B1B" stroke-width="2"/>
+          <text x="250" y="108" text-anchor="middle" font-size="22" font-family="var(--font-body)" fill="#B93C1C">case: apple 4</text>
+        </svg>
+      </div>
+      <span class="tagline left">Monday</span>
+      <span class="tagline right">Thursday</span>
+      <input type="range" min="0" max="100" value="50" aria-label="Compare the pie case on Monday and Thursday">
+      <div class="bar"><div class="knob" aria-hidden="true">&#8596;</div></div>
+    </div>
+    <div class="sheet">
+      <p class="running">The Right Pie</p>
+      <h2 id="h-old-recipe">Today's pie, please</h2>
+      <p class="origin">Imagine if</p>
+      <p>Speed has a price. On Thursday the farm changes its apple recipe, and the price goes up. But the pie in [[Della|the cache]] was put there on Monday, and nobody told her.</p>
+      <p>If pies stay in the case forever, [[Rosie|your app]] keeps getting Monday's pie and Monday's price. Drag across the picture.</p>
+      <p>So now she wants something new: not just a fast pie, but <b>today's</b> pie.</p>
+      <p class="seen">What people see: "I changed my name an hour ago and the site still shows the old one."</p>
+    </div>
+  </div></div>
+  <div class="note-src">
+    <h3>For grown-ups</h3>
+    <dl>
+      <dt>Stale, but the cache can't tell</dt>
+      <dd><span class="b v">Verified</span> In HTTP caching, "fresh" is a clock rule: a response is fresh while its age hasn't passed its freshness lifetime. Nothing checks it against the source. <span class="b i">Inferred</span> So a copy can be fresh by the clock and wrong in fact.</dd>
+      <dt>Keep forever</dt>
+      <dd><span class="b i">Inferred</span> With no expiry and no invalidation, a copy leaves the cache only if it's evicted. Staleness has no upper limit.</dd>
+    </dl>
+    <p class="src">RFC 9111 s4.2</p>
+  </div>
+</section>

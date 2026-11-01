@@ -1,0 +1,43 @@
+<section class="page p-b" id="long-road" aria-labelledby="h-long-road" tabindex="-1" hidden>
+  <div class="scroller"><div class="leaf">
+    <div class="journey">
+      <div class="art"><svg viewBox="0 0 1000 460" role="img" aria-label="A delivery truck drives the long road between the diner and the farm. With each step, more trucks crowd the road and orders pile up at the farm.">
+        <use href="#road-bg" width="1000" height="460"/>
+        <use href="#diner" x="20" y="200" width="160" height="124"/>
+        <use href="#farm" x="790" y="150" width="190" height="172"/>
+        <use href="#baker" x="700" y="230" width="90" height="125"/>
+        <g data-move='{"1":"translate(0px,0px)","2":"translate(520px,-14px)","3":"translate(0px,0px)"}'><use href="#truck" x="180" y="300" width="120" height="76"/></g>
+        <g data-show="3 4"><use href="#truck" x="330" y="290" width="110" height="70"/><use href="#truck" x="470" y="282" width="110" height="70"/><use href="#truck" x="600" y="276" width="100" height="64"/></g>
+        <g data-show="4"><rect x="700" y="60" width="270" height="76" fill="#FBF6E9" stroke="#1B1B1B" stroke-width="2"/>
+          <text x="835" y="96" text-anchor="middle" font-size="24" font-family="var(--font-body)" fill="#B93C1C" font-weight="700">200 orders</text>
+          <text x="835" y="124" text-anchor="middle" font-size="20" font-family="var(--font-body)" fill="#1B1B1B">all for apple pie</text></g>
+        {{tag|745|170|Baker|the database}}
+      </svg></div>
+      <ol class="steps">
+        <li>[[Rosie|your app]] orders a slice. A truck sets off down Long Road.</li>
+        <li>The [[Baker|the database]] bakes, and the truck drives all the way back.</li>
+        <li>The next customer wants the same apple pie. Another truck, another trip.</li>
+        <li>At lunchtime everyone orders at once, and the [[Baker|the database]] is buried in identical orders.</li>
+      </ol>
+    </div>
+    <div class="sheet">
+      <p class="running">A Slice, Now</p>
+      <h2 id="h-long-road">Every slice takes the long road</h2>
+      <p>The first slice is lovely. It's also slow: the order goes all the way to the farm, and the slice comes all the way back. Step through it.</p>
+      <p>Then the next person wants the <b>same</b> apple pie, and the whole trip happens again. At lunch, the [[Baker|the database]] spends all day baking the same pie over and over, and every order waits behind the others.</p>
+      <p class="seen">What people see: pages that load slowly, then slower at the busiest hour, and finally time out.</p>
+    </div>
+  </div></div>
+  <div class="note-src">
+    <h3>For grown-ups</h3>
+    <dl>
+      <dt>Why a database trip is the slow path</dt>
+      <dd><span class="b v">Verified</span> Facebook uses memcache "to reduce the frequency of fetching data along more expensive paths such as database queries", and "to lighten the read load on our databases".</dd>
+      <dt>The same pie, over and over</dt>
+      <dd><span class="b v">Verified</span> Some keys are very hot: "a single key can account for 20% of a server's requests". <span class="b i">Inferred</span> A few popular things can dominate a server's work.</dd>
+      <dt>Why it gets worse at peak</dt>
+      <dd><span class="b i">Inferred</span> A database has a fixed number of connections and disk and CPU budget. Past that, requests queue, so every request waits for the ones ahead of it.</dd>
+    </dl>
+    <p class="src">Nishtala et al., NSDI 2013, s2, s3.2, s3.3</p>
+  </div>
+</section>

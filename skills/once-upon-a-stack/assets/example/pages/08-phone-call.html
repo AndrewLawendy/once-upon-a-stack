@@ -1,0 +1,48 @@
+<section class="page p-c" id="phone-call" aria-labelledby="h-phone-call" tabindex="-1" hidden>
+  <div class="scroller"><div class="leaf">
+    <div class="journey">
+      <div class="art"><svg viewBox="0 0 1000 460" role="img" aria-label="A slow truck carries an old apple pie toward the diner. Meanwhile the Baker changes the recipe and phones Della to throw out apple, but the case is empty. Then the slow truck arrives and the old pie goes into the case.">
+        <use href="#road-bg" width="1000" height="460"/>
+        <use href="#diner" x="20" y="200" width="160" height="124"/>
+        <g data-show="1 2 3"><use href="#della-empty" x="190" y="60" width="110" height="122"/></g>
+        <g data-show="4"><use href="#della" x="190" y="60" width="110" height="122"/></g>
+        <use href="#farm" x="800" y="150" width="180" height="164"/>
+        <use href="#baker" x="700" y="220" width="90" height="125"/>
+        <g data-move='{"1":"translate(500px,-16px)","2":"translate(280px,-8px)","3":"translate(120px,0px)","4":"translate(0px,0px)"}'><use href="#truck" x="170" y="300" width="120" height="76"/><text x="230" y="290" text-anchor="middle" font-size="18" font-family="var(--font-body)" fill="#1B1B1B">old apple</text></g>
+        <g data-show="2 3 4"><use href="#phone" x="560" y="60" width="80" height="80"/>
+          <rect x="400" y="150" width="300" height="56" rx="14" fill="#FBF6E9" stroke="#1B1B1B" stroke-width="2"/>
+          <text x="550" y="186" text-anchor="middle" font-size="22" font-family="var(--font-body)" fill="#1B1B1B">"Throw out the apple!"</text></g>
+        <g data-show="3"><text x="310" y="124" text-anchor="start" font-size="22" font-family="var(--font-body)" fill="#1B1B1B">nothing to throw</text></g>
+        <g data-show="4"><text x="310" y="124" text-anchor="start" font-size="24" font-family="var(--font-display)" fill="#1B1B1B">old pie, back in!</text></g>
+        {{tag|245|4|Della|the cache}}
+        {{tag|745|380|Baker|the database}}
+      </svg></div>
+      <ol class="steps">
+        <li>[[Rosie|your app]] misses, orders apple. The [[Baker|the database]] hands over the <b>old</b> pie, and a slow truck sets off.</li>
+        <li>Then the [[Baker|the database]] changes the recipe and phones: "throw out the apple!"</li>
+        <li>The case is empty. Nothing to throw out.</li>
+        <li>The slow truck finally arrives, and the old pie goes into the case. It stays there until its sticker runs out.</li>
+      </ol>
+    </div>
+    <div class="sheet">
+      <p class="running">The Right Pie</p>
+      <h2 id="h-phone-call">A phone call from the farm</h2>
+      <p>Better fix: whenever the recipe changes, the [[Baker|the database]] phones [[Della|the cache]]: "throw out the apple!" The next order then fetches the new pie. Most changes now show up at once.</p>
+      <p>Why "throw out", not "here's the new pie"? Throwing out twice is harmless.</p>
+      <p>But even throwing out has a gap. Step through it: a slow truck can arrive <b>after</b> the call, and put the old pie back.</p>
+      <p class="seen">What people see: a change that "didn't take", for one item, until the sticker runs out.</p>
+    </div>
+  </div></div>
+  <div class="note-src">
+    <h3>For grown-ups</h3>
+    <dl>
+      <dt>Delete on write</dt>
+      <dd><span class="b v">Verified</span> At Facebook, a write updates the database, then "sends a delete request to memcache that invalidates any stale data". The delete comes from the web server, or from mcsqueal, a daemon on the database that reads its commit log (s4.1). "We choose to delete cached data instead of updating it because deletes are idempotent." HTTP caches invalidate a URL after a successful <code>PUT</code>, <code>POST</code> or <code>DELETE</code> passes through them (RFC 9111 s4.4).</dd>
+      <dt>The stale set</dt>
+      <dd><span class="b v">Verified</span> "A stale set occurs when a web server sets a value in memcache that does not reflect the latest value that should be cached. This can occur when concurrent updates to memcache get reordered." <span class="b i">Inferred</span> The four steps on this page are one such reordering: miss, read old value, write and delete, then set old value.</dd>
+      <dt>Other gaps</dt>
+      <dd><span class="b i">Inferred</span> A delete can be lost if the cache is down; a write through another path (an admin script) may never delete; browser and CDN copies don't hear the call. The TTL is the backstop for all of them.</dd>
+    </dl>
+    <p class="src">Nishtala et al., NSDI 2013, s2, s3.2.1; RFC 9111 s4.4</p>
+  </div>
+</section>

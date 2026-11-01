@@ -1,0 +1,43 @@
+{
+  "opening": "Rosie",
+  "chapters": [
+    {
+      "goal": "Rosie wants her slice of pie quickly",
+      "from": "start",
+      "met": "hit-miss",
+      "links": [
+        {"attempt": "Rosie asks the diner for a pie", "breaks": "The diner has no oven: every app needs the same data, so it lives in one shared source of truth", "evidence": "Inferred", "arrives": "Baker", "page": "p-baker"},
+        {"attempt": "Every slice is ordered from the farm", "breaks": "Each read is a slow database trip, and repeated reads of the same hot data overload it", "evidence": "Verified", "source": "Nishtala et al. NSDI 2013 s2, s3.2, s3.3", "arrives": "Della", "page": "p-della"}
+      ]
+    },
+    {
+      "goal": "Rosie wants today's pie, not last week's",
+      "from": "price: the case keeps showing a pie after the farm changes the recipe",
+      "met": "right-pie",
+      "links": [
+        {"attempt": "Keep pies forever", "breaks": "Freshness is a clock rule, so without expiry or invalidation a copy is stale with no limit", "evidence": "Verified", "source": "RFC 9111 s4.2", "arrives": null, "page": "old-recipe"},
+        {"attempt": "A date sticker (TTL) on each pie", "breaks": "Short TTL means constant refills and load; long TTL means long staleness", "evidence": "Inferred", "arrives": null, "page": "date-sticker"},
+        {"attempt": "The Baker phones to throw out the pie (delete on write)", "breaks": "A slow refill can land after the delete and put the old value back (stale set)", "evidence": "Verified", "source": "Nishtala et al. NSDI 2013 s3.2.1", "arrives": null, "page": "phone-call"}
+      ]
+    },
+    {
+      "goal": "Rosie wants her favourite pie to still be there",
+      "from": "price: the case is small, so it fills up",
+      "met": "p-eddie",
+      "links": [
+        {"attempt": "Keep every pie until its sticker runs out", "breaks": "Memory is bounded; at maxmemory with noeviction, writes are rejected with an OOM error", "evidence": "Verified", "source": "redis.io key eviction docs; Redis 7.4.0 src/server.c", "arrives": null, "page": "full-case"},
+        {"attempt": "Throw a pie out at random", "breaks": "A random victim can be the hottest key, so many readers miss", "evidence": "Verified", "source": "redis.io key eviction docs (allkeys-random guidance)", "arrives": "Eddie", "page": "p-eddie"}
+      ]
+    },
+    {
+      "goal": "Rosie wants pie even at noon",
+      "from": "price: a popular pie's sticker runs out at the busiest hour",
+      "met": "noon-pie",
+      "links": [
+        {"attempt": "Every miss sends its own order", "breaks": "A hot key expiring makes many concurrent misses all recompute it, which slows each one and grows the pile", "evidence": "Verified", "source": "Vattani et al. PVLDB 2015 s1", "arrives": "Rush", "page": "p-rush"},
+        {"attempt": "Make the sticker longer", "breaks": "The stampede only moves to the next expiry, and data gets staler", "evidence": "Inferred", "arrives": "Tess", "page": "p-tess"},
+        {"attempt": "Everyone waits on the spike for the one order", "breaks": "Every waiter still pays the full trip", "evidence": "Inferred", "arrives": null, "page": "noon-pie"}
+      ]
+    }
+  ]
+}

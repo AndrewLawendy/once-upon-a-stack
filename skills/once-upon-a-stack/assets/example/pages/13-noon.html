@@ -1,0 +1,33 @@
+<section class="page p-b" id="noon" aria-labelledby="h-noon" tabindex="-1" hidden>
+  <div class="scroller"><div class="leaf">
+    <div class="art">
+      <svg viewBox="0 0 1000 460" role="img" aria-label="The diner clock shows noon. The apple pie's sticker says sell by 12:00. A crowd is gathering at the door. Rosie waits in line.">
+        <use href="#counter-bg" width="1000" height="460"/>
+        <use href="#della" x="380" y="128" width="200" height="222"/>
+        <rect x="420" y="214" width="120" height="44" rx="10" fill="#FBF6E9" stroke="#1B1B1B" stroke-width="2"/>
+        <text x="480" y="244" text-anchor="middle" font-size="20" font-family="var(--font-body)" fill="#B93C1C">sell by 12:00</text>
+        <use href="#crowd" x="640" y="160" width="300" height="200"/>
+        <use href="#rosie" x="150" y="170" width="120" height="170"/>
+        {{tag|210|104|Rosie|your app}}
+        {{tag|480|62|Della|the cache}}
+      </svg>
+    </div>
+    <div class="sheet">
+      <p class="running">Noon</p>
+      <h2 id="h-noon">Pie, even at noon</h2>
+      <p>Everything works. Pies are fast, fresh enough, and the favourites stay. [[Rosie|your app]] has one last wish: that it keeps working at the busiest moment of the day.</p>
+      <p>Look at the apple pie in [[Della|the cache]]. Its sticker says "sell by 12:00". At noon, the whole town walks in, and most of them want apple.</p>
+      <p>The sticker runs out. The pie goes. Two hundred hungry people are standing at the counter, and the case is empty.</p>
+    </div>
+  </div></div>
+  <div class="note-src">
+    <h3>For grown-ups</h3>
+    <dl>
+      <dt>Hot keys</dt>
+      <dd><span class="b v">Verified</span> At Facebook "a single key can account for 20% of a server's requests". When such a key expires, many requests miss at the same moment.</dd>
+      <dt>How many at once</dt>
+      <dd><span class="b v">Verified</span> "If the cache item is accessed 10 times per second, and the recomputation of the item takes 3 seconds, then 30 requests will recompute the item." Busier keys and slower rebuilds make it worse.</dd>
+    </dl>
+    <p class="src">Nishtala et al., NSDI 2013, s3.3; Vattani et al., PVLDB 8(8) 2015, s1</p>
+  </div>
+</section>

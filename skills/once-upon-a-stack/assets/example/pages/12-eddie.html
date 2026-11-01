@@ -1,0 +1,46 @@
+<section class="page p-c" id="p-eddie" aria-labelledby="h-eddie" tabindex="-1" hidden>
+  <div class="scroller"><div class="leaf">
+    <div class="journey">
+      <div class="art"><svg viewBox="0 0 1000 460" role="img" aria-label="Eddie the busboy picks five pies at random and reads the last-asked time on each. He takes away the one nobody has asked for the longest. Apple, asked for a minute ago, stays.">
+        <use href="#counter-bg" width="1000" height="460"/>
+        <use href="#della" x="80" y="128" width="200" height="222"/>
+        <g font-family="var(--font-body)" font-size="18" fill="#1B1B1B" text-anchor="middle">
+          <g data-show="2 3 4"><rect x="330" y="100" width="120" height="60" rx="10" fill="#FBF6E9" stroke="#1B1B1B" stroke-width="2"/><text x="390" y="126">apple</text><text x="390" y="148">1 min ago</text></g>
+          <g data-show="2 3 4"><rect x="460" y="100" width="120" height="60" rx="10" fill="#FBF6E9" stroke="#1B1B1B" stroke-width="2"/><text x="520" y="126">cherry</text><text x="520" y="148">9 min ago</text></g>
+          <g data-show="2 3"><rect x="590" y="100" width="120" height="60" rx="10" fill="#F2C14E" stroke="#1B1B1B" stroke-width="2"/><text x="650" y="126">rhubarb</text><text x="650" y="148">3 days ago</text></g>
+          <g data-show="2 3 4"><rect x="395" y="170" width="120" height="60" rx="10" fill="#FBF6E9" stroke="#1B1B1B" stroke-width="2"/><text x="455" y="196">pecan</text><text x="455" y="218">2 hrs ago</text></g>
+          <g data-show="2 3 4"><rect x="525" y="170" width="120" height="60" rx="10" fill="#FBF6E9" stroke="#1B1B1B" stroke-width="2"/><text x="585" y="196">lemon</text><text x="585" y="218">20 min ago</text></g>
+        </g>
+        <g data-move='{"1":"translate(0px,0px)","3":"translate(0px,0px)","4":"translate(120px,0px)"}'><use href="#eddie" x="700" y="170" width="140" height="180"/></g>
+        <g data-show="4"><use href="#pie" x="830" y="180" width="90" height="45"/><text x="875" y="166" text-anchor="middle" font-size="20" font-family="var(--font-body)" fill="#FBF6E9">rhubarb, out</text></g>
+        {{tag|770|104|Eddie|the eviction policy}}
+        {{tag|180|62|Della|the cache}}
+      </svg></div>
+      <ol class="steps">
+        <li>The case is full. [[Eddie|the eviction policy]] the busboy comes over.</li>
+        <li>He picks five pies at random and reads when each was last asked for.</li>
+        <li>Rhubarb: three days. Nobody wants rhubarb.</li>
+        <li>Out goes rhubarb. Apple, asked for a minute ago, stays.</li>
+      </ol>
+    </div>
+    <div class="sheet">
+      <p class="running">Room in the Case</p>
+      <h2 id="h-eddie">The busboy clears the oldest plate</h2>
+      <p>Meet [[Eddie|the eviction policy]], the busboy. His rule: when there's no room, take away the pie that <b>nobody has asked for the longest</b>. A pie asked for recently will probably be asked for again.</p>
+      <p>Checking every pie would take him all day, so he cheats a little. He picks a handful at random and clears the stalest of those. It's nearly as good, and much quicker.</p>
+      <p>So [[Rosie|your app]]'s favourite stays, because she keeps asking for it. Goal met.</p>
+    </div>
+  </div></div>
+  <div class="note-src">
+    <h3>For grown-ups</h3>
+    <dl>
+      <dt>LRU, approximately</dt>
+      <dd><span class="b v">Verified</span> Redis's <code>allkeys-lru</code> "samples a small number of keys at random and then evicts the ones with the longest time since last access". <code>maxmemory-samples</code> defaults to <code>5</code>; at <code>10</code> it closely approximates true LRU, at more CPU cost. Since Redis 3.0 it also keeps a pool of good candidates (<code>EVPOOL_SIZE 16</code> in <code>src/evict.c</code>).</dd>
+      <dt>Why not exact LRU</dt>
+      <dd><span class="b v">Verified</span> "The reason Redis does not use a true LRU implementation is because it costs more memory."</dd>
+      <dt>When LRU is wrong</dt>
+      <dd><span class="b v">Verified</span> Redis 4.0 added LFU (<code>allkeys-lfu</code>), which keeps a small frequency counter per key, for when "used recently" isn't the same as "used often". <span class="b i">Inferred</span> One big scan of cold keys can push hot keys out under LRU.</dd>
+    </dl>
+    <p class="src">redis.io key eviction docs, fetched 2026-11-01; Redis 7.4.0 src/evict.c, src/config.c</p>
+  </div>
+</section>

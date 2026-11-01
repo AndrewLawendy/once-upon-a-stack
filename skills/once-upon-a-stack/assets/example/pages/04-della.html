@@ -1,0 +1,34 @@
+<section class="page p-c" id="p-della" aria-labelledby="h-della" tabindex="-1" hidden>
+  <div class="scroller"><div class="leaf">
+    <div class="art">
+      <svg viewBox="0 0 1000 460" role="img" aria-label="On the diner counter stands Della, a glass pie case with a whole apple pie inside. Rosie holds a slice and smiles.">
+        <use href="#counter-bg" width="1000" height="460"/>
+        <use href="#della" x="430" y="128" width="200" height="222"/>
+        <use href="#rosie" x="190" y="170" width="120" height="170"/>
+        <use href="#slice" x="290" y="254" width="50" height="34"/>
+        <text x="760" y="200" font-size="56" font-family="var(--font-display)" fill="#F2C14E">3 sec</text>
+        <text x="760" y="236" font-size="20" font-family="var(--font-body)" fill="#FBF6E9">instead of the long road</text>
+        {{tag|250|104|Rosie|your app}}
+        {{tag|530|62|Della|the cache}}
+      </svg>
+    </div>
+    <div class="sheet">
+      <p class="running">A Slice, Now</p>
+      <h2 id="h-della">A pie case on the counter</h2>
+      <p>Here's the trick. The farm bakes <b>whole pies</b>, so why carry back one slice and throw away the rest?</p>
+      <p>Meet [[Della|the cache]], a glass pie case right on the counter. When a whole pie comes back from the farm, the rest of it goes into her.</p>
+      <p>Now the next person who wants apple gets a slice from the case in seconds. No truck, no trip, and the [[Baker|the database]] can bake something else.</p>
+      <p>That's the whole idea of a cache: a copy of what people keep asking for, near the people asking.</p>
+    </div>
+  </div></div>
+  <div class="note-src">
+    <h3>For grown-ups</h3>
+    <dl>
+      <dt>What the case is</dt>
+      <dd><span class="b v">Verified</span> memcached, the open-source cache server Facebook builds on, is "an in-memory hash table running on a single server" (s3). Memory is much faster than a database query that may touch disk and do work.</dd>
+      <dt>Why it helps the farm, not just for the app</dt>
+      <dd><span class="b v">Verified</span> The design goal is to shield the database: "We are willing to expose slightly stale data in exchange for insulating a backend storage service from excessive load." That trade, speed and protection for some staleness, comes back in chapter two.</dd>
+    </dl>
+    <p class="src">Nishtala et al., NSDI 2013, s2, s3. The "3 sec" in the scene is story scale: a real cache hit takes well under a millisecond (the paper reports a median of 333 microseconds).</p>
+  </div>
+</section>
