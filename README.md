@@ -86,7 +86,6 @@ ln -s "$PWD/once-upon-a-stack/skills/once-upon-a-stack" ~/.claude/skills/once-up
 Work in progress. Known gaps:
 
 - The visual check only finds Chrome on Linux, so on macOS and Windows that step won't run yet.
-- Parts of the instructions are still written for one person.
 
 ## License
 

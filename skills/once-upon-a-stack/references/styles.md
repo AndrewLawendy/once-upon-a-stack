@@ -14,7 +14,7 @@ Pick one of these styles for each book and set `"style"` in `book.json`. Each st
 
 ## Choosing
 
-Match the topic and mood first. Then look at the `style` of each book on the shelf (`<library>/*/.source/book.json`) and prefer one not used yet. Propose it in the table of contents in one line. If Andrew names a style, use that one. Don't invent a style unless he asks for one.
+Match the topic and mood first. Then look at the `style` of each book on the shelf (`<library>/*/.source/book.json`) and prefer one not used yet. Propose it in the table of contents in one line. If the user names a style, use that one. Don't invent a style unless the user asks for one.
 
 ## Drawing rules
 

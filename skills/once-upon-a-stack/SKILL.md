@@ -1,11 +1,11 @@
 ---
 name: once-upon-a-stack
-description: Use when Andrew asks to build, write or rewrite a book, picture book, storybook or children's-book explanation of any topic (your company's architecture, React internals, Kubernetes, Grafana, a concept), asks to add to or change a book in the library, or wants a topic explained deeply as a story to keep and reread.
+description: Use when the user asks to build, write or rewrite a book, picture book, storybook or children's-book explanation of any topic (your company's architecture, React internals, Kubernetes, Grafana, a concept), asks to add to or change a book in the library, or wants a topic explained deeply as a story to keep and reread.
 ---
 
 # Once Upon a Stack
 
-A book explains one topic deeply as a children's story with real engineering underneath. It is one self-contained offline HTML file in `<library>/<slug>--<topic>/index.html`, listed on the shelf at `<library>/index.html`. Reading it needs no Claude and no network. It changes only when Andrew asks for a rewrite.
+A book explains one topic deeply as a children's story with real engineering underneath. It is one self-contained offline HTML file in `<library>/<slug>--<topic>/index.html`, listed on the shelf at `<library>/index.html`. Reading it needs no Claude and no network. It changes only when the user asks for a rewrite.
 
 The folder always says what the book is about, in kebab case: the story name, a double hyphen, then the real topic, such as `the-squirrels-pantry--caching`. Below, `<book>` means that folder.
 
@@ -18,7 +18,7 @@ Do this first, every time. `<library>` is the `library` value in `~/.config/once
 ## Build a new book
 
 1. **Scope.** Do a quick map pass of the topic: what exists, who talks to whom, and which problem forced each part to exist. Choose a world that does some of the explaining (`references/story.md`) and an art style that suits it (`references/styles.md`).
-2. **Table of contents: the only stop.** Show the world, art style, and the chapters from `references/story.md`. For each chapter: its goal, what it comes from (the price or the next want), each attempt, why it breaks and who arrives, and where the goal is met. Also show what's left out and a rough size. Wait for Andrew's approval. Adjust and re-show until he approves. Approval covers everything through step 7.
+2. **Table of contents: the only stop.** Show the world, art style, and the chapters from `references/story.md`. For each chapter: its goal, what it comes from (the price or the next want), each attempt, why it breaks and who arrives, and where the goal is met. Also show what's left out and a rough size. Wait for the user's approval. Adjust and re-show until they approve. Approval covers everything through step 7.
 3. **Set up** `<library>/<book>/.source/` as described in `references/craft.md`. Save the approved plan in `plan.md` and the chain in `chain.json`. Every later step updates `plan.md`, so an interrupted build can resume from it.
 4. **Research** each chapter per `references/research.md`, using one subagent per journey in parallel. Each writes its dossier to `.source/facts/`. Read the dossiers yourself and chase anything thin.
 5. **Write and draw** the pages per `references/story.md`, `references/craft.md` and `references/styles.md`. Write the story and art yourself, not through subagents, so voice and characters stay consistent.
@@ -28,7 +28,7 @@ Do this first, every time. `<library>` is the `library` value in `~/.config/once
 
 ## Rewrite
 
-- **Whole book:** repeat steps 1-8. Keep the world, cast and art style unless Andrew asks otherwise.
+- **Whole book:** repeat steps 1-8. Keep the world, cast and art style unless the user asks otherwise.
 - **One chapter or topic:** read `plan.md`, `book.json` and that chapter's dossier. Re-research against current sources, update that part of `chain.json`, rewrite only those pages, and add an entry to `rewrites` in `book.json` so the cover shows that chapter's own date. Then build and check. No table of contents approval is needed.
 - **Resume:** when `.source/plan.md` shows unfinished work, continue from there.
 
