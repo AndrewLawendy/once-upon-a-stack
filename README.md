@@ -30,13 +30,17 @@ It's written like a children's book on purpose: a children's book can't assume y
 
 ## See one
 
-*The Diner on Long Road* is a 23-page book about caching, made by this skill. **[Read it in your browser](https://andrewlawendy.github.io/once-upon-a-stack/demo/the-diner-on-long-road.html)**
+Two books made by this skill, each readable in your browser:
 
-Rosie wants a slice of pie. Every pie is baked at a farm at the far end of a long road, so she has to wait. A pie case on the counter fixes that, until the recipe changes and the case is still selling the old one.
+- **[The Diner on Long Road](https://andrewlawendy.github.io/once-upon-a-stack/demo/the-diner-on-long-road.html)**, 23 pages about caching. Rosie wants a slice of pie, but every pie comes from a farm at the end of a long road. A pie case fixes that, until the recipe changes and the case still sells the old one. At noon a popular pie's sticker runs out, two hundred people miss at once, and that real failure gets a villain.
+- **[The Pigeons of Two Peaks](https://andrewlawendy.github.io/once-upon-a-stack/demo/the-pigeons-of-two-peaks.html)**, 40 pages about TCP. Juno wants her long story to reach Grandpa across a valley where pigeons get lost, arrive out of order and show up twice. Every part of TCP arrives because the simpler idea broke, including the real 1986 day the internet nearly stopped.
 
-At noon, a popular pie's date sticker runs out, and two hundred people miss at once. That's a real failure with a real name, and it gets a villain. Every character keeps its real job right next to its name, so you never have to remember who's who.
+Every character keeps its real job right next to its name, so you never have to remember who's who.
 
-![The Rush, a crowd of two hundred orders, jams the road to the farm](docs/screenshots/rush.png)
+<p>
+  <img src="docs/screenshots/rush.png" width="49%" alt="The Rush, a crowd of two hundred orders, jams the road to the farm">
+  <img src="docs/screenshots/tcp.png" width="49%" alt="The masked fox guesses the next starting number, from the TCP book">
+</p>
 
 For engineers, every page has a "For grown-ups" drawer with the real terms, config and sources. Each claim is marked Verified, Inferred or Unknown.
 
