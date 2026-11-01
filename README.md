@@ -2,7 +2,7 @@
 
 **Understand any technical topic properly, as a picture book you keep.**
 
-Ask Claude Code once, and you get an illustrated book about DNS, Kubernetes, React, or your own company's system. It's one HTML file you can open any time, offline, for free, without asking anyone again.
+Ask your coding agent once, and you get an illustrated book about DNS, Kubernetes, React, or your own company's system. It's one HTML file you can open any time, offline, for free, without asking anyone again.
 
 ![The cover of The Diner on Long Road](docs/screenshots/cover.png)
 
@@ -46,7 +46,7 @@ For engineers, every page has a "For grown-ups" drawer with the real terms, conf
 
 - **Pages, not a long scroll.** Built for a laptop, with light and dark themes and quiet motion.
 - **Things you can try.** Step through a journey, or drag a slider to see before and after.
-- **Researched, not improvised.** Claude reads the code, specs and papers. What it can't settle goes on a "What we don't know yet" page.
+- **Researched, not improvised.** The agent reads the code, specs and papers. What it can't settle goes on a "What we don't know yet" page.
 - **Its own look.** Each book picks a style that suits its topic: cut paper, woodcut, mid-century, stained glass, blueprint, vintage poster or pixel art.
 
 ## Usage
@@ -57,9 +57,9 @@ For engineers, every page has a "For grown-ups" drawer with the real terms, conf
 /once-upon-a-stack rewrite the caching chapter of The Thirteen Roots
 ```
 
-The first time you run it, Claude asks where to keep your books and suggests `~/once-upon-a-shelf`. Open `index.html` in that folder to see your shelf.
+The first time you run it, the agent asks where to keep your books and suggests `~/once-upon-a-shelf`. Open `index.html` in that folder to see your shelf.
 
-1. Claude maps the topic and shows you a table of contents: the world, the art style, and each chapter's goal, attempts, breaks and new characters. This is the only stop. Nothing is built until you approve it.
+1. The agent maps the topic and shows you a table of contents: the world, the art style, and each chapter's goal, attempts, breaks and new characters. This is the only stop. Nothing is built until you approve it.
 2. It researches each journey in parallel, writes and draws the pages, builds the book, and checks every page in a headless browser, in light and dark.
 3. It hands you the path to the book and says which parts are weakest.
 
@@ -67,7 +67,7 @@ A big topic can take a while and use a lot of tokens: a 45-page book runs severa
 
 ## Requirements
 
-- Claude Code
+- Claude Code, or another coding agent that supports [Agent Skills](https://agentskills.io)
 - Python 3
 - Node.js 22 or newer
 - Google Chrome, Chromium, Edge or Brave, for the visual check. If it isn't found, set `CHROME_PATH` to the browser's executable.
@@ -86,6 +86,18 @@ Or clone the repo and link the skill into your skills folder:
 git clone https://github.com/AndrewLawendy/once-upon-a-stack.git
 ln -s "$PWD/once-upon-a-stack/skills/once-upon-a-stack" ~/.claude/skills/once-upon-a-stack
 ```
+
+### Other coding agents
+
+Codex, Gemini CLI, GitHub Copilot and Cursor all read skills from `~/.agents/skills`, so one link covers them:
+
+```
+git clone https://github.com/AndrewLawendy/once-upon-a-stack.git
+mkdir -p ~/.agents/skills
+ln -s "$PWD/once-upon-a-stack/skills/once-upon-a-stack" ~/.agents/skills/once-upon-a-stack
+```
+
+Then ask for a book in plain words, such as "make a picture book about DNS". These agents are supported by their documentation but not tested yet. Agents that can't start subagents or view images still work, with a few extra steps the skill explains.
 
 ## Status
 

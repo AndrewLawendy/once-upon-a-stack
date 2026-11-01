@@ -1,6 +1,7 @@
 ---
 name: once-upon-a-stack
 description: Use when the user asks to build, write or rewrite a book, picture book, storybook or children's-book explanation of any topic (your company's architecture, React internals, Kubernetes, Grafana, a concept), asks to add to or change a book in the library, or wants a topic explained deeply as a story to keep and reread.
+compatibility: Works with any agent that reads Agent Skills. Needs Python 3, Node.js 22+ and a Chromium-based browser (Chrome, Chromium, Edge or Brave).
 ---
 
 # Once Upon a Stack
@@ -10,6 +11,11 @@ A book explains one topic deeply as a children's story with real engineering und
 The folder always says what the book is about, in kebab case: the story name, a double hyphen, then the real topic, such as `the-squirrels-pantry--caching`. Below, `<book>` means that folder.
 
 Paths below are relative to this skill's directory.
+
+## If your agent can't do something
+
+- **No subagents:** research the journeys one at a time yourself, writing each dossier before starting the next. For the fact-check, ask the user to run it in a new session with the brief in `references/research.md`, so the checker still didn't write the book.
+- **Can't view images:** rely on the check's report, and ask the user to open the screenshots in `.source/check/` and tell you what looks wrong.
 
 ## Find the library
 
