@@ -26,7 +26,7 @@ Match the topic and mood first. Then look at the `style` of each book on the she
 
 **Stained glass:** everything is polygons with a dark lead stroke of 4-5 units. Break the background into random triangles of related colors, and split figures into a few facets with a lighter and a darker side.
 
-**Blueprint:** lines only, no fills, on the blue grid. Add dimension lines, callouts and short capital labels that say something true about the subject. One accent color marks the path of the story.
+**Blueprint:** lines only, no fills, on the blue grid. Draw the main shapes with a stroke of at least 3 and details with at least 2. Add dimension lines, callouts and short capital labels that say something true about the subject, at a font size of at least 15. One accent color marks the path of the story.
 
 **Vintage poster:** big flat shapes with no outlines. Split a figure into a light and a dark half, and use stepped color bands for the sky and rays from the sun. A short slogan may sit in the scene using `font-family:var(--font-display)`.
 

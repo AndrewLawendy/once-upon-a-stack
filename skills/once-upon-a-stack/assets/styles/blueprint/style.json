@@ -1,17 +1,10 @@
 {
   "name": "Blueprint",
   "fonts": [
-    [
-      "Plan Display",
-      400,
-      "normal",
-      "architects-daughter-400.woff2"
-    ],
-    [
-      "Plan Body",
-      400,
-      "normal",
-      "share-tech-mono-400.woff2"
-    ]
+    ["Plan Display", 400, "normal", "architects-daughter-400.woff2"],
+    ["Plan Body", 400, "normal", "libre-franklin-400.woff2"],
+    ["Plan Body", 700, "normal", "libre-franklin-700.woff2"],
+    ["Plan Body", 400, "italic", "libre-franklin-400i.woff2"],
+    ["Plan Label", 400, "normal", "share-tech-mono-400.woff2"]
   ]
 }
