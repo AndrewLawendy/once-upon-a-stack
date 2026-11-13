@@ -86,13 +86,13 @@ One command for any agent (Claude Code, Codex, Cursor, Gemini CLI, GitHub Copilo
 npx skills add AndrewLawendy/once-upon-a-stack -g
 ```
 
-Or, in Claude Code (2.1.275 or later), as a plugin:
+To update it later:
 
 ```
-/plugin install once-upon-a-stack --marketplace AndrewLawendy/once-upon-a-stack
+npx skills update once-upon-a-stack
 ```
 
-Or by hand: clone the repo and link the skill into your agent's skills folder, `~/.claude/skills` for Claude Code or `~/.agents/skills` for Codex, Gemini CLI, GitHub Copilot and Cursor:
+Or by hand: clone the repo and link the skill into your agent's skills folder, `~/.claude/skills` for Claude Code or `~/.agents/skills` for Codex, Gemini CLI, GitHub Copilot and Cursor. Update it with `git pull`.
 
 ```
 git clone https://github.com/AndrewLawendy/once-upon-a-stack.git ~/once-upon-a-stack
